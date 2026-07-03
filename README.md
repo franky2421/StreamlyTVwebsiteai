@@ -1,2 +1,7 @@
-# StreamlyTV AI Single File Website
-Upload index.html to GitHub. This version has CSS and JavaScript inside the same file, so the AI chat button will open without needing style.css or script.js.
+# StreamlyTV AI Pro
+
+Upload these files to GitHub. Vercel will deploy automatically.
+
+Required Vercel Environment Variable:
+
+OPENAI_API_KEY = your OpenAI API key
