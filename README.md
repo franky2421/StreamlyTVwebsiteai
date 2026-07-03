@@ -1,10 +1,15 @@
-# StreamlyTV AI Pro v3
+# StreamlyTV AI Pro v4
 
-Upload these files to the root of the existing GitHub repository:
+Upload these files to GitHub. Vercel will deploy automatically.
 
-- `index.html`
-- `package.json`
-- `README.md`
-- `api/chat.js`
+Required Vercel Environment Variable:
 
-Vercel must have `OPENAI_API_KEY` saved in Environment Variables.
+OPENAI_API_KEY = your OpenAI API key
+
+Version 4 adds:
+- Smarter StreamlyTV AI sales/support assistant
+- Buy buttons inside the chat
+- Order handoff to WhatsApp
+- Payment links for all plans
+- Device setup wizard
+- Better local answers to save API credits
