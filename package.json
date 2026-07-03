@@ -1,12 +1,1 @@
-{
-  "name": "streamlytv-ai-pro-v3",
-  "version": "3.0.0",
-  "type": "module",
-  "private": true,
-  "scripts": {
-    "start": "vercel dev"
-  },
-  "dependencies": {
-    "openai": "latest"
-  }
-}
+{"type":"module","scripts":{"start":"vercel dev"},"dependencies":{"openai":"latest"},"devDependencies":{}}
