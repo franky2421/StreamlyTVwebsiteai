@@ -1,8 +1,11 @@
 {
-  "name": "streamlytv-ai-pro",
-  "version": "1.0.0",
-  "private": true,
+  "name": "streamlytv-ai-pro-v3",
+  "version": "3.0.0",
   "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "vercel dev"
+  },
   "dependencies": {
     "openai": "latest"
   }
