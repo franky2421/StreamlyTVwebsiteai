@@ -1,14 +1,16 @@
-# StreamlyTV AI Pro v8
+# StreamlyTV AI Pro v9
 
-Upload these files to the root of your GitHub repository:
+Premium StreamlyTV website with AI chat, email order notification via FormSubmit, and WhatsApp handoff.
 
+## Deploy
+Upload all files to GitHub root:
 - index.html
 - package.json
 - README.md
 - api/chat.js
 
-Vercel Environment Variable required:
+Vercel must have environment variable:
+- OPENAI_API_KEY
 
-OPENAI_API_KEY = your OpenAI API key
-
-This version includes the full StreamlyTV assistant knowledge base: pricing, trials, device setup, IPTV apps, activation workflow, content categories, sports finder, troubleshooting, refunds, renewals, and business rules.
+## Email notifications
+The order form posts to FormSubmit for iptvstreamly@gmail.com. The first submission may require email confirmation from FormSubmit.

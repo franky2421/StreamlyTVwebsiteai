@@ -4,44 +4,102 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>StreamlyTV AI Pro</title>
+  <meta name="description" content="StreamlyTV AI Pro - premium streaming support, setup, trials and subscriptions." />
   <style>
-    *{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:#080b12;color:#fff;overflow-x:hidden} a{color:inherit;text-decoration:none}
-    .bg{position:fixed;inset:0;background:radial-gradient(circle at 20% 15%,rgba(0,213,255,.26),transparent 28%),radial-gradient(circle at 85% 25%,rgba(255,55,35,.26),transparent 30%),linear-gradient(135deg,#05070c,#101827 60%,#06080e);z-index:-1}
-    header{display:flex;justify-content:space-between;align-items:center;padding:24px 7%;position:sticky;top:0;background:rgba(8,11,18,.7);backdrop-filter:blur(12px);z-index:5;border-bottom:1px solid rgba(255,255,255,.06)}
-    .logo{font-size:22px;font-weight:900;letter-spacing:.3px}.logo span{color:#29d9ff}.nav{display:flex;gap:12px;align-items:center}.nav a{padding:10px 14px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.04);font-weight:700;font-size:14px}.nav a:hover{background:rgba(255,255,255,.1)}
-    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;padding:70px 7% 40px;align-items:center}.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(41,217,255,.35);background:rgba(41,217,255,.1);padding:9px 13px;border-radius:999px;color:#b7f5ff;font-weight:800;font-size:14px}.hero h1{font-size:clamp(42px,6vw,78px);line-height:.95;margin:22px 0 18px}.hero h1 span{background:linear-gradient(90deg,#fff,#29d9ff,#ff3b22);-webkit-background-clip:text;color:transparent}.hero p{color:#c6d0e1;font-size:18px;line-height:1.6;max-width:650px}.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}.btn{border:0;border-radius:16px;padding:15px 22px;font-weight:900;cursor:pointer;color:#06101a;background:linear-gradient(135deg,#29d9ff,#8b70ff);box-shadow:0 15px 40px rgba(41,217,255,.18)}.btn.secondary{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.14);box-shadow:none}.panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:30px;padding:28px;box-shadow:0 30px 100px rgba(0,0,0,.35)}.check{display:flex;gap:12px;margin:14px 0;color:#dce7ff;font-weight:700}.check b{color:#34e27a}
-    .section{padding:42px 7%}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:26px;padding:26px}.card.popular{border-color:#29d9ff;box-shadow:0 0 0 1px rgba(41,217,255,.25),0 30px 80px rgba(41,217,255,.08)}.card h3{font-size:25px;margin:0 0 12px}.price{font-size:44px;font-weight:950;margin:8px 0;color:#fff}.muted{color:#aeb8ca;line-height:1.5}.pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:9px 12px;color:#dce7ff;font-weight:800;font-size:13px}
-    .features{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.feature{padding:18px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);font-weight:800}.feature small{display:block;color:#aeb8ca;margin-top:7px;font-weight:600;line-height:1.4}
-    footer{padding:30px 7%;color:#9ea8ba;border-top:1px solid rgba(255,255,255,.08)}
-    .chatBtn{position:fixed;right:24px;bottom:24px;z-index:20;border:0;border-radius:999px;background:linear-gradient(135deg,#ff3b22,#ff6b23);color:#fff;padding:16px 20px;font-weight:950;box-shadow:0 20px 60px rgba(255,59,34,.3);cursor:pointer}.chat{position:fixed;right:24px;bottom:88px;width:min(430px,calc(100vw - 28px));height:min(650px,calc(100vh - 115px));background:rgba(14,19,31,.96);border:1px solid rgba(255,255,255,.16);border-radius:28px;box-shadow:0 40px 140px rgba(0,0,0,.55);display:none;flex-direction:column;overflow:hidden;z-index:21}.chat.open{display:flex}.chatHead{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.1);font-weight:950}.x{border:0;background:#fff;color:#111;border-radius:14px;width:38px;height:38px;font-size:20px;cursor:pointer}.messages{flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:12px}.msg{max-width:88%;padding:13px 15px;border-radius:18px;white-space:pre-wrap;line-height:1.45;font-weight:650}.bot{align-self:flex-start;background:#26324a;color:#f2f6ff}.user{align-self:flex-end;background:linear-gradient(135deg,#ff3b22,#ff6b23);color:#fff}.quick{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 12px}.quick button{border:1px solid rgba(255,255,255,.14);background:#28344d;color:#fff;border-radius:999px;padding:9px 11px;font-weight:800;cursor:pointer;font-size:12px}.chatForm{display:flex;gap:10px;padding:14px;border-top:1px solid rgba(255,255,255,.1)}.chatForm input{flex:1;background:#090d16;border:1px solid rgba(255,255,255,.18);border-radius:15px;color:#fff;padding:14px;font-size:15px}.chatForm button{border:0;border-radius:15px;background:#ff3b22;color:#fff;font-weight:950;padding:0 18px;cursor:pointer}
-    @media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:40px}.grid3,.features{grid-template-columns:1fr}.nav{display:none}.chat{right:14px;bottom:82px}.chatBtn{right:14px}}
+    :root{--bg:#050713;--card:#0e1530;--blue:#2f8cff;--cyan:#00e5ff;--text:#eef6ff;--muted:#a7b4c8;--good:#26e695;--danger:#ff5364;--gold:#ffcc66}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at top left,#123a7a 0,#050713 36%,#02030a 100%);color:var(--text);overflow-x:hidden}a{color:inherit}.wrap{max-width:1180px;margin:auto;padding:24px}.nav{display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:24px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;box-shadow:0 0 30px #2f8cff66}.pill{border:1px solid #ffffff22;padding:10px 14px;border-radius:999px;color:var(--muted);background:#ffffff08}.hero{min-height:78vh;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center;padding:56px 0}.hero h1{font-size:clamp(42px,7vw,84px);line-height:.92;margin:0 0 18px;letter-spacing:-3px}.hero p{font-size:20px;color:var(--muted);line-height:1.6;margin:0 0 28px}.grad{background:linear-gradient(90deg,#fff,var(--cyan),var(--blue));-webkit-background-clip:text;color:transparent}.cta{display:flex;flex-wrap:wrap;gap:12px}.btn{border:0;border-radius:16px;padding:15px 20px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}.primary{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#001126}.secondary{background:#ffffff10;border:1px solid #ffffff22;color:var(--text)}.screen{border:1px solid #ffffff1c;border-radius:30px;background:linear-gradient(180deg,#111b3c,#070a19);padding:18px;box-shadow:0 30px 80px #0009,0 0 60px #2f8cff33}.screenbar{height:38px;background:#ffffff0a;border-radius:14px;margin-bottom:14px;display:flex;align-items:center;gap:8px;padding:0 12px}.dot{width:10px;height:10px;border-radius:50%;background:#ff5f57}.dot:nth-child(2){background:#ffbd2e}.dot:nth-child(3){background:#28c840}.postergrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.poster{height:120px;border-radius:18px;background:linear-gradient(135deg,#223c75,#111827);display:flex;align-items:end;padding:14px;font-weight:800;color:#fff;box-shadow:inset 0 0 40px #0008}.poster:nth-child(2){background:linear-gradient(135deg,#7a1238,#1d1020)}.poster:nth-child(3){background:linear-gradient(135deg,#196b4f,#0d1d18)}.poster:nth-child(4){background:linear-gradient(135deg,#6b4d19,#20190d)}.poster:nth-child(5){background:linear-gradient(135deg,#4c2391,#151023)}.poster:nth-child(6){background:linear-gradient(135deg,#1e668a,#0b1820)}.section{padding:56px 0}.title{font-size:36px;margin:0 0 12px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:#ffffff0a;border:1px solid #ffffff18;border-radius:24px;padding:22px;box-shadow:0 20px 50px #0004}.card h3{margin:10px 0 8px}.price{font-size:42px;font-weight:900}.popular{border-color:#00e5ff99;box-shadow:0 0 50px #00e5ff22}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.chatLauncher{position:fixed;right:22px;bottom:22px;z-index:30;border:0;border-radius:999px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#001126;font-weight:900;padding:16px 20px;box-shadow:0 10px 40px #00e5ff55;cursor:pointer}.whatsapp{position:fixed;left:22px;bottom:22px;z-index:30;background:#25D366;color:#062814;border-radius:999px;padding:15px 18px;font-weight:900;text-decoration:none;box-shadow:0 10px 40px #25d36655}.chat{position:fixed;right:22px;bottom:88px;width:min(420px,calc(100vw - 28px));height:min(640px,calc(100vh - 120px));background:#071126;border:1px solid #ffffff24;border-radius:26px;box-shadow:0 30px 100px #000b;z-index:40;display:none;overflow:hidden}.chat.open{display:flex;flex-direction:column}.chatHead{padding:16px 18px;background:linear-gradient(135deg,#122655,#071126);display:flex;justify-content:space-between;align-items:center}.chatBody{padding:16px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:12px}.msg{padding:12px 14px;border-radius:16px;max-width:86%;line-height:1.45;white-space:pre-wrap}.bot{background:#ffffff10;align-self:flex-start}.user{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#001126;align-self:flex-end}.chatInput{display:flex;gap:8px;padding:12px;border-top:1px solid #ffffff14}.chatInput input{flex:1;border:1px solid #ffffff18;background:#ffffff0c;color:var(--text);border-radius:14px;padding:13px}.chatInput button{border:0;background:var(--blue);color:white;border-radius:14px;padding:0 16px;font-weight:800}.quick{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 12px}.quick button{background:#ffffff12;border:1px solid #ffffff1d;color:var(--text);border-radius:999px;padding:8px 10px;cursor:pointer}.order{display:grid;grid-template-columns:1fr 1fr;gap:12px}.order input,.order select,.order textarea{width:100%;border:1px solid #ffffff22;background:#ffffff0c;color:white;border-radius:14px;padding:13px}.order textarea{grid-column:1/-1;min-height:80px}.full{grid-column:1/-1}.notice{font-size:13px;color:var(--muted);line-height:1.5}@media(max-width:850px){.hero{grid-template-columns:1fr;padding:34px 0}.grid,.features{grid-template-columns:1fr}.postergrid{grid-template-columns:repeat(2,1fr)}.order{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}.chat{right:14px;bottom:80px}.whatsapp{left:14px}.chatLauncher{right:14px}}
   </style>
 </head>
 <body>
-  <div class="bg"></div>
-  <header><div class="logo">Streamly<span>TV</span></div><nav class="nav"><a href="#plans">Plans</a><a href="#features">Features</a><a href="#content">Content</a><a href="https://wa.me/61410350514" target="_blank">WhatsApp</a></nav></header>
-  <main>
-    <section class="hero">
-      <div><div class="badge">🤖 StreamlyTV AI Pro</div><h1>Premium streaming support powered by <span>AI.</span></h1><p>Live TV, sports, PPV, movies, series and setup help for Firestick, Smart TVs, Android, iPhone, iPad, Chromecast, Apple TV, Windows and Mac.</p><div class="cta"><button class="btn" onclick="openChat('Hi, I want help choosing a StreamlyTV option')">Chat with Assistant</button><a class="btn secondary" href="https://wa.me/61410350514" target="_blank">Contact WhatsApp</a></div></div>
-      <div class="panel"><h2>What your AI can do</h2><div class="check"><b>✅</b> Recommend the best option</div><div class="check"><b>✅</b> Send payment links</div><div class="check"><b>✅</b> Collect customer setup details</div><div class="check"><b>✅</b> Explain device setup</div><div class="check"><b>✅</b> Find sports and content categories</div><div class="check"><b>✅</b> Troubleshoot common issues</div></div>
+  <div class="wrap">
+    <nav class="nav">
+      <div class="brand"><div class="logo">▶</div> StreamlyTV</div>
+      <div class="pill">🤖 StreamlyTV Assistant • 24/7 Support</div>
+    </nav>
+    <main class="hero">
+      <section>
+        <h1>Unlimited entertainment. <span class="grad">One simple payment.</span></h1>
+        <p>50,000+ live channels, 100,000+ movies and series, sports, PPV, family entertainment, HD/FHD/4K quality and friendly AI setup support.</p>
+        <div class="cta">
+          <button class="btn primary" onclick="openChat('I want a 24 hour free trial')">🎁 Start 24-Hour Trial</button>
+          <button class="btn secondary" onclick="openChat('Help me choose a package')">🤖 Chat with Assistant</button>
+          <a class="btn secondary" href="#order">📋 Send Setup Details</a>
+        </div>
+        <p class="notice">Family-friendly service. No adult channels, movies or series. Recommended internet speed: 50 Mbps+.</p>
+      </section>
+      <section class="screen">
+        <div class="screenbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><strong style="margin-left:8px">StreamlyTV AI Pro</strong></div>
+        <div class="postergrid">
+          <div class="poster">Live TV</div><div class="poster">UFC & PPV</div><div class="poster">Movies</div><div class="poster">Sports</div><div class="poster">Kids</div><div class="poster">4K</div>
+        </div>
+      </section>
+    </main>
+    <section class="section">
+      <h2 class="title">Why choose StreamlyTV?</h2><p class="muted">Premium support and easy setup from start to finish.</p>
+      <div class="features">
+        <div class="card">📺 <h3>50,000+ Channels</h3><p class="muted">Australia, UK, USA, Arabic, Europe, Asia and more.</p></div>
+        <div class="card">🎬 <h3>100,000+ VOD</h3><p class="muted">Movies, series, new releases, Netflix UK/US/Arabic and more.</p></div>
+        <div class="card">⚽ <h3>Sports & PPV</h3><p class="muted">UFC, Boxing, NRL, NBA, Formula 1, soccer and more.</p></div>
+        <div class="card">🌍 <h3>Works Worldwide</h3><p class="muted">No VPN required. Wi-Fi, Ethernet or mobile data supported.</p></div>
+        <div class="card">📱 <h3>All Devices</h3><p class="muted">Firestick, Smart TV, Apple TV, Chromecast, phone, tablet, PC and Mac.</p></div>
+        <div class="card">🤖 <h3>AI Setup Help</h3><p class="muted">StreamlyTV Assistant guides customers through setup and support.</p></div>
+      </div>
     </section>
-    <section id="plans" class="section"><h2>Choose your option</h2><div class="grid3"><div class="card"><h3>3 Months</h3><div class="price">$60</div><p class="muted">Great starter option. One-time payment, no automatic renewal.</p><a class="btn" href="https://buy.stripe.com/14AeV6fFJ72g8CLcbz1Fe02" target="_blank">Buy 3 Months</a></div><div class="card popular"><h3>6 Months ⭐</h3><div class="price">$100</div><p class="muted">Most popular value. One-time payment, no automatic renewal.</p><a class="btn" href="https://buy.stripe.com/4gMdR2fFJdqEaKTcbz1Fe05" target="_blank">Buy 6 Months</a></div><div class="card"><h3>12 Months</h3><div class="price">$180</div><p class="muted">Best long-term value. One-time payment, no automatic renewal.</p><a class="btn" href="https://buy.stripe.com/cNi00c3X11HW9GPb7v1Fe04" target="_blank">Buy 12 Months</a></div></div></section>
-    <section id="features" class="section"><h2>Features</h2><div class="features"><div class="feature">📺 50,000+ Live TV<small>Countries, sports, news, kids and entertainment.</small></div><div class="feature">🎬 100,000+ VOD<small>Movies, series, new releases and international libraries.</small></div><div class="feature">⚽ Sports & PPV<small>UFC, boxing, NRL, NBA, Formula 1, soccer and more.</small></div><div class="feature">🔒 Family Friendly<small>No adult channels, movies or series.</small></div><div class="feature">🌍 Works Worldwide<small>No VPN required. Mobile data supported.</small></div><div class="feature">📱 All Devices<small>TV, Firestick, phone, tablet, PC, Mac, Apple TV and Chromecast.</small></div><div class="feature">🎥 HD • FHD • 4K<small>Quality available depending on content and connection.</small></div><div class="feature">🛠️ Setup Support<small>AI assistant plus WhatsApp handoff when needed.</small></div></div></section>
-    <section id="content" class="section"><h2>Popular content libraries</h2><div class="pillrow"><span class="pill">Netflix UK</span><span class="pill">Netflix USA</span><span class="pill">Netflix Arabic</span><span class="pill">Disney+</span><span class="pill">Apple TV+</span><span class="pill">HBO Max</span><span class="pill">Prime Video</span><span class="pill">Paramount+</span><span class="pill">Peacock</span><span class="pill">Shahid</span><span class="pill">TOD</span><span class="pill">OSN+</span><span class="pill">UFC</span><span class="pill">TNT Sports</span><span class="pill">DAZN</span><span class="pill">Formula 1 4K</span><span class="pill">NBA</span><span class="pill">NRL</span><span class="pill">World Cricket</span></div></section>
-  </main>
-  <footer>© StreamlyTV • iptvstreamly@gmail.com • +61 410 350 514</footer>
-  <button class="chatBtn" onclick="toggleChat()">🤖 Assistant</button>
-  <div class="chat" id="chat"><div class="chatHead">🤖 StreamlyTV Assistant <button class="x" onclick="toggleChat()">×</button></div><div class="messages" id="messages"></div><div class="quick"><button onclick="sendQuick('How much are the options?')">Prices</button><button onclick="sendQuick('Can I get a 24 hour trial?')">24h Trial</button><button onclick="sendQuick('How do I install on Firestick?')">Firestick</button><button onclick="sendQuick('Where can I watch UFC?')">UFC</button><button onclick="sendQuick('Do I need a VPN?')">VPN</button><button onclick="sendQuick('What if it buffers?')">Buffering</button></div><form class="chatForm" onsubmit="sendMsg(event)"><input id="input" placeholder="Ask StreamlyTV Assistant..." autocomplete="off"/><button>Send</button></form></div>
-  <script>
-    const messagesEl=document.getElementById('messages'), input=document.getElementById('input'), chat=document.getElementById('chat');
-    let history=[];
-    function toggleChat(){chat.classList.toggle('open'); if(chat.classList.contains('open')&&!messagesEl.children.length){bot('Hi! 👋 Welcome to StreamlyTV. I can help with prices, free trials, setup, sports, movies, payments and troubleshooting. What device are you using today?')}}
-    function openChat(text){chat.classList.add('open'); if(!messagesEl.children.length)bot('Hi! 👋 Welcome to StreamlyTV. I can help you get set up from start to finish.'); if(text)sendText(text)}
-    function add(text, cls){const d=document.createElement('div');d.className='msg '+cls;d.textContent=text;messagesEl.appendChild(d);messagesEl.scrollTop=messagesEl.scrollHeight}
-    function bot(t){add(t,'bot');history.push({role:'assistant',content:t})} function user(t){add(t,'user');history.push({role:'user',content:t})}
-    function sendQuick(t){sendText(t)}
-    async function sendMsg(e){e.preventDefault(); const t=input.value.trim(); if(!t)return; input.value=''; sendText(t)}
-    async function sendText(t){user(t); const loading='Typing...'; add(loading,'bot'); const last=messagesEl.lastChild; try{const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:t,history})}); const data=await r.json(); last.textContent=data.reply||'Please contact StreamlyTV on WhatsApp +61 410 350 514.'; history.push({role:'assistant',content:last.textContent});}catch(e){last.textContent='Sorry, I had trouble replying. Please contact StreamlyTV on WhatsApp +61 410 350 514.'}}
-  </script>
+    <section class="section" id="plans">
+      <h2 class="title">Choose your package</h2><p class="muted">One-time payment. No automatic renewals.</p>
+      <div class="grid">
+        <div class="card"><h3>3 Months</h3><div class="price">$60</div><p class="muted">Great for getting started.</p><a class="btn primary" href="https://buy.stripe.com/14AeV6fFJ72g8CLcbz1Fe02">Buy 3 Months</a></div>
+        <div class="card popular"><h3>6 Months ⭐</h3><div class="price">$100</div><p class="muted">Most popular value.</p><a class="btn primary" href="https://buy.stripe.com/4gMdR2fFJdqEaKTcbz1Fe05">Buy 6 Months</a></div>
+        <div class="card"><h3>12 Months 👑</h3><div class="price">$180</div><p class="muted">Best long-term value.</p><a class="btn primary" href="https://buy.stripe.com/cNi00c3X11HW9GPb7v1Fe04">Buy 12 Months</a></div>
+        <div class="card"><h3>24-Hour Trial</h3><div class="price">Free</div><p class="muted">Test StreamlyTV before purchasing.</p><button class="btn secondary" onclick="openChat('I want a 24 hour free trial')">Request Trial</button></div>
+      </div>
+    </section>
+    <section class="section" id="order">
+      <h2 class="title">Send setup details</h2><p class="muted">This sends your details to StreamlyTV by email and opens WhatsApp with the same information ready to send.</p>
+      <form class="card order" id="orderForm" action="https://formsubmit.co/iptvstreamly@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New StreamlyTV Customer Details">
+        <input type="hidden" name="_captcha" value="false">
+        <input name="name" placeholder="Full name" required>
+        <input name="whatsapp" placeholder="WhatsApp number" required>
+        <input name="email" placeholder="Email (optional)">
+        <select name="package"><option>24-hour trial</option><option>3 months - $60</option><option>6 months - $100</option><option>12 months - $180</option></select>
+        <select name="device"><option>Firestick</option><option>Samsung TV</option><option>LG TV</option><option>Android TV / Google TV</option><option>Android Phone</option><option>iPhone / iPad</option><option>Apple TV</option><option>Chromecast</option><option>Windows / Mac</option><option>Other</option></select>
+        <select name="app"><option>IBO Pro Player</option><option>IB Player</option><option>SmartOne IPTV</option><option>TiviMate</option><option>IPTV Smarters Pro</option><option>XCIPTV</option><option>Smarters Player Lite</option><option>Other</option></select>
+        <input name="mac" placeholder="MAC Address (if shown)">
+        <input name="device_key" placeholder="Device Key (if shown)">
+        <input class="full" name="app_website" placeholder="App activation website shown in app (if shown)">
+        <textarea name="notes" placeholder="Anything else we should know?"></textarea>
+        <button class="btn primary full" type="submit">📧 Email StreamlyTV & Open WhatsApp</button>
+        <p class="notice full">First email submission may ask you to confirm FormSubmit by email. After that, customer details will be emailed automatically.</p>
+      </form>
+    </section>
+  </div>
+  <a class="whatsapp" href="https://wa.me/61410350514" target="_blank">WhatsApp</a>
+  <button class="chatLauncher" onclick="openChat()">🤖 StreamlyTV Assistant</button>
+  <div class="chat" id="chat">
+    <div class="chatHead"><strong>🤖 StreamlyTV Assistant</strong><button onclick="closeChat()" class="btn secondary" style="padding:8px 10px">✕</button></div>
+    <div class="chatBody" id="chatBody"></div>
+    <div class="quick">
+      <button onclick="quick('How much is 6 months?')">Pricing</button>
+      <button onclick="quick('I have a Firestick, help me setup')">Firestick</button>
+      <button onclick="quick('Do you have UFC?')">UFC</button>
+      <button onclick="quick('I want a 24 hour free trial')">Trial</button>
+      <button onclick="quick('I need troubleshooting help')">Troubleshooting</button>
+    </div>
+    <div class="chatInput"><input id="chatText" placeholder="Ask StreamlyTV Assistant..." onkeydown="if(event.key==='Enter')sendMsg()"><button onclick="sendMsg()">Send</button></div>
+  </div>
+<script>
+const chat=document.getElementById('chat'), body=document.getElementById('chatBody'), input=document.getElementById('chatText');
+let messages=[];
+function add(text, cls){const d=document.createElement('div');d.className='msg '+cls;d.textContent=text;body.appendChild(d);body.scrollTop=body.scrollHeight;}
+function openChat(seed){chat.classList.add('open'); if(!messages.length){const welcome='Hi! 👋 Welcome to StreamlyTV. I’m StreamlyTV Assistant. I can help with packages, free trials, device setup, sports, movies, troubleshooting and activation details. What device are you using today?'; add(welcome,'bot'); messages.push({role:'assistant',content:welcome});} if(seed) setTimeout(()=>quick(seed),200); input.focus();}
+function closeChat(){chat.classList.remove('open')}
+function quick(t){input.value=t;sendMsg()}
+async function sendMsg(){const text=input.value.trim(); if(!text)return; input.value=''; add(text,'user'); messages.push({role:'user',content:text}); add('Typing...','bot'); const typing=body.lastChild; try{const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages})}); const data=await r.json(); typing.remove(); const reply=data.reply||data.error||'Sorry, please contact StreamlyTV on WhatsApp 0410 350 514.'; add(reply,'bot'); messages.push({role:'assistant',content:reply});}catch(e){typing.remove(); add('Sorry, I had trouble connecting. Please contact StreamlyTV on WhatsApp 0410 350 514.','bot');}}
+document.getElementById('orderForm').addEventListener('submit', function(){
+ const fd=new FormData(this); let txt='New StreamlyTV customer%0A'; for(const [k,v] of fd.entries()){ if(!k.startsWith('_') && v) txt+=encodeURIComponent(k+': '+v)+'%0A'; }
+ window.open('https://wa.me/61410350514?text='+txt,'_blank');
+});
+</script>
 </body>
 </html>
