@@ -146,6 +146,15 @@ SPORTS FINDER:
 - World Cup Soccer: TSN 3.
 
 When asked "does it have X", answer based on the above. If specific title/event availability may change, say the library/channels update regularly and invite them to ask StreamlyTV team if they need exact current confirmation.
+
+AUTOMATIC REQUEST SUBMISSION:
+- When you have collected enough details for a trial or activation request, first show the customer a clear summary and ask them to confirm it.
+- Only after the customer confirms, reply with a friendly confirmation and append this exact machine-readable line at the very end:
+SUBMIT_REQUEST_JSON: {"name":"...","whatsapp":"...","email":"...","package":"...","device":"...","app":"...","mac":"...","deviceKey":"...","appWebsite":"...","status":"Trial Request or Pending/Paid Order","notes":"..."}
+- The JSON must be valid, one line only, with double quotes. Use empty strings for unknown optional fields.
+- Never show or discuss the machine-readable line. The website removes it before showing the reply.
+- Do not append the line until the customer has confirmed the summary.
+
 `;
 
 export default async function handler(req, res) {
@@ -165,7 +174,41 @@ export default async function handler(req, res) {
         ...safeMessages.map(m => ({ role: m.role === "assistant" ? "assistant" : "user", content: String(m.content || "").slice(0, 4000) }))
       ]
     });
-    return res.status(200).json({ reply: completion.choices?.[0]?.message?.content || "Sorry, I couldn't generate a reply. Please contact StreamlyTV on WhatsApp: 0410 350 514." });
+
+    let reply = completion.choices?.[0]?.message?.content || "Sorry, I couldn't generate a reply. Please contact StreamlyTV on WhatsApp: 0410 350 514.";
+    let notificationSent = false;
+    const marker = "SUBMIT_REQUEST_JSON:";
+    const markerIndex = reply.lastIndexOf(marker);
+
+    if (markerIndex !== -1) {
+      const jsonText = reply.slice(markerIndex + marker.length).trim().split("\n")[0];
+      reply = reply.slice(0, markerIndex).trim();
+      try {
+        const data = JSON.parse(jsonText);
+        if (process.env.RESEND_API_KEY) {
+          const summary = `New StreamlyTV Request\n\nName: ${data.name || ""}\nWhatsApp: ${data.whatsapp || ""}\nEmail: ${data.email || ""}\nPackage: ${data.package || ""}\nDevice: ${data.device || ""}\nIPTV App: ${data.app || ""}\nMAC Address: ${data.mac || ""}\nDevice Key: ${data.deviceKey || ""}\nApp Website: ${data.appWebsite || ""}\nPayment/Trial: ${data.status || ""}\nNotes: ${data.notes || ""}`;
+          const emailResponse = await fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              from: process.env.FROM_EMAIL || "StreamlyTV <onboarding@resend.dev>",
+              to: process.env.NOTIFY_EMAIL || "iptvstreamly@gmail.com",
+              subject: `New StreamlyTV Request - ${data.name || "Customer"}`,
+              text: summary
+            })
+          });
+          notificationSent = emailResponse.ok;
+          if (!emailResponse.ok) console.error(await emailResponse.text());
+        }
+      } catch (submissionError) {
+        console.error("Could not submit chat request", submissionError);
+      }
+    }
+
+    return res.status(200).json({ reply, notificationSent });
   } catch (err) {
     console.error(err);
     const msg = err?.status === 429 ? "The AI account has reached its current usage limit. Please contact StreamlyTV on WhatsApp: 0410 350 514." : "Sorry, something went wrong. Please contact StreamlyTV on WhatsApp: 0410 350 514.";

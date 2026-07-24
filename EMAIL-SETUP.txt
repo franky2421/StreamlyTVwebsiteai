@@ -1,0 +1,28 @@
+STREAMLYTV AUTOMATIC EMAIL SETUP
+
+The website is configured to send completed setup/trial requests to:
+iptvstreamly@gmail.com
+
+Required Vercel environment variables:
+
+1. RESEND_API_KEY
+   Create this in your Resend account.
+
+2. NOTIFY_EMAIL
+   iptvstreamly@gmail.com
+
+3. FROM_EMAIL
+   For initial testing use:
+   StreamlyTV <onboarding@resend.dev>
+
+   For production, verify your own domain in Resend and use an address such as:
+   StreamlyTV <support@yourdomain.com>
+
+After adding the variables in Vercel:
+- Open the StreamlyTV project
+- Settings -> Environment Variables
+- Add the three variables
+- Redeploy the latest deployment
+
+The website form and the AI chat can then automatically email confirmed customer requests.
+WhatsApp remains a manual one-tap handoff until Meta WhatsApp Cloud API access is available.
