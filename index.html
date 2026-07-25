@@ -1,503 +1,1404 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StreamlyTV</title>
   <link rel="icon" href="assets/streamlytv-logo.png" />
   <style>
-    :root{--bg:#050812;--card:#0b1224;--card2:#101a33;--blue:#18a9ff;--cyan:#47e4ff;--text:#eef7ff;--muted:#9db1c8;--line:rgba(255,255,255,.12);--gold:#ffd66b;--green:#22e58f;--red:#ff5d7a}
-    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at top left,#0a3563 0,#071022 35%,#030611 75%);color:var(--text);overflow-x:hidden} a{color:inherit;text-decoration:none}.wrap{width:min(1180px,92%);margin:auto}
-    header{position:sticky;top:0;z-index:50;background:rgba(3,6,17,.78);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav{height:78px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.2px}.brand img{width:54px;height:54px;border-radius:14px;object-fit:cover;box-shadow:0 0 24px rgba(24,169,255,.4)}.navlinks{display:flex;gap:22px;color:var(--muted);font-size:14px}.navlinks a:hover{color:white}.btn{border:0;border-radius:999px;padding:13px 20px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,var(--blue),#1668ff);color:white;box-shadow:0 12px 30px rgba(24,169,255,.28);display:inline-flex;align-items:center;gap:8px}.btn.alt{background:rgba(255,255,255,.08);border:1px solid var(--line);box-shadow:none}.btn.green{background:linear-gradient(135deg,#16d77a,#03a56d)}
-    .hero{position:relative;min-height:760px;display:grid;align-items:center;overflow:hidden}.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,6,17,.96),rgba(3,6,17,.62),rgba(3,6,17,.94)),url('https://images.unsplash.com/photo-1593784991095-a205069470b6?q=80&w=1800&auto=format&fit=crop');background-size:cover;background-position:center;transform:scale(1.04);filter:saturate(1.2)}.hero:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 36%,rgba(24,169,255,.28),transparent 32%)}.heroContent{position:relative;z-index:1;padding:80px 0}.kicker{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(71,228,255,.35);background:rgba(71,228,255,.08);padding:10px 15px;border-radius:999px;color:#bff5ff;font-weight:800;font-size:13px}.hero h1{font-size:clamp(42px,7vw,86px);line-height:.95;margin:24px 0 18px;max-width:850px}.hero p{font-size:clamp(17px,2vw,22px);color:#c9d8ea;max-width:720px;line-height:1.6}.heroBtns{display:flex;gap:14px;flex-wrap:wrap;margin:30px 0}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:42px;max-width:900px}.stat{background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:22px;padding:20px;backdrop-filter:blur(10px)}.stat b{font-size:25px;display:block}.stat span{color:var(--muted);font-size:13px}
-    section{padding:86px 0}.sectionTitle{text-align:center;margin-bottom:34px}.sectionTitle h2{font-size:clamp(30px,4vw,52px);margin:0 0 10px}.sectionTitle p{color:var(--muted);font-size:17px;max-width:720px;margin:auto}.grid{display:grid;gap:18px}.features{grid-template-columns:repeat(4,1fr)}.card{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.035));border:1px solid var(--line);border-radius:26px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.25)}.icon{width:52px;height:52px;border-radius:16px;background:rgba(24,169,255,.16);display:grid;place-items:center;font-size:26px;margin-bottom:16px}.card h3{margin:0 0 8px;font-size:20px}.card p{color:var(--muted);line-height:1.55;margin:0}.devices{grid-template-columns:repeat(6,1fr)}.device{text-align:center;padding:18px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-weight:800}.device span{display:block;font-size:28px;margin-bottom:8px}.pricing{grid-template-columns:repeat(3,1fr)}.price{position:relative}.badge{position:absolute;right:20px;top:18px;background:rgba(255,214,107,.16);color:var(--gold);border:1px solid rgba(255,214,107,.35);border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900}.price h3{font-size:27px}.amount{font-size:46px;font-weight:950;margin:16px 0}.amount small{font-size:16px;color:var(--muted)}.price ul{padding-left:18px;color:#c9d8ea;line-height:1.9}.showcase{grid-template-columns:1.1fr .9fr}.pillbox{display:flex;gap:10px;flex-wrap:wrap}.pill{padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.06);color:#d7e9fb;font-weight:700;font-size:14px}.reviews{grid-template-columns:repeat(3,1fr)}.review{min-height:190px}.stars{color:var(--gold);font-size:18px;margin-bottom:12px}.faq{max-width:900px;margin:auto}.qa{border:1px solid var(--line);border-radius:20px;margin:12px 0;overflow:hidden;background:rgba(255,255,255,.05)}.qa summary{padding:18px 20px;cursor:pointer;font-weight:850}.qa div{padding:0 20px 18px;color:var(--muted);line-height:1.6}.formGrid{grid-template-columns:1fr 1fr}.input,select,textarea{width:100%;background:#071027;border:1px solid var(--line);border-radius:14px;padding:14px 15px;color:white;outline:none}label{font-size:13px;color:#b9c9dc;font-weight:800} .field{display:grid;gap:7px;margin-bottom:12px}textarea{min-height:100px}.notice{border:1px solid rgba(71,228,255,.3);background:rgba(71,228,255,.08);padding:16px;border-radius:20px;color:#c9f7ff;margin-top:16px;display:none;white-space:pre-wrap}footer{padding:42px 0;border-top:1px solid var(--line);color:var(--muted);text-align:center}.waFloat{position:fixed;right:18px;bottom:18px;z-index:70;background:#25d366;color:white;border-radius:999px;padding:14px 18px;font-weight:950;box-shadow:0 14px 36px rgba(37,211,102,.36)}
-    .chatFab{position:fixed;right:18px;bottom:82px;z-index:70;border-radius:999px;padding:15px 18px;background:linear-gradient(135deg,var(--blue),#155cff);font-weight:950;box-shadow:0 18px 46px rgba(24,169,255,.42);cursor:pointer}.chat{position:fixed;right:18px;bottom:145px;width:min(410px,calc(100vw - 36px));height:620px;max-height:calc(100vh - 180px);z-index:80;background:#071027;border:1px solid var(--line);border-radius:28px;box-shadow:0 25px 90px rgba(0,0,0,.6);display:none;overflow:hidden}.chat.open{display:flex;flex-direction:column}.chatHead{display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.05)}.chatHead img{width:42px;height:42px;border-radius:12px;object-fit:cover}.chatHead b{display:block}.chatHead span{color:var(--green);font-size:12px}.close{margin-left:auto;background:transparent;border:0;color:white;font-size:24px;cursor:pointer}.chatMsgs{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:12px}.msg{padding:12px 14px;border-radius:18px;max-width:86%;line-height:1.45;white-space:pre-wrap}.bot{background:rgba(255,255,255,.08);align-self:flex-start}.user{background:linear-gradient(135deg,var(--blue),#155cff);align-self:flex-end}.quick{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px 12px}.quick button{background:rgba(255,255,255,.07);border:1px solid var(--line);color:#d9efff;border-radius:999px;padding:8px 10px;cursor:pointer}.chatInput{display:flex;gap:8px;padding:14px;border-top:1px solid var(--line)}.chatInput input{flex:1;background:#050b1a;border:1px solid var(--line);border-radius:999px;color:white;padding:12px 14px}.chatInput button{border:0;border-radius:999px;background:var(--blue);color:white;font-weight:900;padding:0 16px}
-    @media(max-width:900px){.navlinks{display:none}.stats,.features,.pricing,.showcase,.formGrid{grid-template-columns:1fr}.devices{grid-template-columns:repeat(2,1fr)}.reviews{grid-template-columns:1fr}.hero{min-height:680px}.chat{right:10px;bottom:132px;width:calc(100vw - 20px)}}
+    :root {
+      --bg: #050812;
+      --card: #0b1224;
+      --card2: #101a33;
+      --blue: #18a9ff;
+      --cyan: #47e4ff;
+      --text: #eef7ff;
+      --muted: #9db1c8;
+      --line: rgba(255, 255, 255, .12);
+      --gold: #ffd66b;
+      --green: #22e58f;
+      --red: #ff5d7a
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(circle at top left, #0a3563 0, #071022 35%, #030611 75%);
+      color: var(--text);
+      overflow-x: hidden
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .wrap {
+      width: min(1180px, 92%);
+      margin: auto
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(3, 6, 17, .78);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line)
+    }
+
+    .nav {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: .2px
+    }
+
+    .brand img {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: 0 0 24px rgba(24, 169, 255, .4)
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    .navlinks a:hover {
+      color: white
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 20px;
+      font-weight: 800;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--blue), #1668ff);
+      color: white;
+      box-shadow: 0 12px 30px rgba(24, 169, 255, .28);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .btn.alt {
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid var(--line);
+      box-shadow: none
+    }
+
+    .btn.green {
+      background: linear-gradient(135deg, #16d77a, #03a56d)
+    }
+
+    .hero {
+      position: relative;
+      min-height: 760px;
+      display: grid;
+      align-items: center;
+      overflow: hidden
+    }
+
+    .hero:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(3, 6, 17, .96), rgba(3, 6, 17, .62), rgba(3, 6, 17, .94)), url('https://images.unsplash.com/photo-1593784991095-a205069470b6?q=80&w=1800&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.04);
+      filter: saturate(1.2)
+    }
+
+    .hero:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 72% 36%, rgba(24, 169, 255, .28), transparent 32%)
+    }
+
+    .heroContent {
+      position: relative;
+      z-index: 1;
+      padding: 80px 0
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(71, 228, 255, .35);
+      background: rgba(71, 228, 255, .08);
+      padding: 10px 15px;
+      border-radius: 999px;
+      color: #bff5ff;
+      font-weight: 800;
+      font-size: 13px
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: .95;
+      margin: 24px 0 18px;
+      max-width: 850px
+    }
+
+    .hero p {
+      font-size: clamp(17px, 2vw, 22px);
+      color: #c9d8ea;
+      max-width: 720px;
+      line-height: 1.6
+    }
+
+    .heroBtns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 30px 0
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 42px;
+      max-width: 900px
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 20px;
+      backdrop-filter: blur(10px)
+    }
+
+    .stat b {
+      font-size: 25px;
+      display: block
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    section {
+      padding: 86px 0
+    }
+
+    .sectionTitle {
+      text-align: center;
+      margin-bottom: 34px
+    }
+
+    .sectionTitle h2 {
+      font-size: clamp(30px, 4vw, 52px);
+      margin: 0 0 10px
+    }
+
+    .sectionTitle p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 720px;
+      margin: auto
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px
+    }
+
+    .features {
+      grid-template-columns: repeat(4, 1fr)
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .035));
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .25)
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: rgba(24, 169, 255, .16);
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      margin-bottom: 16px
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 20px
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0
+    }
+
+    .devices {
+      grid-template-columns: repeat(6, 1fr)
+    }
+
+    .device {
+      text-align: center;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid var(--line);
+      font-weight: 800
+    }
+
+    .device span {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 8px
+    }
+
+    .pricing {
+      grid-template-columns: repeat(3, 1fr)
+    }
+
+    .price {
+      position: relative
+    }
+
+    .badge {
+      position: absolute;
+      right: 20px;
+      top: 18px;
+      background: rgba(255, 214, 107, .16);
+      color: var(--gold);
+      border: 1px solid rgba(255, 214, 107, .35);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 900
+    }
+
+    .price h3 {
+      font-size: 27px
+    }
+
+    .amount {
+      font-size: 46px;
+      font-weight: 950;
+      margin: 16px 0
+    }
+
+    .amount small {
+      font-size: 16px;
+      color: var(--muted)
+    }
+
+    .price ul {
+    padding-left: 18px;
+    color: #c9d8ea;
+    line-height: 1.6;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+    .showcase {
+      grid-template-columns: 1.1fr .9fr
+    }
+
+    .pillbox {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .06);
+      color: #d7e9fb;
+      font-weight: 700;
+      font-size: 14px
+    }
+
+    .reviews {
+      grid-template-columns: repeat(3, 1fr)
+    }
+
+    .review {
+      min-height: 190px
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: 18px;
+      margin-bottom: 12px
+    }
+
+    .faq {
+      max-width: 900px;
+      margin: auto
+    }
+
+    .qa {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      margin: 12px 0;
+      overflow: hidden;
+      background: rgba(255, 255, 255, .05)
+    }
+
+    .qa summary {
+      padding: 18px 20px;
+      cursor: pointer;
+      font-weight: 850
+    }
+
+    .qa div {
+      padding: 0 20px 18px;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .formGrid {
+      grid-template-columns: 1fr 1fr
+    }
+
+    .input,
+    select,
+    textarea {
+      width: 100%;
+      background: #071027;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 15px;
+      color: white;
+      outline: none
+    }
+
+    label {
+      font-size: 13px;
+      color: #b9c9dc;
+      font-weight: 800
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+      margin-bottom: 12px
+    }
+
+    textarea {
+      min-height: 100px
+    }
+
+    .notice {
+      border: 1px solid rgba(71, 228, 255, .3);
+      background: rgba(71, 228, 255, .08);
+      padding: 16px;
+      border-radius: 20px;
+      color: #c9f7ff;
+      margin-top: 16px;
+      display: none;
+      white-space: pre-wrap
+    }
+
+    footer {
+      padding: 42px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center
+    }
+
+    .waFloat {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 70;
+      background: #25d366;
+      color: white;
+      border-radius: 999px;
+      padding: 14px 18px;
+      font-weight: 950;
+      box-shadow: 0 14px 36px rgba(37, 211, 102, .36)
+    }
+
+    .chatFab {
+      position: fixed;
+      right: 18px;
+      bottom: 82px;
+      z-index: 70;
+      border-radius: 999px;
+      padding: 15px 18px;
+      background: linear-gradient(135deg, var(--blue), #155cff);
+      font-weight: 950;
+      box-shadow: 0 18px 46px rgba(24, 169, 255, .42);
+      cursor: pointer
+    }
+
+    .chat {
+      position: fixed;
+      right: 18px;
+      bottom: 145px;
+      width: min(410px, calc(100vw - 36px));
+      height: 620px;
+      max-height: calc(100vh - 180px);
+      z-index: 80;
+      background: #071027;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: 0 25px 90px rgba(0, 0, 0, .6);
+      display: none;
+      overflow: hidden
+    }
+
+    .chat.open {
+      display: flex;
+      flex-direction: column
+    }
+
+    .chatHead {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, .05)
+    }
+
+    .chatHead img {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      object-fit: cover
+    }
+
+    .chatHead b {
+      display: block
+    }
+
+    .chatHead span {
+      color: var(--green);
+      font-size: 12px
+    }
+
+    .close {
+      margin-left: auto;
+      background: transparent;
+      border: 0;
+      color: white;
+      font-size: 24px;
+      cursor: pointer
+    }
+
+    .chatMsgs {
+      flex: 1;
+      overflow: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .msg {
+      padding: 12px 14px;
+      border-radius: 18px;
+      max-width: 86%;
+      line-height: 1.45;
+      white-space: pre-wrap
+    }
+
+    .bot {
+      background: rgba(255, 255, 255, .08);
+      align-self: flex-start
+    }
+
+    .user {
+      background: linear-gradient(135deg, var(--blue), #155cff);
+      align-self: flex-end
+    }
+
+    .quick {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 0 16px 12px
+    }
+
+    .quick button {
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid var(--line);
+      color: #d9efff;
+      border-radius: 999px;
+      padding: 8px 10px;
+      cursor: pointer
+    }
+
+    .chatInput {
+      display: flex;
+      gap: 8px;
+      padding: 14px;
+      border-top: 1px solid var(--line)
+    }
+
+    .chatInput input {
+      flex: 1;
+      background: #050b1a;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: white;
+      padding: 12px 14px
+    }
+
+    .chatInput button {
+      border: 0;
+      border-radius: 999px;
+      background: var(--blue);
+      color: white;
+      font-weight: 900;
+      padding: 0 16px
+    }
+
+    @media(max-width:900px) {
+      .navlinks {
+        display: none
+      }
+
+      .stats,
+      .features,
+      .pricing,
+      .showcase,
+      .formGrid {
+        grid-template-columns: 1fr
+      }
+
+      .devices {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .reviews {
+        grid-template-columns: 1fr
+      }
+
+      .hero {
+        min-height: 680px
+      }
+
+      .chat {
+        right: 10px;
+        bottom: 132px;
+        width: calc(100vw - 20px)
+      }
+    }
+
     /* ===== Premium StreamlyTV Hero Upgrade ===== */
 
-.hero{
-  position:relative;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  overflow:hidden;
-  isolation:isolate;
-  padding:120px 0 120px;
-  background:
-linear-gradient(rgba(5,8,18,.65), rgba(5,8,18,.88)),
-url("assets/hero-bg.png");
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-}
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      isolation: isolate;
+      padding: 120px 0 120px;
+      background:
+        linear-gradient(rgba(5, 8, 18, .65), rgba(5, 8, 18, .88)),
+        url("assets/hero-bg.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
 
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-2;
-  background:
-    linear-gradient(90deg, rgba(1,5,14,.96) 0%, rgba(1,8,20,.78) 48%, rgba(1,8,20,.34) 100%);
-}
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(1, 5, 14, .96) 0%, rgba(1, 8, 20, .78) 48%, rgba(1, 8, 20, .34) 100%);
+    }
 
-.hero::after{
-  content:"";
-  position:absolute;
-  width:560px;
-  height:560px;
-  right:-120px;
-  top:50%;
-  transform:translateY(-50%);
-  z-index:-1;
-  border-radius:50%;
-  background:rgba(24,169,255,.14);
-  filter:blur(20px);
-  box-shadow:
-    0 0 120px rgba(24,169,255,.30),
-    0 0 220px rgba(24,169,255,.16);
-  animation:heroGlow 7s ease-in-out infinite alternate;
-}
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 560px;
+      height: 560px;
+      right: -120px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: -1;
+      border-radius: 50%;
+      background: rgba(24, 169, 255, .14);
+      filter: blur(20px);
+      box-shadow:
+        0 0 120px rgba(24, 169, 255, .30),
+        0 0 220px rgba(24, 169, 255, .16);
+      animation: heroGlow 7s ease-in-out infinite alternate;
+    }
 
-.heroContent{
-  position:relative;
-  width:min(1180px, 92%);
-  margin:auto;
-  z-index:2;
-}
+    .heroContent {
+      position: relative;
+      width: min(1180px, 92%);
+      margin: auto;
+      z-index: 2;
+    }
 
-.kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:12px 18px;
-  margin-bottom:24px;
-  border:1px solid rgba(71,228,255,.40);
-  border-radius:999px;
-  background:rgba(4,20,39,.55);
-  box-shadow:0 12px 35px rgba(0,0,0,.24);
-  backdrop-filter:blur(14px);
-  font-weight:800;
-}
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 18px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(71, 228, 255, .40);
+      border-radius: 999px;
+      background: rgba(4, 20, 39, .55);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .24);
+      backdrop-filter: blur(14px);
+      font-weight: 800;
+    }
 
-.hero h1{
-  max-width:820px;
-  margin:0;
-  font-size:clamp(52px, 7vw, 98px);
-  line-height:.96;
-  letter-spacing:-3px;
-  text-wrap:balance;
-  text-shadow:0 12px 40px rgba(0,0,0,.55);
-}
+    .hero h1 {
+      max-width: 820px;
+      margin: 0;
+      font-size: clamp(52px, 7vw, 98px);
+      line-height: .96;
+      letter-spacing: -3px;
+      text-wrap: balance;
+      text-shadow: 0 12px 40px rgba(0, 0, 0, .55);
+    }
 
-.hero h1 span{
-  display:inline-block;
-  background:linear-gradient(90deg,#f8dc8b,#d9af52,#f7c95d);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent !important;
-  filter:drop-shadow(0 8px 20px rgba(217,175,82,.22));
-}
+    .hero h1 span {
+      display: inline-block;
+      background: linear-gradient(90deg, #f8dc8b, #d9af52, #f7c95d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent !important;
+      filter: drop-shadow(0 8px 20px rgba(217, 175, 82, .22));
+    }
 
-.heroContent > p{
-    font-size:21px;
-    line-height:1.8;
-    color:#d7d7d7;
-    max-width:700px;
-    margin:26px 0 40px;
-}
+    .heroContent>p {
+      font-size: 21px;
+      line-height: 1.8;
+      color: #d7d7d7;
+      max-width: 700px;
+      margin: 26px 0 40px;
+    }
 
-.heroBtns{
-  display:flex;
-  flex-wrap:wrap;
-  gap:14px;
-  margin-bottom:38px;
-}
+    .heroBtns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 38px;
+    }
 
-.heroBtns .btn{
-  min-height:56px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:15px 25px;
-  border-radius:999px;
-  font-weight:900;
-  transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
-}
+    .heroBtns .btn {
+      min-height: 56px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 25px;
+      border-radius: 999px;
+      font-weight: 900;
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
 
-.heroBtns .btn:hover{
-  transform:translateY(-4px);
-  filter:brightness(1.08);
-  box-shadow:0 18px 45px rgba(24,169,255,.30);
-}
+    .heroBtns .btn:hover {
+      transform: translateY(-4px);
+      filter: brightness(1.08);
+      box-shadow: 0 18px 45px rgba(24, 169, 255, .30);
+    }
 
-.heroBtns .green:hover{
-  box-shadow:0 18px 45px rgba(34,197,94,.30);
-}
+    .heroBtns .green:hover {
+      box-shadow: 0 18px 45px rgba(34, 197, 94, .30);
+    }
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:14px;
-  max-width:980px;
-  margin-top:70px;
-}
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 980px;
+      margin-top: 70px;
+    }
 
-.stat{
-  min-height:112px;
-  padding:22px;
-  cursor:pointer;
-overflow:hidden;
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:24px;
-  background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.045));
-  backdrop-filter:blur(18px);
-  box-shadow:0 20px 55px rgba(0,0,0,.26);
-  transition:transform .25s ease,border-color .25s ease;
-}
+    .stat {
+      min-height: 112px;
+      padding: 22px;
+      cursor: pointer;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .045));
+      backdrop-filter: blur(18px);
+      box-shadow: 0 20px 55px rgba(0, 0, 0, .26);
+      transition: transform .25s ease, border-color .25s ease;
+    }
 
 
-.stat:hover{
-    transform:translateY(-12px) scale(1.04);
-    border-color:rgba(24,169,255,.65);
-    box-shadow:
-        0 35px 80px rgba(24,169,255,.35),
-        0 0 40px rgba(24,169,255,.20);
-    transition:all .35s ease;
-}
+    .stat:hover {
+      transform: translateY(-12px) scale(1.04);
+      border-color: rgba(24, 169, 255, .65);
+      box-shadow:
+        0 35px 80px rgba(24, 169, 255, .35),
+        0 0 40px rgba(24, 169, 255, .20);
+      transition: all .35s ease;
+    }
 
-.stat strong{
-    display:block;
-    font-size:18px;
-    font-weight:700;
-    color:#ffffff;
-    margin-bottom:8px;
-    line-height:1.4;
-    letter-spacing:0;
-}
+    .stat strong {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      letter-spacing: 0;
+    }
 
-.stat span{
-    font-size:14px;
-    line-height:1.5;
-    color:#b7c9db;
-}
+    .stat span {
+      font-size: 13px;
+      line-height: 1.4;
+      color: #b7c9db;
+    }
 
-@keyframes heroGlow{
-  from{transform:translateY(-50%) scale(.92);opacity:.72}
-  to{transform:translateY(-50%) scale(1.08);opacity:1}
-}
+    @keyframes heroGlow {
+      from {
+        transform: translateY(-50%) scale(.92);
+        opacity: .72
+      }
 
-@media(max-width:900px){
-  .hero{
-    min-height:auto;
-    padding:90px 0 55px;
-  }
+      to {
+        transform: translateY(-50%) scale(1.08);
+        opacity: 1
+      }
+    }
 
-  .hero::before{
-    background:linear-gradient(180deg,rgba(1,5,14,.94),rgba(3,14,29,.80));
-  }
+    @media(max-width:900px) {
+      .hero {
+        min-height: auto;
+        padding: 90px 0 55px;
+      }
 
-  .hero::after{
-    width:360px;
-    height:360px;
-    right:-150px;
-    top:35%;
-  }
+      .hero::before {
+        background: linear-gradient(180deg, rgba(1, 5, 14, .94), rgba(3, 14, 29, .80));
+      }
 
-  .hero h1{
-    font-size:clamp(48px,14vw,72px);
-    line-height:1;
-    letter-spacing:-2px;
-  }
+      .hero::after {
+        width: 360px;
+        height: 360px;
+        right: -150px;
+        top: 35%;
+      }
 
-  .heroBtns{
-    display:grid;
-    grid-template-columns:1fr;
-  }
+      .hero h1 {
+        font-size: clamp(48px, 14vw, 72px);
+        line-height: 1;
+        letter-spacing: -2px;
+      }
 
-  .heroBtns .btn{
-    width:100%;
-  }
+      .heroBtns {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
 
-  .stats{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-}
+      .heroBtns .btn {
+        width: 100%;
+      }
 
-@media(max-width:520px){
-  .hero{
-    padding:70px 0 42px;
-  }
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
 
-  .heroContent{
-    width:min(92%,680px);
-  }
+    @media(max-width:520px) {
+      .hero {
+        padding: 70px 0 42px;
+      }
 
-  .kicker{
-    width:100%;
-    justify-content:center;
-    text-align:center;
-    font-size:14px;
-  }
+      .heroContent {
+        width: min(92%, 680px);
+      }
 
-  .hero h1{
-    font-size:clamp(44px,13vw,62px);
-  }
+      .kicker {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        font-size: 14px;
+      }
 
-  .heroContent > p{
-    font-size:17px;
-    line-height:1.6;
-  }
+      .hero h1 {
+        font-size: clamp(44px, 13vw, 62px);
+      }
 
-  .stats{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
+      .heroContent>p {
+        font-size: 17px;
+        line-height: 1.6;
+      }
 
-  .stat{
-    min-height:102px;
-    padding:16px;
-    border-radius:20px;
-  }
+      .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
 
-  .stat strong{
-    font-size:19px;
-  }
+      .stat {
+        min-height: 102px;
+        padding: 16px;
+        border-radius: 20px;
+      }
 
-  .stat span{
-    font-size:13px;
-  }
-}
-/* ===== Premium Pricing Section ===== */
+      .stat strong {
+        font-size: 19px;
+      }
 
-#plans{
-  position:relative;
-  overflow:hidden;
-  padding:100px 0;
-  background:
-    radial-gradient(circle at 50% 0%,rgba(217,175,82,.12),transparent 38%),
-    linear-gradient(180deg,#061426 0%,#030a13 100%);
-}
+      .stat span {
+        font-size: 13px;
+      }
+    }
 
-#plans .section-title{
-  max-width:760px;
-  margin:0 auto 45px;
-  text-align:center;
-}
+    /* ===== Premium Pricing Section ===== */
 
-#plans .section-title h2{
-  font-size:clamp(34px,5vw,56px);
-  line-height:1.05;
-  margin-bottom:14px;
-}
+    #plans {
+      position: relative;
+      overflow: hidden;
+      padding: 100px 0;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(217, 175, 82, .12), transparent 38%),
+        linear-gradient(180deg, #061426 0%, #030a13 100%);
+    }
 
-#plans .section-title p{
-  color:#aebfd3;
-  font-size:18px;
-  line-height:1.7;
-}
+    #plans .section-title {
+      max-width: 760px;
+      margin: 0 auto 45px;
+      text-align: center;
+    }
 
-#plans .grid3{
-  align-items:stretch;
-  gap:24px;
-}
+    #plans .section-title h2 {
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
 
-#plans .card{
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  min-height:100%;
-  padding:34px 28px;
-  border:1px solid rgba(255,255,255,.13);
-  border-radius:26px;
-  background:
-    linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.035));
-  backdrop-filter:blur(18px);
-  box-shadow:0 24px 65px rgba(0,0,0,.30);
-  transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
-}
+    #plans .section-title p {
+      color: #aebfd3;
+      font-size: 18px;
+      line-height: 1.7;
+    }
 
-#plans .card:hover{
-  transform:translateY(-9px);
-  border-color:rgba(24,169,255,.48);
-  box-shadow:0 32px 80px rgba(24,169,255,.18);
-}
+    #plans .grid3 {
+      align-items: stretch;
+      gap: 24px;
+    }
 
-#plans .card:nth-child(3){
-  transform:scale(1.045);
-  border:1px solid rgba(217,175,82,.72);
-  background:
-    radial-gradient(circle at top,rgba(217,175,82,.18),transparent 42%),
-    linear-gradient(145deg,rgba(35,28,13,.96),rgba(7,16,28,.96));
-  box-shadow:
-    0 28px 80px rgba(0,0,0,.42),
-    0 0 45px rgba(217,175,82,.15);
-}
+    #plans .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 34px 28px;
+      border: 1px solid rgba(255, 255, 255, .13);
+      border-radius: 26px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, .035));
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 65px rgba(0, 0, 0, .30);
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
 
-#plans .card:nth-child(3)::before{
-  content:"MOST POPULAR";
-  position:absolute;
-  top:-15px;
-  left:50%;
-  transform:translateX(-50%);
-  padding:9px 18px;
-  border-radius:999px;
-  background:linear-gradient(135deg,#f6dc8a,#b87b16);
-  color:#07101c;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:1.1px;
-  white-space:nowrap;
-  box-shadow:0 12px 30px rgba(217,175,82,.30);
-}
+    #plans .card:hover {
+      transform: translateY(-9px);
+      border-color: rgba(24, 169, 255, .48);
+      box-shadow: 0 32px 80px rgba(24, 169, 255, .18);
+    }
 
-#plans .card:nth-child(3):hover{
-  transform:translateY(-9px) scale(1.045);
-  border-color:#f1c766;
-  box-shadow:
-    0 35px 90px rgba(0,0,0,.44),
-    0 0 60px rgba(217,175,82,.25);
-}
+    #plans .card:nth-child(3) {
+      transform: scale(1.045);
+      border: 1px solid rgba(217, 175, 82, .72);
+      background:
+        radial-gradient(circle at top, rgba(217, 175, 82, .18), transparent 42%),
+        linear-gradient(145deg, rgba(35, 28, 13, .96), rgba(7, 16, 28, .96));
+      box-shadow:
+        0 28px 80px rgba(0, 0, 0, .42),
+        0 0 45px rgba(217, 175, 82, .15);
+    }
 
-#plans .price{
-  margin:18px 0 22px;
-  font-size:clamp(42px,5vw,62px);
-  font-weight:950;
-  letter-spacing:-2px;
-  color:#fff;
-}
+    #plans .card:nth-child(3)::before {
+      content: "MOST POPULAR";
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f6dc8a, #b87b16);
+      color: #07101c;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      white-space: nowrap;
+      box-shadow: 0 12px 30px rgba(217, 175, 82, .30);
+    }
 
-#plans ul{
-  flex:1;
-  margin:10px 0 28px;
-  padding:0;
-  list-style:none;
-}
+    #plans .card:nth-child(3):hover {
+      transform: translateY(-9px) scale(1.045);
+      border-color: #f1c766;
+      box-shadow:
+        0 35px 90px rgba(0, 0, 0, .44),
+        0 0 60px rgba(217, 175, 82, .25);
+    }
 
-#plans li{
-  position:relative;
-  margin:13px 0;
-  padding-left:28px;
-  color:#c4d1df;
-  line-height:1.55;
-}
+    #plans .price {
+      margin: 18px 0 22px;
+      font-size: clamp(42px, 5vw, 62px);
+      font-weight: 950;
+      letter-spacing: -2px;
+      color: #fff;
+    }
 
-#plans li::before{
-  content:"✓";
-  position:absolute;
-  left:0;
-  color:#45d483;
-  font-weight:900;
-}
+    #plans ul {
+      flex: 1;
+      margin: 10px 0 28px;
+      padding: 0;
+      list-style: none;
+    }
 
-#plans .btn{
-  width:100%;
-  min-height:56px;
-  margin-top:auto;
-  border-radius:16px;
-  font-size:16px;
-  font-weight:900;
-}
+    #plans li {
+      position: relative;
+      margin: 13px 0;
+      padding-left: 28px;
+      color: #c4d1df;
+      line-height: 1.55;
+    }
 
-#plans .card:nth-child(3) .btn{
-  background:linear-gradient(135deg,#f6dc8a,#b87b16);
-  color:#06101c;
-  box-shadow:0 16px 38px rgba(217,175,82,.23);
-}
+    #plans li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #45d483;
+      font-weight: 900;
+    }
 
-@media(max-width:900px){
-  #plans{
-    padding:75px 0;
-  }
+    #plans .btn {
+      width: 100%;
+      min-height: 56px;
+      margin-top: auto;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 900;
+    }
 
-  #plans .grid3{
-    grid-template-columns:1fr;
-    gap:24px;
-  }
+    #plans .card:nth-child(3) .btn {
+      background: linear-gradient(135deg, #f6dc8a, #b87b16);
+      color: #06101c;
+      box-shadow: 0 16px 38px rgba(217, 175, 82, .23);
+    }
 
-  #plans .card:nth-child(3),
-  #plans .card:nth-child(3):hover{
-    transform:none;
-  }
+    @media(max-width:900px) {
+      #plans {
+        padding: 75px 0;
+      }
 
-  #plans .card{
-    padding:30px 22px;
-  }
-}
+      #plans .grid3 {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      #plans .card:nth-child(3),
+      #plans .card:nth-child(3):hover {
+        transform: none;
+      }
+
+      #plans .card {
+        padding: 30px 22px;
+      }
+    }
   </style>
 </head>
+
 <body>
-<header><div class="wrap nav"><a class="brand" href="#"><img src="assets/streamlytv-logo.png" alt="StreamlyTV"><span>StreamlyTV</span></a><nav class="navlinks"><a href="#features">Features</a><a href="entertainment.html">Entertainment</a><a href="#plans">Plans</a><a href="#devices">Devices</a><a href="#setup">Setup</a><a href="#faq">FAQ</a></nav><button class="btn" onclick="openChat()">Smart Support</button></div></header>
-<main>
-<section class="hero">
-  <div class="wrap heroContent">
-    <span class="kicker">🟢 StreamlyTV Support Online • 24/7 Support</span>
-
-    <h1>
-      Unlimited Entertainment.<br>
-      <span style="color:#d9af52;">Built Around You.</span>
-    </h1>
-
-    <p>
-      Live TV, sports, PPV, movies, series, kids content and international
-      entertainment with fast setup and friendly support.
-    </p>
-
-    <div class="heroBtns">
-      <button class="btn" onclick="openChat('I want a 24-hour free trial')">
-        Start 24-Hour Trial
-      </button>
-
-      <a class="btn alt" href="#plans">View Packages</a>
-
-      <a class="btn green" href="entertainment.html">
-        🎬 Entertainment Hub
-      </a>
+  <header>
+    <div class="wrap nav"><a class="brand" href="#"><img src="assets/streamlytv-logo.png"
+          alt="StreamlyTV"><span>StreamlyTV</span></a>
+      <nav class="navlinks"><a href="#features">Features</a><a href="entertainment.html">Entertainment</a><a
+          href="#plans">Plans</a><a href="#devices">Devices</a><a href="#setup">Setup</a><a href="#faq">FAQ</a></nav>
+      <button class="btn" onclick="openChat()">Smart Support</button>
     </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="wrap heroContent">
+        <span class="kicker">🟢 StreamlyTV Support Online • 24/7 Support</span>
 
-    <div class="stats">
-      <div class="stat">
-        <strong>50,000+</strong>
-        <span>Live TV Channels</span>
-      </div>
+        <h1>
+          Unlimited Entertainment.<br>
+          <span style="color:#d9af52;">Built Around You.</span>
+        </h1>
 
-      <div class="stat">
-        <strong>100,000+</strong>
-        <span>Movies &amp; Series</span>
-      </div>
+        <p>
+          Live TV, sports, PPV, movies, series, kids content and international
+          entertainment with fast setup and friendly support.
+        </p>
 
-      <div class="stat">
-        <strong>4K / FHD / HD</strong>
-        <span>Quality where available</span>
-      </div>
+        <div class="heroBtns">
+          <button class="btn" onclick="openChat('I want a 24-hour free trial')">
+            Start 24-Hour Trial
+          </button>
 
-      <div class="stat">
-        <strong>Worldwide</strong>
-        <span>No VPN required</span>
+          <a class="btn alt" href="#plans">View Packages</a>
+
+          <a class="btn green" href="entertainment.html">
+            🎬 Entertainment Hub
+          </a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong>50,000+</strong>
+            <span>Live TV Channels</span>
+          </div>
+
+          <div class="stat">
+            <strong>100,000+</strong>
+            <span>Movies &amp; Series</span>
+          </div>
+
+          <div class="stat">
+            <strong>4K / FHD / HD</strong>
+            <span>Quality where available</span>
+          </div>
+
+          <div class="stat">
+            <strong>Worldwide</strong>
+            <span>No VPN required</span>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>Why Choose StreamlyTV?</h2>
+          <p>A premium, family-friendly streaming experience with regular updates, strong device support and Smart setup
+            help.</p>
+        </div>
+        <div class="grid features">
+          <div class="card">
+            <div class="icon">📺</div>
+            <h3>Live TV</h3>
+            <p>50,000+ live channels across Australia, UK, USA, Canada, Arabic, Europe and more.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🎬</div>
+            <h3>VOD Library</h3>
+            <p>100,000+ movies and series with New Releases, Netflix UK/US/Arabic and more.</p>
+          </div>
+          <div class="card">
+            <div class="icon">⚽</div>
+            <h3>Sports & PPV</h3>
+            <p>UFC, boxing, NBA, NRL, Formula 1, football, DAZN, TNT Sports and PPV categories.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🤖</div>
+            <h3>Smart Support</h3>
+            <p>StreamlyTV Support helps customers with setup, devices, troubleshooting and package info.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🌍</div>
+            <h3>Works Worldwide</h3>
+            <p>Use StreamlyTV around the world with Wi-Fi, Ethernet or mobile data.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🔒</div>
+            <h3>Family Friendly</h3>
+            <p>No adult channels, adult movies or adult series.</p>
+          </div>
+          <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Smooth Streaming</h3>
+            <p>Optimized for stable viewing with 50 Mbps+ recommended internet.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🔄</div>
+            <h3>Regular Updates</h3>
+            <p>Live channels, movies and series are updated regularly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="plans">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>One-Time Packages</h2>
+          <p>No automatic renewals. We contact you 7 days and 3 days before expiry.</p>
+        </div>
+        <div class="grid pricing">
+          <div class="card price">
+            <h3>3 Months</h3>
+            <div class="amount">$60 <small>AUD</small></div>
+            <ul>
+              <li>One-time payment</li>
+              <li>Live TV + VOD</li>
+              <li>Smart setup help</li>
+            </ul><a class="btn" href="https://buy.stripe.com/5kQ14g1OT72gf19ejH1Fe0a" target="_blank">Buy 3 Months</a>
+          </div>
+          <div class="card price"><span class="badge">Most Popular</span>
+            <h3>6 Months</h3>
+            <div class="amount">$100 <small>AUD</small></div>
+            <ul>
+              <li>Best balance</li>
+              <li>One-time payment</li>
+              <li>Renewal reminder</li>
+            </ul><a class="btn" href="https://buy.stripe.com/dRmaEQ3X13Q4dX5grP1Fe09" target="_blank">Buy 6 Months</a>
+          </div>
+          <div class="card price"><span class="badge">Best Value</span>
+            <h3>12 Months</h3>
+            <div class="amount">$180 <small>AUD</small></div>
+            <ul>
+              <li>Best long-term value</li>
+              <li>One-time payment</li>
+              <li>Less renewals</li>
+            </ul><a class="btn" href="https://buy.stripe.com/28E28kbptgCQ7yHb7v1Fe08" target="_blank">Buy 12 Months</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="devices">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>Works On Your Favourite Devices</h2>
+          <p>Fire TV Stick 4K Max is recommended, but many devices are supported.</p>
+        </div>
+        <div class="grid devices">
+          <div class="device"><span>🔥</span>Firestick</div>
+          <div class="device"><span>📺</span>Smart TV</div>
+          <div class="device"><span>🤖</span>Android TV</div>
+          <div class="device"><span>🍎</span>Apple TV</div>
+          <div class="device"><span>📡</span>Chromecast</div>
+          <div class="device"><span>💻</span>Windows/Mac</div>
+          <div class="device"><span>📱</span>iPhone/iPad</div>
+          <div class="device"><span>📲</span>Android Phone</div>
+          <div class="device"><span>🖥️</span>Samsung</div>
+          <div class="device"><span>📺</span>LG TV</div>
+          <div class="device"><span>⭐</span>4K Max</div>
+          <div class="device"><span>🌍</span>Worldwide</div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="wrap grid showcase">
+        <div class="card">
+          <h2>Sports Finder</h2>
+          <p style="color:var(--muted);line-height:1.7">Ask StreamlyTV Support where to find UFC, NRL, boxing, Formula
+            1, NBA, soccer, wrestling and PPV events.</p>
+          <div class="pillbox"><span class="pill">UFC: UK TNT / US PPV / UFC Event 1</span><span class="pill">NRL:
+              Australia Sports / Fox 502</span><span class="pill">Formula 1: 4K UHD</span><span class="pill">NBA: NBA
+              Pass PPV / NBA HD</span><span class="pill">Boxing: DAZN / Sky / HBO / Prime</span><span
+              class="pill">Soccer: beIN / RTL+ / MLS PPV</span></div>
+        </div>
+        <div class="card">
+          <h2>Movies & Series</h2>
+          <p style="color:var(--muted);line-height:1.7">Includes New Releases, Netflix UK, Netflix USA, Netflix Arabic,
+            Disney+, Apple TV+, Prime Video, HBO Max, Shahid, OSN, kids, anime, Arabic series and more.</p>
+        </div>
+      </div>
+    </section>
+    <section id="setup">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>Send Setup Details</h2>
+          <p>Use this form to prepare your trial or activation request. It creates a WhatsApp message and optional email
+            notification.</p>
+        </div>
+        <div class="grid formGrid">
+          <div class="card">
+            <form id="orderForm">
+              <div class="field"><label>Full Name</label><input class="input" name="name" required
+                  placeholder="Your name"></div>
+              <div class="field"><label>WhatsApp Number</label><input class="input" name="whatsapp" required
+                  placeholder="Your WhatsApp number"></div>
+              <div class="field"><label>Email (optional)</label><input class="input" name="email"
+                  placeholder="your@email.com"></div>
+              <div class="field"><label>Package</label><select name="package" required>
+                  <option value="">Select a package...</option>
+                  <option>24-hour Trial</option>
+                  <option>3 Months ($60)</option>
+                  <option>6 Months ($100)</option>
+                  <option>12 Months ($180)</option>
+                </select></div>
+              <div class="field"><label>Device</label><select name="device" required>
+                  <option value="">Select your device...</option>
+                  <option>Fire TV Stick 4K Max</option>
+                  <option>Firestick / Fire TV</option>
+                  <option>Samsung TV</option>
+                  <option>LG TV</option>
+                  <option>Android TV / Google TV</option>
+                  <option>Android Phone</option>
+                  <option>iPhone / iPad</option>
+                  <option>Apple TV</option>
+                  <option>Chromecast</option>
+                  <option>Windows PC</option>
+                  <option>Mac</option>
+                  <option>Other</option>
+                </select></div>
+              <div class="field"><label>IPTV App</label><select name="app" required>
+                  <option value="">Select your IPTV app...</option>
+                  <option>IBO Pro Player</option>
+                  <option>IB Player</option>
+                  <option>SmartOne IPTV</option>
+                  <option>IPTV Smarters Pro</option>
+                  <option>XCIPTV</option>
+                  <option>TiviMate</option>
+                  <option>Smarters Player Lite</option>
+                  <option>HOT IPTV</option>
+                  <option>Bob Player</option>
+                  <option>Flix IPTV</option>
+                  <option>Other</option>
+                </select></div>
+              <div class="field"><label>MAC Address</label><input class="input" name="mac"
+                  placeholder="Example: 00:1A:79:..."></div>
+              <div class="field"><label>Device Key</label><input class="input" name="deviceKey"
+                  placeholder="Device key shown in app"></div>
+              <div class="field"><label>App Website shown in app</label><input class="input" name="appWebsite"
+                  placeholder="Website shown inside the IPTV app"></div>
+              <div class="field"><label>Notes</label><textarea name="notes"
+                  placeholder="Anything else we should know?"></textarea></div><button class="btn" type="submit">Send
+                Setup Request</button>
+            </form>
+            <div id="formNotice" class="notice"></div>
+          </div>
+          <div class="card">
+            <h2>What happens next?</h2>
+            <p>StreamlyTV team receives your details, assigns the correct package, completes the setup and tells you
+              when it is ready.</p>
+            <p>For IBO Pro Player, IB Player and SmartOne IPTV, please send MAC Address, Device Key and the app website
+              shown.</p>
+            <p>For IPTV Smarters, XCIPTV or TiviMate, StreamlyTV provides Server URL, Username and Password after
+              activation.</p><button class="btn alt" onclick="openChat('Help me set up my device')">Ask StreamlyTV
+              Support</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>What Customers Say</h2>
+          <p>Friendly support, fast setup and premium entertainment.</p>
+        </div>
+        <div class="grid reviews">
+          <div class="card review">
+            <div class="stars">★★★★★</div>
+            <p>“Setup was simple and the assistant explained exactly what I needed to send.”</p>
+          </div>
+          <div class="card review">
+            <div class="stars">★★★★★</div>
+            <p>“Great quality and easy to use on my Firestick.”</p>
+          </div>
+          <div class="card review">
+            <div class="stars">★★★★★</div>
+            <p>“The support helped me find sports and choose the right package.”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="faq">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>FAQ</h2>
+          <p>Quick answers to common StreamlyTV questions.</p>
+        </div>
+        <div class="faq">
+          <details class="qa">
+            <summary>Do I need a VPN?</summary>
+            <div>No. StreamlyTV does not require a VPN.</div>
+          </details>
+          <details class="qa">
+            <summary>What internet speed do I need?</summary>
+            <div>We recommend more than 50 Mbps for the best experience, especially for HD, FHD and 4K content.</div>
+          </details>
+          <details class="qa">
+            <summary>Can I use multiple devices?</summary>
+            <div>You can install it on many devices, but one active stream works at a time. Opening a second stream may
+              stop or log out the first.</div>
+          </details>
+          <details class="qa">
+            <summary>Can I use Chromecast or Apple TV?</summary>
+            <div>Yes. StreamlyTV supports Chromecast and Apple TV using compatible IPTV apps.</div>
+          </details>
+          <details class="qa">
+            <summary>Can I pause my service?</summary>
+            <div>No. Once activated, the service runs until the expiry date and cannot be paused.</div>
+          </details>
+          <details class="qa">
+            <summary>Does live TV have subtitles?</summary>
+            <div>No. Live TV does not include subtitles. Some movies and series may include subtitles or dubbed audio,
+              but not all.</div>
+          </details>
+          <details class="qa">
+            <summary>Is there adult content?</summary>
+            <div>No. StreamlyTV is family-friendly and does not provide adult channels, adult movies or adult series.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap"><img src="assets/streamlytv-logo.png" alt="StreamlyTV"
+        style="width:70px;border-radius:18px;margin-bottom:12px">
+      <p>StreamlyTV • WhatsApp 0410 350 514 • iptvstreamly@gmail.com</p>
+      <p style="margin-top:10px"><a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms & Conditions</a>
+        • <a href="refund.html">Refund Policy</a></p>
     </div>
+  </footer>
+  <a class="waFloat" href="https://wa.me/61410350514" target="_blank">WhatsApp</a>
+  <div class="chatFab" onclick="openChat()">🤖 StreamlyTV Support</div>
+  <div class="chat" id="chat">
+    <div class="chatHead"><img src="assets/streamlytv-logo.png" alt="StreamlyTV">
+      <div><b>StreamlyTV Support</b><span>● Online now</span></div><button class="close"
+        onclick="closeChat()">×</button>
+    </div>
+    <div class="chatMsgs" id="chatMsgs"></div>
+    <div class="quick"><button onclick="sendQuick('How do I start a 24-hour trial?')">24h Trial</button><button
+        onclick="sendQuick('How do I set up Firestick?')">Firestick</button><button
+        onclick="sendQuick('Do you have UFC?')">UFC</button><button
+        onclick="sendQuick('Which package is best?')">Packages</button></div>
+    <div class="chatInput"><input id="chatText" placeholder="Ask StreamlyTV Support..."
+        onkeydown="if(event.key==='Enter') sendChat()"><button onclick="sendChat()">Send</button></div>
   </div>
-</section>
-
-<section id="features"><div class="wrap"><div class="sectionTitle"><h2>Why Choose StreamlyTV?</h2><p>A premium, family-friendly streaming experience with regular updates, strong device support and Smart setup help.</p></div><div class="grid features"><div class="card"><div class="icon">📺</div><h3>Live TV</h3><p>50,000+ live channels across Australia, UK, USA, Canada, Arabic, Europe and more.</p></div><div class="card"><div class="icon">🎬</div><h3>VOD Library</h3><p>100,000+ movies and series with New Releases, Netflix UK/US/Arabic and more.</p></div><div class="card"><div class="icon">⚽</div><h3>Sports & PPV</h3><p>UFC, boxing, NBA, NRL, Formula 1, football, DAZN, TNT Sports and PPV categories.</p></div><div class="card"><div class="icon">🤖</div><h3>Smart Support</h3><p>StreamlyTV Support helps customers with setup, devices, troubleshooting and package info.</p></div><div class="card"><div class="icon">🌍</div><h3>Works Worldwide</h3><p>Use StreamlyTV around the world with Wi-Fi, Ethernet or mobile data.</p></div><div class="card"><div class="icon">🔒</div><h3>Family Friendly</h3><p>No adult channels, adult movies or adult series.</p></div><div class="card"><div class="icon">⚡</div><h3>Smooth Streaming</h3><p>Optimized for stable viewing with 50 Mbps+ recommended internet.</p></div><div class="card"><div class="icon">🔄</div><h3>Regular Updates</h3><p>Live channels, movies and series are updated regularly.</p></div></div></div></section>
-<section id="plans"><div class="wrap"><div class="sectionTitle"><h2>One-Time Packages</h2><p>No automatic renewals. We contact you 7 days and 3 days before expiry.</p></div><div class="grid pricing"><div class="card price"><h3>3 Months</h3><div class="amount">$60 <small>AUD</small></div><ul><li>One-time payment</li><li>Live TV + VOD</li><li>Smart setup help</li></ul><a class="btn" href="https://buy.stripe.com/5kQ14g1OT72gf19ejH1Fe0a" target="_blank">Buy 3 Months</a></div><div class="card price"><span class="badge">Most Popular</span><h3>6 Months</h3><div class="amount">$100 <small>AUD</small></div><ul><li>Best balance</li><li>One-time payment</li><li>Renewal reminder</li></ul><a class="btn" href="https://buy.stripe.com/dRmaEQ3X13Q4dX5grP1Fe09" target="_blank">Buy 6 Months</a></div><div class="card price"><span class="badge">Best Value</span><h3>12 Months</h3><div class="amount">$180 <small>AUD</small></div><ul><li>Best long-term value</li><li>One-time payment</li><li>Less renewals</li></ul><a class="btn" href="https://buy.stripe.com/28E28kbptgCQ7yHb7v1Fe08" target="_blank">Buy 12 Months</a></div></div></div></section>
-<section id="devices"><div class="wrap"><div class="sectionTitle"><h2>Works On Your Favourite Devices</h2><p>Fire TV Stick 4K Max is recommended, but many devices are supported.</p></div><div class="grid devices"><div class="device"><span>🔥</span>Firestick</div><div class="device"><span>📺</span>Smart TV</div><div class="device"><span>🤖</span>Android TV</div><div class="device"><span>🍎</span>Apple TV</div><div class="device"><span>📡</span>Chromecast</div><div class="device"><span>💻</span>Windows/Mac</div><div class="device"><span>📱</span>iPhone/iPad</div><div class="device"><span>📲</span>Android Phone</div><div class="device"><span>🖥️</span>Samsung</div><div class="device"><span>📺</span>LG TV</div><div class="device"><span>⭐</span>4K Max</div><div class="device"><span>🌍</span>Worldwide</div></div></div></section>
-<section><div class="wrap grid showcase"><div class="card"><h2>Sports Finder</h2><p style="color:var(--muted);line-height:1.7">Ask StreamlyTV Support where to find UFC, NRL, boxing, Formula 1, NBA, soccer, wrestling and PPV events.</p><div class="pillbox"><span class="pill">UFC: UK TNT / US PPV / UFC Event 1</span><span class="pill">NRL: Australia Sports / Fox 502</span><span class="pill">Formula 1: 4K UHD</span><span class="pill">NBA: NBA Pass PPV / NBA HD</span><span class="pill">Boxing: DAZN / Sky / HBO / Prime</span><span class="pill">Soccer: beIN / RTL+ / MLS PPV</span></div></div><div class="card"><h2>Movies & Series</h2><p style="color:var(--muted);line-height:1.7">Includes New Releases, Netflix UK, Netflix USA, Netflix Arabic, Disney+, Apple TV+, Prime Video, HBO Max, Shahid, OSN, kids, anime, Arabic series and more.</p></div></div></section>
-<section id="setup"><div class="wrap"><div class="sectionTitle"><h2>Send Setup Details</h2><p>Use this form to prepare your trial or activation request. It creates a WhatsApp message and optional email notification.</p></div><div class="grid formGrid"><div class="card"><form id="orderForm"><div class="field"><label>Full Name</label><input class="input" name="name" required placeholder="Your name"></div><div class="field"><label>WhatsApp Number</label><input class="input" name="whatsapp" required placeholder="Your WhatsApp number"></div><div class="field"><label>Email (optional)</label><input class="input" name="email" placeholder="your@email.com"></div><div class="field"><label>Package</label><select name="package" required><option value="">Select a package...</option><option>24-hour Trial</option><option>3 Months ($60)</option><option>6 Months ($100)</option><option>12 Months ($180)</option></select></div><div class="field"><label>Device</label><select name="device" required><option value="">Select your device...</option><option>Fire TV Stick 4K Max</option><option>Firestick / Fire TV</option><option>Samsung TV</option><option>LG TV</option><option>Android TV / Google TV</option><option>Android Phone</option><option>iPhone / iPad</option><option>Apple TV</option><option>Chromecast</option><option>Windows PC</option><option>Mac</option><option>Other</option></select></div><div class="field"><label>IPTV App</label><select name="app" required><option value="">Select your IPTV app...</option><option>IBO Pro Player</option><option>IB Player</option><option>SmartOne IPTV</option><option>IPTV Smarters Pro</option><option>XCIPTV</option><option>TiviMate</option><option>Smarters Player Lite</option><option>HOT IPTV</option><option>Bob Player</option><option>Flix IPTV</option><option>Other</option></select></div><div class="field"><label>MAC Address</label><input class="input" name="mac" placeholder="Example: 00:1A:79:..." ></div><div class="field"><label>Device Key</label><input class="input" name="deviceKey" placeholder="Device key shown in app"></div><div class="field"><label>App Website shown in app</label><input class="input" name="appWebsite" placeholder="Website shown inside the IPTV app"></div><div class="field"><label>Notes</label><textarea name="notes" placeholder="Anything else we should know?"></textarea></div><button class="btn" type="submit">Send Setup Request</button></form><div id="formNotice" class="notice"></div></div><div class="card"><h2>What happens next?</h2><p>StreamlyTV team receives your details, assigns the correct package, completes the setup and tells you when it is ready.</p><p>For IBO Pro Player, IB Player and SmartOne IPTV, please send MAC Address, Device Key and the app website shown.</p><p>For IPTV Smarters, XCIPTV or TiviMate, StreamlyTV provides Server URL, Username and Password after activation.</p><button class="btn alt" onclick="openChat('Help me set up my device')">Ask StreamlyTV Support</button></div></div></div></section>
-<section><div class="wrap"><div class="sectionTitle"><h2>What Customers Say</h2><p>Friendly support, fast setup and premium entertainment.</p></div><div class="grid reviews"><div class="card review"><div class="stars">★★★★★</div><p>“Setup was simple and the assistant explained exactly what I needed to send.”</p></div><div class="card review"><div class="stars">★★★★★</div><p>“Great quality and easy to use on my Firestick.”</p></div><div class="card review"><div class="stars">★★★★★</div><p>“The support helped me find sports and choose the right package.”</p></div></div></div></section>
-<section id="faq"><div class="wrap"><div class="sectionTitle"><h2>FAQ</h2><p>Quick answers to common StreamlyTV questions.</p></div><div class="faq"><details class="qa"><summary>Do I need a VPN?</summary><div>No. StreamlyTV does not require a VPN.</div></details><details class="qa"><summary>What internet speed do I need?</summary><div>We recommend more than 50 Mbps for the best experience, especially for HD, FHD and 4K content.</div></details><details class="qa"><summary>Can I use multiple devices?</summary><div>You can install it on many devices, but one active stream works at a time. Opening a second stream may stop or log out the first.</div></details><details class="qa"><summary>Can I use Chromecast or Apple TV?</summary><div>Yes. StreamlyTV supports Chromecast and Apple TV using compatible IPTV apps.</div></details><details class="qa"><summary>Can I pause my service?</summary><div>No. Once activated, the service runs until the expiry date and cannot be paused.</div></details><details class="qa"><summary>Does live TV have subtitles?</summary><div>No. Live TV does not include subtitles. Some movies and series may include subtitles or dubbed audio, but not all.</div></details><details class="qa"><summary>Is there adult content?</summary><div>No. StreamlyTV is family-friendly and does not provide adult channels, adult movies or adult series.</div></details></div></div></section>
-</main>
-<footer><div class="wrap"><img src="assets/streamlytv-logo.png" alt="StreamlyTV" style="width:70px;border-radius:18px;margin-bottom:12px"><p>StreamlyTV • WhatsApp 0410 350 514 • iptvstreamly@gmail.com</p><p style="margin-top:10px"><a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms & Conditions</a> • <a href="refund.html">Refund Policy</a></p></div></footer>
-<a class="waFloat" href="https://wa.me/61410350514" target="_blank">WhatsApp</a><div class="chatFab" onclick="openChat()">🤖 StreamlyTV Support</div><div class="chat" id="chat"><div class="chatHead"><img src="assets/streamlytv-logo.png" alt="StreamlyTV"><div><b>StreamlyTV Support</b><span>● Online now</span></div><button class="close" onclick="closeChat()">×</button></div><div class="chatMsgs" id="chatMsgs"></div><div class="quick"><button onclick="sendQuick('How do I start a 24-hour trial?')">24h Trial</button><button onclick="sendQuick('How do I set up Firestick?')">Firestick</button><button onclick="sendQuick('Do you have UFC?')">UFC</button><button onclick="sendQuick('Which package is best?')">Packages</button></div><div class="chatInput"><input id="chatText" placeholder="Ask StreamlyTV Support..." onkeydown="if(event.key==='Enter') sendChat()"><button onclick="sendChat()">Send</button></div></div>
-<script>
-const msgs = [{role:'assistant',content:'Hi! 👋 Welcome to StreamlyTV. I’m StreamlyTV Support. I can help with packages, free trials, device setup, sports, movies, troubleshooting and activation details. What can I help you with today?'}];
-const chat = document.getElementById('chat'), chatMsgs = document.getElementById('chatMsgs'), chatText = document.getElementById('chatText');
-function render(){chatMsgs.innerHTML='';msgs.forEach(m=>{const d=document.createElement('div');d.className='msg '+(m.role==='user'?'user':'bot');d.textContent=m.content;chatMsgs.appendChild(d)});chatMsgs.scrollTop=chatMsgs.scrollHeight}
-function openChat(prefill){chat.classList.add('open');render(); if(prefill){chatText.value=prefill; chatText.focus();}}
-function closeChat(){chat.classList.remove('open')}
-function sendQuick(t){chatText.value=t;sendChat()}
-async function sendChat(){const t=chatText.value.trim();if(!t)return;msgs.push({role:'user',content:t});chatText.value='';render();msgs.push({role:'assistant',content:'Typing...'});render();try{const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:msgs.filter(m=>m.content!=='Typing...')})});const j=await r.json();msgs.pop();let reply=j.reply||'Please contact StreamlyTV on WhatsApp: 0410 350 514.';if(j.notificationSent)reply+='\n\n✅ Your request has been sent securely to the StreamlyTV team by email.';msgs.push({role:'assistant',content:reply});render()}catch(e){msgs.pop();msgs.push({role:'assistant',content:'Sorry, I had trouble connecting. Please contact StreamlyTV on WhatsApp: 0410 350 514.'});render()}}
-render();
-document.getElementById('orderForm').addEventListener('submit',async(e)=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.target).entries());data.status=data.package==='24-hour Trial'?'Trial Request':'Pending/Paid Order';const box=document.getElementById('formNotice');box.style.display='block';box.textContent='Preparing your request...';try{const r=await fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const j=await r.json();box.innerHTML='Request received. '+(j.emailed?'✅ Your details were automatically emailed to StreamlyTV.':'Your request was prepared, but automatic email is not connected yet.')+'\n\nYou can also send the same details through WhatsApp.';const a=document.createElement('a');a.className='btn green';a.style.marginTop='12px';a.href=j.whatsappUrl;a.target='_blank';a.textContent='Send to WhatsApp';box.appendChild(document.createElement('br'));box.appendChild(a);const m=document.createElement('a');m.className='btn alt';m.style.marginTop='12px';m.style.marginLeft='8px';m.href=j.mailto;m.textContent='Open Email Draft';box.appendChild(m)}catch(err){box.textContent='Could not submit automatically. Please WhatsApp StreamlyTV on 0410 350 514.'}})
-</script>
+  <script>
+    const msgs = [{ role: 'assistant', content: 'Hi! 👋 Welcome to StreamlyTV. I’m StreamlyTV Support. I can help with packages, free trials, device setup, sports, movies, troubleshooting and activation details. What can I help you with today?' }];
+    const chat = document.getElementById('chat'), chatMsgs = document.getElementById('chatMsgs'), chatText = document.getElementById('chatText');
+    function render() { chatMsgs.innerHTML = ''; msgs.forEach(m => { const d = document.createElement('div'); d.className = 'msg ' + (m.role === 'user' ? 'user' : 'bot'); d.textContent = m.content; chatMsgs.appendChild(d) }); chatMsgs.scrollTop = chatMsgs.scrollHeight }
+    function openChat(prefill) { chat.classList.add('open'); render(); if (prefill) { chatText.value = prefill; chatText.focus(); } }
+    function closeChat() { chat.classList.remove('open') }
+    function sendQuick(t) { chatText.value = t; sendChat() }
+    async function sendChat() { const t = chatText.value.trim(); if (!t) return; msgs.push({ role: 'user', content: t }); chatText.value = ''; render(); msgs.push({ role: 'assistant', content: 'Typing...' }); render(); try { const r = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: msgs.filter(m => m.content !== 'Typing...') }) }); const j = await r.json(); msgs.pop(); let reply = j.reply || 'Please contact StreamlyTV on WhatsApp: 0410 350 514.'; if (j.notificationSent) reply += '\n\n✅ Your request has been sent securely to the StreamlyTV team by email.'; msgs.push({ role: 'assistant', content: reply }); render() } catch (e) { msgs.pop(); msgs.push({ role: 'assistant', content: 'Sorry, I had trouble connecting. Please contact StreamlyTV on WhatsApp: 0410 350 514.' }); render() } }
+    render();
+    document.getElementById('orderForm').addEventListener('submit', async (e) => { e.preventDefault(); const data = Object.fromEntries(new FormData(e.target).entries()); data.status = data.package === '24-hour Trial' ? 'Trial Request' : 'Pending/Paid Order'; const box = document.getElementById('formNotice'); box.style.display = 'block'; box.textContent = 'Preparing your request...'; try { const r = await fetch('/api/order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); const j = await r.json(); box.innerHTML = 'Request received. ' + (j.emailed ? '✅ Your details were automatically emailed to StreamlyTV.' : 'Your request was prepared, but automatic email is not connected yet.') + '\n\nYou can also send the same details through WhatsApp.'; const a = document.createElement('a'); a.className = 'btn green'; a.style.marginTop = '12px'; a.href = j.whatsappUrl; a.target = '_blank'; a.textContent = 'Send to WhatsApp'; box.appendChild(document.createElement('br')); box.appendChild(a); const m = document.createElement('a'); m.className = 'btn alt'; m.style.marginTop = '12px'; m.style.marginLeft = '8px'; m.href = j.mailto; m.textContent = 'Open Email Draft'; box.appendChild(m) } catch (err) { box.textContent = 'Could not submit automatically. Please WhatsApp StreamlyTV on 0410 350 514.' } })
+  </script>
 </body>
+
 </html>
