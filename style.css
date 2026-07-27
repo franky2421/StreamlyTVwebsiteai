@@ -514,3 +514,18 @@ footer {
         margin-left: auto !important;
     }
 }
+.pricing .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0;
+    white-space: nowrap;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.pricing .btn span {
+    display: inline;
+}
