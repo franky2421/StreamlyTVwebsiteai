@@ -3,6 +3,9 @@
   "version": "10.0.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "dev": "vercel dev --listen 3000"
+  },
   "dependencies": {
     "@vercel/node": "latest",
     "openai": "latest"
