@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Test Page — Business Card</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #020713;
+      color: #fff;
+    }
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: #030916;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 36px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 26px;
+      font-weight: 800;
+    }
+    .brand span span { color: #00a8ff; }
+    .logo {
+      background: linear-gradient(135deg, #ff005d, #00d5ff, #21ff73);
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+    .badge {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(0, 168, 255, 0.12);
+      color: #00a8ff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    h1 { margin: 16px 0 6px; font-size: 30px; }
+    p { margin: 0; line-height: 1.6; color: rgba(255, 255, 255, 0.72); }
+    .divider { height: 1px; background: rgba(255, 255, 255, 0.08); margin: 24px 0; }
+    .contact { display: grid; gap: 12px; }
+    .contact a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: background 0.2s ease;
+    }
+    .contact a:hover { background: rgba(0, 168, 255, 0.14); }
+    .whatsapp { background: #00c853 !important; text-align: center; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">
+      <span class="logo">▶</span>
+      <span>Streamly<span>TV</span></span>
+    </div>
+    <span class="badge">Test Page</span>
+    <h1>Business Card</h1>
+    <p>This is a standalone test page at <strong>/business-card</strong>. It does not affect the main website.</p>
+    <div class="divider"></div>
+    <nav class="contact" aria-label="Contact links">
+      <a class="whatsapp" href="https://wa.me/" target="_blank" rel="noopener">Message on WhatsApp</a>
+      <a href="mailto:hello@example.com">hello@example.com</a>
+      <a href="/index.html">Back to main site</a>
+    </nav>
+  </main>
+</body>
+</html>
