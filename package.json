@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vercel dev --listen 3000"
+    "dev": "node dev-server.mjs",
+    "start": "node dev-server.mjs"
   },
   "dependencies": {
     "@vercel/node": "latest",
