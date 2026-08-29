@@ -3,6 +3,10 @@
   "version": "10.0.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "dev": "node dev-server.mjs",
+    "start": "node dev-server.mjs"
+  },
   "dependencies": {
     "@vercel/node": "latest",
     "openai": "latest"

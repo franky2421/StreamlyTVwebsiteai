@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050812" />
+  <meta name="description"
+    content="StreamlyTV digital business card — tap or scan to connect. Website, WhatsApp, free trial, packages, entertainment, setup help and support in one place." />
+  <title>StreamlyTV — Digital Business Card</title>
+  <link rel="icon" href="assets/streamlytv-logo.png" />
+  <link rel="preload" as="image" href="assets/streamlytv-logo.png" />
+  <style>
+    :root {
+      --bg: #050812;
+      --card: #0b1224;
+      --card2: #101a33;
+      --blue: #18a9ff;
+      --cyan: #47e4ff;
+      --text: #eef7ff;
+      --muted: #9db1c8;
+      --line: rgba(255, 255, 255, .12);
+      --green: #22e58f;
+      --gold: #ffd66b;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: radial-gradient(circle at top left, #0a3563 0, #071022 35%, #030611 75%) no-repeat;
+      background-attachment: fixed;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      width: min(440px, 92%);
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+
+    /* ---- Identity ---- */
+    .card {
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 30px 24px 26px;
+      text-align: center;
+      box-shadow: 0 26px 70px rgba(0, 0, 0, .55);
+    }
+
+    .logo {
+      width: 104px;
+      height: 104px;
+      border-radius: 24px;
+      object-fit: cover;
+      margin: 0 auto 16px;
+      display: block;
+      border: 1px solid var(--line);
+      box-shadow: 0 0 0 6px rgba(24, 169, 255, .08), 0 14px 34px rgba(0, 0, 0, .5);
+    }
+
+    .brand {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: .2px;
+      margin: 0;
+    }
+
+    .brand span {
+      color: var(--blue);
+    }
+
+    .tagline {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 7px 16px;
+      border-radius: 30px;
+      background: rgba(24, 169, 255, .12);
+      border: 1px solid rgba(24, 169, 255, .35);
+      color: var(--cyan);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    /* ---- Save contact (primary) ---- */
+    .save {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      margin-top: 22px;
+      padding: 18px 20px;
+      border: 0;
+      border-radius: 16px;
+      font: inherit;
+      font-size: 18px;
+      font-weight: 800;
+      color: #04121f;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      box-shadow: 0 12px 30px rgba(24, 169, 255, .35);
+    }
+
+    .save:active {
+      transform: translateY(1px);
+    }
+
+    .save svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* ---- Action grid ---- */
+    .links {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 96px;
+      padding: 16px 10px;
+      border-radius: 18px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+      transition: border-color .18s ease, background .18s ease, transform .1s ease;
+    }
+
+    .link:active {
+      transform: translateY(1px);
+    }
+
+    .link:hover {
+      border-color: rgba(24, 169, 255, .55);
+      background: var(--card2);
+    }
+
+    .link .ico {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: rgba(24, 169, 255, .12);
+      color: var(--cyan);
+    }
+
+    .link .ico svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* full-width feature rows */
+    .link.wide {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 14px;
+      min-height: 66px;
+      text-align: left;
+      font-size: 16px;
+    }
+
+    .link.wide .sub {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .link.whatsapp {
+      background: linear-gradient(135deg, rgba(34, 229, 143, .16), rgba(34, 229, 143, .06));
+      border-color: rgba(34, 229, 143, .4);
+    }
+
+    .link.whatsapp .ico {
+      background: rgba(34, 229, 143, .16);
+      color: var(--green);
+    }
+
+    .link.trial {
+      background: linear-gradient(135deg, rgba(255, 214, 107, .16), rgba(255, 214, 107, .05));
+      border-color: rgba(255, 214, 107, .4);
+    }
+
+    .link.trial .ico {
+      background: rgba(255, 214, 107, .16);
+      color: var(--gold);
+    }
+
+    .foot {
+      margin-top: 22px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .foot a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 360px) {
+      .links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <section class="card">
+      <img class="logo" src="assets/streamlytv-logo.png" alt="StreamlyTV logo"
+        width="104" height="104" fetchpriority="high" />
+      <h1 class="brand">Streamly<span>TV</span></h1>
+      <p class="tagline">Premium streaming, live sports &amp; entertainment.<br />Tap a button below to connect.</p>
+      <span class="badge">Digital Business Card</span>
+
+      <button class="save" id="saveContact" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+          <line x1="19" y1="8" x2="19" y2="14" />
+          <line x1="22" y1="11" x2="16" y2="11" />
+        </svg>
+        Save Contact
+      </button>
+    </section>
+
+    <nav class="links" aria-label="StreamlyTV quick links">
+      <!-- WhatsApp / Contact -->
+      <a class="link wide whatsapp" href="https://wa.me/61410350514" target="_blank" rel="noopener">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.04 2A9.9 9.9 0 0 0 2.1 11.9a9.8 9.8 0 0 0 1.36 4.98L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.2h.01a9.9 9.9 0 0 0 9.9-9.9A9.9 9.9 0 0 0 12.04 2Zm5.8 14.06c-.24.68-1.4 1.3-1.94 1.35-.5.05-1.13.07-1.83-.11a15 15 0 0 1-1.66-.61 12.9 12.9 0 0 1-4.95-4.37c-.37-.5-.98-1.44-.98-2.75 0-1.3.68-1.94.92-2.2a.97.97 0 0 1 .7-.33h.5c.16 0 .38-.06.59.45.24.58.8 2 .87 2.15.07.14.11.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.36-.42.48-.14.14-.28.28-.12.55.16.28.72 1.18 1.54 1.91 1.06.95 1.95 1.24 2.23 1.38.28.14.44.12.6-.07.16-.19.69-.8.87-1.08.18-.28.36-.23.6-.14.24.09 1.55.73 1.81.86.28.14.46.21.53.32.07.12.07.68-.17 1.36Z" />
+          </svg>
+        </span>
+        <span>WhatsApp / Contact<span class="sub">0410 350 514 · tap to chat</span></span>
+      </a>
+
+      <!-- Free Trial -->
+      <a class="link wide trial"
+        href="https://wa.me/61410350514?text=Hi%20StreamlyTV%2C%20I%27d%20like%20to%20start%20a%20FREE%20TRIAL%20please."
+        target="_blank" rel="noopener">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="m5 3 14 9-14 9V3z" />
+          </svg>
+        </span>
+        <span>Start Free Trial<span class="sub">Try StreamlyTV before you buy</span></span>
+      </a>
+
+      <!-- Website -->
+      <a class="link" href="index.html">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" />
+          </svg>
+        </span>
+        Website
+      </a>
+
+      <!-- View Packages -->
+      <a class="link" href="index.html#plans">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M20 7 12 3 4 7l8 4 8-4z" />
+            <path d="M4 7v10l8 4 8-4V7" />
+            <path d="M12 11v10" />
+          </svg>
+        </span>
+        View Packages
+      </a>
+
+      <!-- Entertainment -->
+      <a class="link" href="entertainment.html">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="14" rx="2" />
+            <path d="m10 9 4 3-4 3V9z" />
+            <path d="M8 21h8" />
+          </svg>
+        </span>
+        Entertainment
+      </a>
+
+      <!-- Setup Help -->
+      <a class="link" href="index.html#setup">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path
+              d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+          </svg>
+        </span>
+        Setup Help
+      </a>
+
+      <!-- Customer Support -->
+      <a class="link"
+        href="https://wa.me/61410350514?text=Hi%20StreamlyTV%20Support%2C%20I%20need%20some%20help.">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+          </svg>
+        </span>
+        Customer Support
+      </a>
+    </nav>
+
+    <p class="foot">
+      StreamlyTV · WhatsApp <a href="https://wa.me/61410350514">0410 350 514</a><br />
+      <a href="mailto:iptvstreamly@gmail.com">iptvstreamly@gmail.com</a>
+    </p>
+  </main>
+
+  <script>
+    // Build a downloadable vCard so the card can be saved straight to a phone's contacts.
+    (function () {
+      var vcard = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        "N:;StreamlyTV;;;",
+        "FN:StreamlyTV",
+        "ORG:StreamlyTV",
+        "TITLE:Premium Streaming & Entertainment",
+        "TEL;TYPE=CELL:+61410350514",
+        "EMAIL;TYPE=INTERNET:iptvstreamly@gmail.com",
+        "URL:" + location.origin + "/index.html",
+        "NOTE:Scan or tap to view packages, start a free trial and get setup help.",
+        "END:VCARD"
+      ].join("\r\n");
+
+      var btn = document.getElementById("saveContact");
+      btn.addEventListener("click", function () {
+        var blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "StreamlyTV.vcf";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+      });
+    })();
+  </script>
+</body>
+
+</html>
