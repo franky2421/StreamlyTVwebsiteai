@@ -10,7 +10,6 @@
   const entertainment = [
     { id: "sports", title: "Sports & Live Events", icon: "⚽", image: "assets/genre-sports.png", description: "Follow the matches, fights and events you love.", options: ["Football / Soccer", "Live Sports", "Champions League", "beIN Sports", "Football PPV", "Live PPV Events", "NRL & Rugby", "Cricket", "Tennis", "Horse Racing", "UFC / Combat Sports", "Sports Replays"] },
     { id: "movies", title: "Movies & Series", icon: "🎬", image: "assets/genre-films.png", description: "Big-screen stories, new releases and series.", options: ["Latest Movies", "Popular Series", "New Releases", "Cinema Releases", "Blu-ray Movies", "Box Office", "4K Movies", "Dolby Audio", "International Movies"] },
-    { id: "premium", title: "Premium Entertainment", icon: "✨", image: "assets/genre-films.png", description: "Popular international movies, series and on-demand entertainment.", options: ["Popular streaming-style movies and series", "Major international entertainment", "Exclusive series", "On-demand entertainment"] },
     { id: "family", title: "Kids & Family", icon: "👨‍👩‍👧‍👦", image: "assets/genre-family.png", description: "Family favourites for every age.", options: ["Kids Channels", "Kids Movies", "Cartoons", "Family Movies", "Family Entertainment", "Anime for Kids", "Nickelodeon-style content", "Kids Series"] },
     { id: "arabic", title: "Arabic Entertainment", icon: "🌙", image: "assets/genre-arabic.png", description: "Arabic cinema, series, channels and drama.", options: ["Arabic Movies", "Arabic Series", "MBC", "Rotana & ART", "Shahid-style content", "Arabic Drama", "Arabic Comedy", "Arabic Cinema", "Ramadan Content"] },
     { id: "turkish", title: "Turkish", icon: "🇹🇷", image: "assets/genre-world.png", description: "Turkish movies, series and dubbed favourites.", options: ["Turkish Movies", "Turkish Series", "Dubbed Content", "Subtitled Content"] },
@@ -26,7 +25,7 @@
 
   const preferenceGroups = {
     quality: { title: "Video quality", values: ["4K / UHD", "Dolby Audio", "Dolby Vision", "Multi-Subtitles", "Premium Sports Quality"] },
-    language: { title: "Language & region", values: ["English", "Arabic", "Turkish", "French", "German", "Italian", "Spanish", "Portuguese", "Indian", "Asian", "Nordic", "Latino", "Other International"] },
+    language: { title: "Language & region", values: ["English", "Arabic", "Turkish", "French", "German", "Italian", "Spanish", "Portuguese", "Indian", "Asian", "Nordic", "Latino", "Other International", "Australia", "United Kingdom", "USA", "New Zealand", "Canada", "Europe", "Asia", "Middle East"] },
     dialect: { title: "Arabic content", values: ["Egyptian", "Syrian / Lebanese", "Gulf", "Iraqi", "Moroccan", "Tunisian", "Algerian / Libyan", "Yemeni", "Jordanian / Palestinian", "Bedouin", "Ramadan", "Arabic Kids"] },
   };
 
@@ -35,13 +34,36 @@
     ["🇳🇿", "New Zealand"], ["🇨🇦", "Canada"], ["🇱🇧", "Lebanon"], ["🇩🇪", "Germany"], ["🇦🇹", "Austria"], ["🇳🇱", "Netherlands"], ["🇧🇪", "Belgium"], ["🇮🇹", "Italy"], ["🇫🇷", "France"], ["🇪🇸", "Spain"], ["🇵🇹", "Portugal"], ["🇨🇭", "Switzerland"], ["🇵🇱", "Poland"], ["🇬🇷", "Greece"], ["🇨🇾", "Cyprus"], ["🇱🇻", "Latvia"], ["🇸🇪", "Sweden"], ["🇩🇰", "Denmark"], ["🇳🇴", "Norway"], ["🇫🇮", "Finland"], ["🇮🇸", "Iceland"], ["🇭🇺", "Hungary"], ["🇷🇴", "Romania"], ["🇦🇱", "Albania"], ["🇽🇰", "Kosovo"], ["🇷🇺", "Russia"], ["🇺🇦", "Ukraine"], ["🇲🇹", "Malta"], ["🇨🇿", "Czech Republic"], ["🇷🇸", "Serbia"], ["🇧🇦", "Bosnia"], ["🇭🇷", "Croatia"], ["🇲🇰", "Macedonia"], ["🇸🇮", "Slovenia"], ["🇲🇪", "Montenegro"], ["🇧🇬", "Bulgaria"], ["🇪🇪", "Estonia"], ["🇹🇷", "Turkey"], ["🌐", "Kurdish Region"], ["🇮🇷", "Iran"], ["🇦🇫", "Afghanistan"], ["🇵🇰", "Pakistan"], ["🇮🇳", "India"], ["🇸🇬", "Singapore"], ["🇧🇷", "Brazil"], ["🇸🇷", "Suriname"], ["🇲🇽", "Mexico"], ["🇦🇷", "Argentina"], ["🌎", "Latin America"], ["🏝️", "Caribbean"], ["🇯🇵", "Japan"], ["🇹🇼", "Taiwan"], ["🇵🇭", "Philippines"], ["🇬🇪", "Georgia"], ["🇦🇿", "Azerbaijan"], ["🇺🇿", "Uzbekistan"], ["🇦🇲", "Armenia"], ["🇻🇪", "Venezuela"], ["🇭🇰", "Hong Kong"], ["🇨🇳", "China"], ["🇻🇳", "Vietnam"], ["🇲🇾", "Malaysia"], ["🇮🇩", "Indonesia"], ["🇰🇷", "South Korea"], ["🇹🇭", "Thailand"], ["🇰🇿", "Kazakhstan"], ["🇱🇹", "Lithuania"], ["🌍", "Africa"], ["🇸🇾", "Syria"], ["🇲🇦", "Morocco"], ["🇪🇬", "Egypt"], ["🇦🇪", "United Arab Emirates"], ["🇮🇶", "Iraq"], ["🇸🇦", "Saudi Arabia"], ["🇰🇼", "Kuwait"], ["🇶🇦", "Qatar"], ["🇴🇲", "Oman"], ["🇧🇭", "Bahrain"], ["🇯🇴", "Jordan"], ["🇵🇸", "Palestine"], ["🇹🇳", "Tunisia"], ["🇩🇿", "Algeria"], ["🇾🇪", "Yemen"], ["🇱🇾", "Libya"], ["🇸🇩", "Sudan"],
   ].filter((country, index, list) => list.findIndex(item => item[1] === country[1]) === index);
   const popularCountryNames = new Set(["New Zealand", "Canada", "Lebanon", "Germany", "France", "India", "Turkey", "Italy", "Spain", "United Arab Emirates"]);
+  const preferenceStorageKey = "streamlytv-explore-preferences-v1";
+  const validCategoryIds = new Set(entertainment.map(group => group.id));
+  const validSubpreferences = new Set(entertainment.flatMap(group => group.options.map(option => `${group.id}::${option}`)));
+  const validAdvancedPreferences = new Set(Object.values(preferenceGroups).flatMap(group => group.values));
+  const validCountryNames = new Set(allCountries.map(([, name]) => name));
 
+  function readSavedPreferences() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(preferenceStorageKey) || "{}");
+      const subpreferences = Array.isArray(saved.subpreferences) ? saved.subpreferences.filter(value => validSubpreferences.has(value)) : [];
+      const categories = Array.isArray(saved.categories) ? saved.categories.filter(value => validCategoryIds.has(value)) : [];
+      subpreferences.forEach(value => categories.push(value.split("::")[0]));
+      return {
+        categories: new Set(categories),
+        subpreferences: new Set(subpreferences),
+        advanced: new Set(Array.isArray(saved.advanced) ? saved.advanced.filter(value => validAdvancedPreferences.has(value)) : []),
+        countries: new Set(Array.isArray(saved.countries) ? saved.countries.filter(value => validCountryNames.has(value)) : []),
+      };
+    } catch {
+      return { categories: new Set(), subpreferences: new Set(), advanced: new Set(), countries: new Set() };
+    }
+  }
+
+  const savedPreferences = readSavedPreferences();
   const state = {
     plan: plans[0],
-    categories: new Set(),
-    subpreferences: new Set(),
-    advanced: new Set(),
-    countries: new Set(),
+    categories: savedPreferences.categories,
+    subpreferences: savedPreferences.subpreferences,
+    advanced: savedPreferences.advanced,
+    countries: savedPreferences.countries,
     step: 1,
     showAllCountries: false,
     countryQuery: "",
@@ -324,6 +346,14 @@
   }
 
   function renderSummary() {
+    try {
+      localStorage.setItem(preferenceStorageKey, JSON.stringify({
+        categories: [...state.categories],
+        subpreferences: [...state.subpreferences],
+        advanced: [...state.advanced],
+        countries: [...state.countries],
+      }));
+    } catch {}
     const rows = summaryRows();
     asideSummary.innerHTML = rows;
     mobileTotal.textContent = money(totalCost());

@@ -16,6 +16,8 @@ body { background: var(--cinema-ink); color: var(--cinema-white); font-family: I
 header { background: rgba(7, 8, 11, .97); border-bottom-color: rgba(255, 255, 255, .1); }
 
 .hero.cinematic {
+  position: relative;
+  overflow: hidden;
   min-height: min(860px, calc(100vh - 76px));
   min-height: min(860px, calc(100svh - 76px));
   display: flex;
@@ -25,6 +27,9 @@ header { background: rgba(7, 8, 11, .97); border-bottom-color: rgba(255, 255, 25
   isolation: isolate;
 }
 .hero.cinematic::before {
+  position: absolute;
+  inset: 0;
+  content: "";
   background-image: linear-gradient(90deg, rgba(5, 5, 7, .96) 0%, rgba(5, 5, 7, .82) 34%, rgba(5, 5, 7, .25) 72%, rgba(5, 5, 7, .38) 100%), linear-gradient(0deg, rgba(5, 5, 7, .98) 0%, rgba(5, 5, 7, .08) 56%, rgba(5, 5, 7, .38) 100%), url("assets/genre-sports.png");
   background-position: center, center, 62% center;
   background-size: cover;
@@ -34,20 +39,23 @@ header { background: rgba(7, 8, 11, .97); border-bottom-color: rgba(255, 255, 25
   z-index: -2;
 }
 .hero.cinematic::after {
+  position: absolute;
+  inset: 0;
+  content: "";
   background: radial-gradient(ellipse at 12% 50%, rgba(177, 14, 35, .21), transparent 46%), linear-gradient(0deg, rgba(7, 8, 11, .86), transparent 30%);
   z-index: -1;
   pointer-events: none;
 }
-.hero.cinematic .heroContent { width: min(100% - 48px, 1280px); padding: 110px 0 115px; margin: 0 auto; }
+.hero.cinematic .heroContent { position: relative; z-index: 1; width: min(100% - 48px, 1280px); padding: 110px 0 115px; margin: 0 auto; }
 .cinema-kicker { display: inline-flex; align-items: center; gap: 10px; color: #f5d6d8; font-size: 12px; font-weight: 750; letter-spacing: .2em; text-transform: uppercase; }
 .cinema-kicker::before { content: ""; width: 24px; height: 2px; background: var(--cinema-red-bright); }
-.hero.cinematic h1 { max-width: 790px; margin: 22px 0 18px; font-size: clamp(54px, 8.2vw, 104px); line-height: .94; font-weight: 850; letter-spacing: -.055em; color: #fff; text-shadow: none; text-wrap: balance; }
+.hero.cinematic h1 { max-width: 960px; margin: 22px 0 18px; font-size: clamp(52px, 7vw, 90px); line-height: .94; font-weight: 850; letter-spacing: -.055em; color: #fff; text-shadow: none; text-wrap: balance; }
 .hero.cinematic h1 span { display: block; color: #fff !important; }
 .hero.cinematic .hero-lede { max-width: 600px; margin: 0; color: #e1dedb; font-size: clamp(17px, 1.65vw, 21px); line-height: 1.58; text-shadow: none; }
 .hero.cinematic .hero-catalogue { margin: 18px 0 0; color: #d8d2cd; font-size: 14px; letter-spacing: .01em; }
 .hero.cinematic .hero-catalogue strong { color: #fff; font-weight: 780; }
 .hero.cinematic .heroBtns { margin: 32px 0 0; gap: 12px; }
-.hero.cinematic .heroBtns .btn { min-height: 52px; border: 1px solid transparent; border-radius: 5px; padding: 14px 24px; background: var(--cinema-red); color: #fff; box-shadow: none; font-size: 14px; font-weight: 760; text-shadow: none; filter: none; transform: none; }
+.hero.cinematic .heroBtns .btn { min-height: 52px; border: 1px solid transparent; border-radius: 5px; padding: 14px 24px; background: var(--cinema-red); text-decoration: none; color: #fff; box-shadow: none; font-size: 14px; font-weight: 760; text-shadow: none; filter: none; transform: none; }
 .hero.cinematic .heroBtns .btn:hover { background: #ed263e; transform: translateY(-1px); }
 .hero.cinematic .heroBtns .btn.alt { border-color: rgba(255,255,255,.5); background: rgba(9,9,11,.62); }
 .hero.cinematic .heroBtns .btn.alt:hover { background: #fff; color: #09090b; }
