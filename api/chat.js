@@ -13,13 +13,18 @@ CONTACT:
 - WhatsApp: 0410 350 514 / +61 410 350 514
 - Email: iptvstreamly@gmail.com
 
-PACKAGES / PAYMENTS:
-- One-time payment only. No automatic renewals. No recurring charges.
-- 3 Months: $60 AUD — https://buy.stripe.com/5kQ14g1OT72gf19ejH1Fe0a
-- 6 Months: $100 AUD — https://buy.stripe.com/dRmaEQ3X13Q4dX5grP1Fe09
-- 12 Months: $180 AUD — https://buy.stripe.com/28E28kbptgCQ7yHb7v1Fe08
+PACKAGES / ORDERING:
+- One-time packages have no automatic renewals or recurring charges.
+- 3 Months: $80 AUD.
+- 6 Months: $140 AUD.
+- 12 Months: $250 AUD.
+- Customers order directly through StreamlyTV WhatsApp; do not provide payment URLs or checkout links.
 - Renewal reminders: customer will be contacted 7 days and 3 days before expiry.
 - 24-hour free StreamlyTV trial is available. Each customer should only receive one trial.
+
+PAYMENT QUESTIONS:
+- If a customer asks how or where to pay, whether they can purchase, says they want to subscribe, or asks how to buy a package, reply exactly: “To purchase a StreamlyTV package, please contact StreamlyTV directly through WhatsApp and we’ll help you complete your order.”
+- The website will display the StreamlyTV WhatsApp contact button with this response.
 
 CORE SELLING POINTS:
 - 50,000+ live TV channels.
@@ -115,12 +120,11 @@ TROUBLESHOOTING:
 - Login failed: check Server URL, Username, Password. If correct and still fails, contact StreamlyTV.
 
 BUSINESS POLICIES:
-- If customer pays twice: StreamlyTV verifies and refunds duplicate payment via Stripe.
+- If customer reports a duplicate payment or incorrect package, ask them to contact StreamlyTV through WhatsApp so the team can review it.
 - If wrong MAC Address: customer must send correct MAC and Device Key; StreamlyTV can update.
-- If wrong package bought: contact StreamlyTV; refund incorrect purchase through Stripe and help purchase correct package.
-- Refunds are processed through Stripe and can take a few business days depending on the bank/card provider.
+- Refund requests are reviewed by StreamlyTV and may take a few business days to process.
 - Service cannot be paused.
-- Upgrade from 3 months to 12 months: yes; StreamlyTV can arrange upgrade, 12-month package is $180 AUD.
+- Upgrade from 3 months to 12 months: yes; StreamlyTV can arrange the upgrade. The 12-month package is $250 AUD.
 
 CONTENT KNOWLEDGE:
 - Live TV countries/categories include Australia, UK Ultimate, USA Ultimate, Canada, New Zealand, Germany, France, Italy, Spain, Portugal, Netherlands, Belgium, Sweden, Norway, Denmark, Finland, Greece, Cyprus, Poland, Austria, Switzerland, Romania, Hungary, Serbia, Bosnia, Croatia, Slovenia, Macedonia, Montenegro, Russia, Ukraine, Brazil, Mexico, Caribbean, Africa, India, Pakistan, Japan, China, Hong Kong, Taiwan, South Korea, Thailand, Malaysia, Indonesia, Philippines, Vietnam, Emirates, Saudi Arabia, Kuwait, Bahrain, Qatar, Oman, Iraq, Syria, Lebanon, Palestine, Jordan, Egypt, Morocco, Algeria, Tunisia, Libya, Sudan, Yemen, Turkey, Iran, Kurdish, Hebrew, Afghanistan, Azerbaijan, Armenia, Kazakhstan, Uzbekistan, Georgia, Cameroon, Saint Lucia, Latino and more.
@@ -157,15 +161,27 @@ SUBMIT_REQUEST_JSON: {"name":"...","whatsapp":"...","email":"...","package":"...
 
 `;
 
+function isPaymentIntent(message) {
+  const text = message.toLowerCase().replace(/[’']/g, "'");
+  return /\b(?:how\s+(?:do|can)\s+i\s+(?:pay|purchase|buy|subscribe)|where\s+(?:do|can)\s+i\s+(?:pay|purchase)|can\s+i\s+(?:purchase|buy|subscribe)|i\s+(?:want|would like|wanna)\s+to\s+(?:purchase|buy|subscribe)|how\s+to\s+(?:pay|purchase|buy|subscribe)|where\s+to\s+pay|(?:buy|purchase)\s+(?:a\s+)?(?:package|subscription)|(?:payment|pay).*\b(?:package|subscription)|(?:package|subscription).*\b(?:payment|pay))\b/i.test(text);
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
+  const { messages = [] } = req.body || {};
+  const safeMessages = Array.isArray(messages) ? messages.slice(-12) : [];
+  const latestUserMessage = [...safeMessages].reverse().find(message => message?.role === "user");
+  if (latestUserMessage && isPaymentIntent(String(latestUserMessage.content || ""))) {
+    return res.status(200).json({
+      reply: "To purchase a StreamlyTV package, please contact StreamlyTV directly through WhatsApp and we’ll help you complete your order.",
+      contactButton: true
+    });
+  }
   try {
     if (!process.env.OPENAI_API_KEY) {
       return res.status(500).json({ reply: "AI is not connected yet. Please make sure OPENAI_API_KEY is added in Vercel, then redeploy." });
     }
     const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-    const { messages = [] } = req.body || {};
-    const safeMessages = Array.isArray(messages) ? messages.slice(-12) : [];
     const completion = await client.chat.completions.create({
       model: process.env.OPENAI_MODEL || "gpt-4o-mini",
       temperature: 0.35,
