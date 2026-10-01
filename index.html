@@ -1166,30 +1166,30 @@
         <div class="grid pricing">
           <div class="card price">
             <h3>3 Months</h3>
-            <div class="amount">$60 <small>AUD</small></div>
+            <div class="amount">$80 <small>AUD</small></div>
             <ul>
               <li>One-time payment</li>
               <li>Live TV + VOD</li>
               <li>Smart setup help</li>
-            </ul><a class="btn" href="https://buy.stripe.com/5kQ14g1OT72gf19ejH1Fe0a" target="_blank">Buy 3 Months</a>
+            </ul><a class="btn" href="https://wa.me/61410350514?text=Hi%20StreamlyTV%2C%20I%27d%20like%20to%20order%20the%203%20month%20package." target="_blank" rel="noopener">Order via WhatsApp</a>
           </div>
           <div class="card price"><span class="badge">Most Popular</span>
             <h3>6 Months</h3>
-            <div class="amount">$100 <small>AUD</small></div>
+            <div class="amount">$140 <small>AUD</small></div>
             <ul>
               <li>Best balance</li>
               <li>One-time payment</li>
               <li>Renewal reminder</li>
-            </ul><a class="btn" href="https://buy.stripe.com/dRmaEQ3X13Q4dX5grP1Fe09" target="_blank">Buy 6 Months</a>
+            </ul><a class="btn" href="https://wa.me/61410350514?text=Hi%20StreamlyTV%2C%20I%27d%20like%20to%20order%20the%206%20month%20package." target="_blank" rel="noopener">Order via WhatsApp</a>
           </div>
           <div class="card price"><span class="badge">Best Value</span>
             <h3>12 Months</h3>
-            <div class="amount">$180 <small>AUD</small></div>
+            <div class="amount">$250 <small>AUD</small></div>
             <ul>
               <li>Best long-term value</li>
               <li>One-time payment</li>
               <li>Less renewals</li>
-            </ul><a class="btn" href="https://buy.stripe.com/28E28kbptgCQ7yHb7v1Fe08" target="_blank">Buy 12 Months</a>
+            </ul><a class="btn" href="https://wa.me/61410350514?text=Hi%20StreamlyTV%2C%20I%27d%20like%20to%20order%20the%2012%20month%20package." target="_blank" rel="noopener">Order via WhatsApp</a>
           </div>
         </div>
       </div>
@@ -1253,9 +1253,9 @@
               <div class="field"><label>Package</label><select name="package" required>
                   <option value="">Select a package...</option>
                   <option>24-hour Trial</option>
-                  <option>3 Months ($60)</option>
-                  <option>6 Months ($100)</option>
-                  <option>12 Months ($180)</option>
+                  <option>3 Months ($80 AUD)</option>
+                  <option>6 Months ($140 AUD)</option>
+                  <option>12 Months ($250 AUD)</option>
                 </select></div>
               <div class="field"><label>Device</label><select name="device" required>
                   <option value="">Select your device...</option>
@@ -1401,11 +1401,30 @@
   <script>
     const msgs = [{ role: 'assistant', content: 'Hi! 👋 Welcome to StreamlyTV. I’m StreamlyTV Support. I can help with packages, free trials, device setup, sports, movies, troubleshooting and activation details. What can I help you with today?' }];
     const chat = document.getElementById('chat'), chatMsgs = document.getElementById('chatMsgs'), chatText = document.getElementById('chatText');
-    function render() { chatMsgs.innerHTML = ''; msgs.forEach(m => { const d = document.createElement('div'); d.className = 'msg ' + (m.role === 'user' ? 'user' : 'bot'); d.textContent = m.content; chatMsgs.appendChild(d) }); chatMsgs.scrollTop = chatMsgs.scrollHeight }
+    function render() {
+      chatMsgs.innerHTML = '';
+      msgs.forEach(m => {
+        const d = document.createElement('div');
+        d.className = 'msg ' + (m.role === 'user' ? 'user' : 'bot');
+        d.textContent = m.content;
+        if (m.contactButton) {
+          const contact = document.createElement('a');
+          contact.className = 'btn green';
+          contact.href = 'https://wa.me/61410350514';
+          contact.target = '_blank';
+          contact.rel = 'noopener';
+          contact.textContent = 'WhatsApp StreamlyTV';
+          d.appendChild(document.createElement('br'));
+          d.appendChild(contact);
+        }
+        chatMsgs.appendChild(d);
+      });
+      chatMsgs.scrollTop = chatMsgs.scrollHeight;
+    }
     function openChat(prefill) { chat.classList.add('open'); render(); if (prefill) { chatText.value = prefill; chatText.focus(); } }
     function closeChat() { chat.classList.remove('open') }
     function sendQuick(t) { chatText.value = t; sendChat() }
-    async function sendChat() { const t = chatText.value.trim(); if (!t) return; msgs.push({ role: 'user', content: t }); chatText.value = ''; render(); msgs.push({ role: 'assistant', content: 'Typing...' }); render(); try { const r = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: msgs.filter(m => m.content !== 'Typing...') }) }); const j = await r.json(); msgs.pop(); let reply = j.reply || 'Please contact StreamlyTV on WhatsApp: 0410 350 514.'; if (j.notificationSent) reply += '\n\n✅ Your request has been sent securely to the StreamlyTV team by email.'; msgs.push({ role: 'assistant', content: reply }); render() } catch (e) { msgs.pop(); msgs.push({ role: 'assistant', content: 'Sorry, I had trouble connecting. Please contact StreamlyTV on WhatsApp: 0410 350 514.' }); render() } }
+    async function sendChat() { const t = chatText.value.trim(); if (!t) return; msgs.push({ role: 'user', content: t }); chatText.value = ''; render(); msgs.push({ role: 'assistant', content: 'Typing...' }); render(); try { const r = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: msgs.filter(m => m.content !== 'Typing...') }) }); const j = await r.json(); msgs.pop(); let reply = j.reply || 'Please contact StreamlyTV on WhatsApp: 0410 350 514.'; if (j.notificationSent) reply += '\n\n✅ Your request has been sent securely to the StreamlyTV team by email.'; msgs.push({ role: 'assistant', content: reply, contactButton: Boolean(j.contactButton) }); render() } catch (e) { msgs.pop(); msgs.push({ role: 'assistant', content: 'Sorry, I had trouble connecting. Please contact StreamlyTV on WhatsApp: 0410 350 514.' }); render() } }
     render();
     document.getElementById('orderForm').addEventListener('submit', async (e) => { e.preventDefault(); const data = Object.fromEntries(new FormData(e.target).entries()); data.status = data.package === '24-hour Trial' ? 'Trial Request' : 'Pending/Paid Order'; const box = document.getElementById('formNotice'); box.style.display = 'block'; box.textContent = 'Preparing your request...'; try { const r = await fetch('/api/order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); const j = await r.json(); box.innerHTML = 'Request received. ' + (j.emailed ? '✅ Your details were automatically emailed to StreamlyTV.' : 'Your request was prepared, but automatic email is not connected yet.') + '\n\nYou can also send the same details through WhatsApp.'; const a = document.createElement('a'); a.className = 'btn green'; a.style.marginTop = '12px'; a.href = j.whatsappUrl; a.target = '_blank'; a.textContent = 'Send to WhatsApp'; box.appendChild(document.createElement('br')); box.appendChild(a); const m = document.createElement('a'); m.className = 'btn alt'; m.style.marginTop = '12px'; m.style.marginLeft = '8px'; m.href = j.mailto; m.textContent = 'Open Email Draft'; box.appendChild(m) } catch (err) { box.textContent = 'Could not submit automatically. Please WhatsApp StreamlyTV on 0410 350 514.' } })
   </script>
