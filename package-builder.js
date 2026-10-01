@@ -4,13 +4,13 @@
     { months: 3, label: "3 Months", price: 80 },
     { months: 6, label: "6 Months", price: 140 },
     { months: 12, label: "12 Months", price: 250 },
+    { months: 1, label: "1-Day Free Trial", price: 0 },
   ];
 
   const entertainment = [
-    { id: "sports", title: "Sports & Live Events", icon: "⚽", image: "assets/genre-sports.png", description: "Follow the matches, fights and events you love.", options: ["Football / Soccer", "Live Sports", "Champions League", "beIN Sports", "Football PPV", "Cricket", "Tennis", "Horse Racing", "UFC / Combat Sports", "Sports Replays"] },
+    { id: "sports", title: "Sports & Live Events", icon: "⚽", image: "assets/genre-sports.png", description: "Follow the matches, fights and events you love.", options: ["Football / Soccer", "Live Sports", "Champions League", "beIN Sports", "Football PPV", "Live PPV Events", "NRL & Rugby", "Cricket", "Tennis", "Horse Racing", "UFC / Combat Sports", "Sports Replays"] },
     { id: "movies", title: "Movies & Series", icon: "🎬", image: "assets/genre-films.png", description: "Big-screen stories, new releases and series.", options: ["Latest Movies", "Popular Series", "New Releases", "Cinema Releases", "Blu-ray Movies", "Box Office", "4K Movies", "Dolby Audio", "International Movies"] },
-    { id: "premium", title: "Premium Entertainment", icon: "✨", image: "assets/genre-films.png", description: "Popular international movies, series and on-demand entertainment.", options: ["Popular streaming-style movies and series", "Major international entertainment", "Exclusive series", "On-demand entertainment"] },
-    { id: "family", title: "Kids & Family", icon: "👨‍👩‍👧‍👦", image: "assets/genre-family.png", description: "Family favourites for every age.", options: ["Kids Channels", "Kids Movies", "Cartoons", "Family Movies", "Nickelodeon-style content", "Kids Series"] },
+    { id: "family", title: "Kids & Family", icon: "👨‍👩‍👧‍👦", image: "assets/genre-family.png", description: "Family favourites for every age.", options: ["Kids Channels", "Kids Movies", "Cartoons", "Family Movies", "Family Entertainment", "Anime for Kids", "Nickelodeon-style content", "Kids Series"] },
     { id: "arabic", title: "Arabic Entertainment", icon: "🌙", image: "assets/genre-arabic.png", description: "Arabic cinema, series, channels and drama.", options: ["Arabic Movies", "Arabic Series", "MBC", "Rotana & ART", "Shahid-style content", "Arabic Drama", "Arabic Comedy", "Arabic Cinema", "Ramadan Content"] },
     { id: "turkish", title: "Turkish", icon: "🇹🇷", image: "assets/genre-world.png", description: "Turkish movies, series and dubbed favourites.", options: ["Turkish Movies", "Turkish Series", "Dubbed Content", "Subtitled Content"] },
     { id: "asian", title: "Asian Entertainment", icon: "🌏", image: "assets/genre-world.png", description: "Stories and channels from across Asia.", options: ["Asian Movies", "Asian Series", "Korean", "Japanese", "Chinese", "Anime"] },
@@ -24,8 +24,8 @@
   ];
 
   const preferenceGroups = {
-    quality: { title: "Video quality", values: ["4K / UHD", "Dolby Audio", "Dolby Vision", "Multi-Subtitles"] },
-    language: { title: "Language & region", values: ["English", "Arabic", "Turkish", "French", "German", "Italian", "Spanish", "Portuguese", "Indian", "Asian", "Nordic", "Latino", "Other International"] },
+    quality: { title: "Video quality", values: ["4K / UHD", "Dolby Audio", "Dolby Vision", "Multi-Subtitles", "Premium Sports Quality"] },
+    language: { title: "Language & region", values: ["English", "Arabic", "Turkish", "French", "German", "Italian", "Spanish", "Portuguese", "Indian", "Asian", "Nordic", "Latino", "Other International", "Australia", "United Kingdom", "USA", "New Zealand", "Canada", "Europe", "Asia", "Middle East"] },
     dialect: { title: "Arabic content", values: ["Egyptian", "Syrian / Lebanese", "Gulf", "Iraqi", "Moroccan", "Tunisian", "Algerian / Libyan", "Yemeni", "Jordanian / Palestinian", "Bedouin", "Ramadan", "Arabic Kids"] },
   };
 
@@ -34,13 +34,36 @@
     ["🇳🇿", "New Zealand"], ["🇨🇦", "Canada"], ["🇱🇧", "Lebanon"], ["🇩🇪", "Germany"], ["🇦🇹", "Austria"], ["🇳🇱", "Netherlands"], ["🇧🇪", "Belgium"], ["🇮🇹", "Italy"], ["🇫🇷", "France"], ["🇪🇸", "Spain"], ["🇵🇹", "Portugal"], ["🇨🇭", "Switzerland"], ["🇵🇱", "Poland"], ["🇬🇷", "Greece"], ["🇨🇾", "Cyprus"], ["🇱🇻", "Latvia"], ["🇸🇪", "Sweden"], ["🇩🇰", "Denmark"], ["🇳🇴", "Norway"], ["🇫🇮", "Finland"], ["🇮🇸", "Iceland"], ["🇭🇺", "Hungary"], ["🇷🇴", "Romania"], ["🇦🇱", "Albania"], ["🇽🇰", "Kosovo"], ["🇷🇺", "Russia"], ["🇺🇦", "Ukraine"], ["🇲🇹", "Malta"], ["🇨🇿", "Czech Republic"], ["🇷🇸", "Serbia"], ["🇧🇦", "Bosnia"], ["🇭🇷", "Croatia"], ["🇲🇰", "Macedonia"], ["🇸🇮", "Slovenia"], ["🇲🇪", "Montenegro"], ["🇧🇬", "Bulgaria"], ["🇪🇪", "Estonia"], ["🇹🇷", "Turkey"], ["🌐", "Kurdish Region"], ["🇮🇷", "Iran"], ["🇦🇫", "Afghanistan"], ["🇵🇰", "Pakistan"], ["🇮🇳", "India"], ["🇸🇬", "Singapore"], ["🇧🇷", "Brazil"], ["🇸🇷", "Suriname"], ["🇲🇽", "Mexico"], ["🇦🇷", "Argentina"], ["🌎", "Latin America"], ["🏝️", "Caribbean"], ["🇯🇵", "Japan"], ["🇹🇼", "Taiwan"], ["🇵🇭", "Philippines"], ["🇬🇪", "Georgia"], ["🇦🇿", "Azerbaijan"], ["🇺🇿", "Uzbekistan"], ["🇦🇲", "Armenia"], ["🇻🇪", "Venezuela"], ["🇭🇰", "Hong Kong"], ["🇨🇳", "China"], ["🇻🇳", "Vietnam"], ["🇲🇾", "Malaysia"], ["🇮🇩", "Indonesia"], ["🇰🇷", "South Korea"], ["🇹🇭", "Thailand"], ["🇰🇿", "Kazakhstan"], ["🇱🇹", "Lithuania"], ["🌍", "Africa"], ["🇸🇾", "Syria"], ["🇲🇦", "Morocco"], ["🇪🇬", "Egypt"], ["🇦🇪", "United Arab Emirates"], ["🇮🇶", "Iraq"], ["🇸🇦", "Saudi Arabia"], ["🇰🇼", "Kuwait"], ["🇶🇦", "Qatar"], ["🇴🇲", "Oman"], ["🇧🇭", "Bahrain"], ["🇯🇴", "Jordan"], ["🇵🇸", "Palestine"], ["🇹🇳", "Tunisia"], ["🇩🇿", "Algeria"], ["🇾🇪", "Yemen"], ["🇱🇾", "Libya"], ["🇸🇩", "Sudan"],
   ].filter((country, index, list) => list.findIndex(item => item[1] === country[1]) === index);
   const popularCountryNames = new Set(["New Zealand", "Canada", "Lebanon", "Germany", "France", "India", "Turkey", "Italy", "Spain", "United Arab Emirates"]);
+  const preferenceStorageKey = "streamlytv-explore-preferences-v1";
+  const validCategoryIds = new Set(entertainment.map(group => group.id));
+  const validSubpreferences = new Set(entertainment.flatMap(group => group.options.map(option => `${group.id}::${option}`)));
+  const validAdvancedPreferences = new Set(Object.values(preferenceGroups).flatMap(group => group.values));
+  const validCountryNames = new Set(allCountries.map(([, name]) => name));
 
+  function readSavedPreferences() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(preferenceStorageKey) || "{}");
+      const subpreferences = Array.isArray(saved.subpreferences) ? saved.subpreferences.filter(value => validSubpreferences.has(value)) : [];
+      const categories = Array.isArray(saved.categories) ? saved.categories.filter(value => validCategoryIds.has(value)) : [];
+      subpreferences.forEach(value => categories.push(value.split("::")[0]));
+      return {
+        categories: new Set(categories),
+        subpreferences: new Set(subpreferences),
+        advanced: new Set(Array.isArray(saved.advanced) ? saved.advanced.filter(value => validAdvancedPreferences.has(value)) : []),
+        countries: new Set(Array.isArray(saved.countries) ? saved.countries.filter(value => validCountryNames.has(value)) : []),
+      };
+    } catch {
+      return { categories: new Set(), subpreferences: new Set(), advanced: new Set(), countries: new Set() };
+    }
+  }
+
+  const savedPreferences = readSavedPreferences();
   const state = {
     plan: plans[0],
-    categories: new Set(),
-    subpreferences: new Set(),
-    advanced: new Set(),
-    countries: new Set(),
+    categories: savedPreferences.categories,
+    subpreferences: savedPreferences.subpreferences,
+    advanced: savedPreferences.advanced,
+    countries: savedPreferences.countries,
     step: 1,
     showAllCountries: false,
     countryQuery: "",
@@ -75,6 +98,152 @@
     const advanced = Object.values(preferenceGroups).flatMap(group => group.values.filter(value => state.advanced.has(value)));
     return [...lines, ...advanced];
   };
+
+  const discoveryShelves = [
+    { title: "Live Sports", cards: [
+      { title: "Football / Soccer", image: "assets/genre-sports.png", category: "sports", option: "Football / Soccer" },
+      { title: "UFC & Combat Sports", image: "assets/ufc-hero.png", category: "sports", option: "UFC / Combat Sports" },
+      { title: "NRL & Rugby", image: "assets/genre-sports.png", category: "sports", option: "NRL & Rugby" },
+      { title: "Cricket", image: "assets/genre-sports.png", category: "sports", option: "Cricket" },
+      { title: "Tennis", image: "assets/genre-sports.png", category: "sports", option: "Tennis" },
+      { title: "Live PPV Events", image: "assets/ufc-hero.png", category: "sports", option: "Live PPV Events" },
+      { title: "Champions League", image: "assets/genre-sports.png", category: "sports", option: "Champions League" },
+      { title: "beIN Sports", image: "assets/genre-world.png", category: "sports", option: "beIN Sports" },
+    ] },
+    { title: "Movies & Series", cards: [
+      { title: "Latest Movies", image: "assets/genre-films.png", category: "movies", option: "Latest Movies" },
+      { title: "Popular Series", image: "assets/genre-films.png", category: "movies", option: "Popular Series" },
+      { title: "New Releases", image: "assets/genre-films.png", category: "movies", option: "New Releases" },
+      { title: "4K & UHD", image: "assets/genre-films.png", category: "movies", option: "4K Movies" },
+      { title: "Dolby Audio", image: "assets/genre-films.png", category: "movies", option: "Dolby Audio" },
+      { title: "Cinema Releases", image: "assets/genre-films.png", category: "movies", option: "Cinema Releases" },
+      { title: "Box Office", image: "assets/genre-films.png", category: "movies", option: "Box Office" },
+      { title: "International Movies", image: "assets/genre-world.png", category: "movies", option: "International Movies" },
+    ] },
+    { title: "Kids & Family", cards: [
+      { title: "Kids Channels", image: "assets/genre-family.png", category: "family", option: "Kids Channels" },
+      { title: "Kids Movies", image: "assets/genre-family.png", category: "family", option: "Kids Movies" },
+      { title: "Cartoons", image: "assets/genre-family.png", category: "family", option: "Cartoons" },
+      { title: "Family Entertainment", image: "assets/genre-family.png", category: "family", option: "Family Entertainment" },
+      { title: "Kids Series", image: "assets/genre-family.png", category: "family", option: "Kids Series" },
+      { title: "Anime for Kids", image: "assets/genre-family.png", category: "family", option: "Anime for Kids" },
+    ] },
+    { title: "Arabic Entertainment", cards: [
+      { title: "Arabic Movies", image: "assets/genre-arabic.png", category: "arabic", option: "Arabic Movies" },
+      { title: "Arabic Series", image: "assets/genre-arabic.png", category: "arabic", option: "Arabic Series" },
+      { title: "MBC", image: "assets/genre-arabic.png", category: "arabic", option: "MBC" },
+      { title: "Rotana & ART", image: "assets/genre-arabic.png", category: "arabic", option: "Rotana & ART" },
+      { title: "Arabic Drama", image: "assets/genre-arabic.png", category: "arabic", option: "Arabic Drama" },
+      { title: "Arabic Comedy", image: "assets/genre-arabic.png", category: "arabic", option: "Arabic Comedy" },
+      { title: "Arabic Cinema", image: "assets/genre-arabic.png", category: "arabic", option: "Arabic Cinema" },
+      { title: "Ramadan Content", image: "assets/genre-arabic.png", category: "arabic", option: "Ramadan Content" },
+    ] },
+    { title: "International", cards: [
+      { title: "Australia", image: "assets/genre-world.png", country: "Australia", badge: "Included" },
+      { title: "United Kingdom", image: "assets/genre-world.png", country: "United Kingdom", badge: "Included" },
+      { title: "USA", image: "assets/genre-world.png", country: "USA", badge: "Included" },
+      { title: "New Zealand", image: "assets/genre-world.png", country: "New Zealand", badge: "Optional Add-On" },
+      { title: "Canada", image: "assets/genre-world.png", country: "Canada", badge: "Optional Add-On" },
+      { title: "Europe", image: "assets/genre-world.png", country: "Europe", badge: "Optional Add-On" },
+      { title: "Asia", image: "assets/genre-world.png", country: "Asia", badge: "Optional Add-On" },
+      { title: "Middle East", image: "assets/genre-arabic.png", country: "Middle East", badge: "Optional Add-On" },
+    ] },
+    { title: "4K & Premium Quality", cards: [
+      { title: "4K UHD", image: "assets/genre-films.png", advanced: "4K / UHD" },
+      { title: "Dolby Audio", image: "assets/genre-films.png", advanced: "Dolby Audio" },
+      { title: "Dolby Vision", image: "assets/genre-films.png", advanced: "Dolby Vision" },
+      { title: "Multi-Subtitle", image: "assets/genre-world.png", advanced: "Multi-Subtitles" },
+      { title: "Premium Sports Quality", image: "assets/genre-sports.png", advanced: "Premium Sports Quality" },
+    ] },
+    { title: "More to Explore", cards: [
+      { title: "Documentaries", image: "assets/genre-documentary.png", category: "documentaries", option: "Documentaries" },
+      { title: "News", image: "assets/genre-world.png", category: "news", option: "International News" },
+      { title: "Music & Radio", image: "assets/genre-world.png", category: "music", option: "Music Channels" },
+      { title: "Islamic", image: "assets/genre-arabic.png", category: "islamic", option: "Islamic Channels" },
+      { title: "Comedy & Theatre", image: "assets/genre-films.png", category: "comedy", option: "Comedy" },
+      { title: "Anime", image: "assets/genre-family.png", category: "anime", option: "Anime Series" },
+      { title: "Turkish", image: "assets/genre-world.png", category: "turkish", option: "Turkish Series" },
+      { title: "Asian Entertainment", image: "assets/genre-world.png", category: "asian", option: "Asian Series" },
+      { title: "Indian Entertainment", image: "assets/genre-world.png", category: "indian", option: "Indian Series" },
+    ] },
+  ];
+  const discoveryCards = discoveryShelves.flatMap(shelf => shelf.cards);
+  const discoveryRows = document.getElementById("discovery-rows");
+  const discoveryStatus = document.getElementById("discovery-status");
+  let discoveryFeedbackTimer;
+
+  function isDiscoveryCardSelected(card) {
+    if (card.advanced) return state.advanced.has(card.advanced);
+    if (card.category && card.option) return state.subpreferences.has(`${card.category}::${card.option}`);
+    return false;
+  }
+
+  function updateDiscoveryCardStates() {
+    if (!discoveryRows) return;
+    discoveryRows.querySelectorAll("[data-discovery-card]").forEach(button => {
+      const card = discoveryCards[Number(button.dataset.discoveryCard)];
+      if (!card || card.country) return;
+      const selected = isDiscoveryCardSelected(card);
+      button.classList.toggle("is-selected", selected);
+      button.setAttribute("aria-pressed", String(selected));
+      button.querySelector(".shelf-card-action").textContent = selected ? "Remove Preference" : "Add to Preferences";
+      button.setAttribute("aria-label", `${card.title}: ${selected ? "Remove Preference" : "Add to Preferences"}`);
+      button.querySelector(".shelf-card-check").textContent = selected ? "✓" : "";
+    });
+  }
+
+  function showDiscoveryFeedback(message) {
+    if (!discoveryStatus) return;
+    discoveryStatus.textContent = message;
+    window.clearTimeout(discoveryFeedbackTimer);
+    discoveryFeedbackTimer = window.setTimeout(() => { discoveryStatus.textContent = ""; }, 2800);
+  }
+
+  function renderDiscoveryRows() {
+    if (!discoveryRows) return;
+    let cardIndex = 0;
+    discoveryRows.innerHTML = discoveryShelves.map((shelf, shelfIndex) => `
+      <section class="shelf" aria-labelledby="discovery-row-${shelfIndex}">
+        <div class="shelf-heading"><h3 id="discovery-row-${shelfIndex}">${escapeHtml(shelf.title)}</h3></div>
+        <div class="shelf-track" role="group" aria-label="${escapeHtml(shelf.title)} choices" tabindex="0">
+          ${shelf.cards.map(card => {
+            const index = cardIndex++;
+            const selected = isDiscoveryCardSelected(card);
+            const country = Boolean(card.country);
+            const action = country ? "Explore Country Options" : selected ? "Remove Preference" : "Add to Preferences";
+            const badge = card.badge ? `<span class="shelf-card-badge${card.badge === "Included" ? " is-included" : ""}">${escapeHtml(card.badge)}</span>` : "";
+            return `<button class="shelf-card${selected ? " is-selected" : ""}" type="button" style="--shelf-image:url('${card.image}')" data-discovery-card="${index}"${country ? "" : ` aria-pressed="${selected}"`} aria-label="${escapeHtml(`${card.title}: ${action}`)}">
+              ${badge}<span class="shelf-card-content"><span class="shelf-card-title">${escapeHtml(card.title)}</span><span class="shelf-card-action">${action}</span></span><span class="shelf-card-check" aria-hidden="true">${selected ? "✓" : ""}</span>
+            </button>`;
+          }).join("")}
+        </div>
+      </section>`).join("");
+    updateDiscoveryCardStates();
+  }
+
+  function openCountrySelector(country) {
+    const includedNames = includedCountries.map(name => name.replace(/^\S+\s/, ""));
+    const isIncluded = includedNames.includes(country);
+    const hasCountry = allCountries.some(([, name]) => name === country);
+    state.countryQuery = hasCountry ? country : "";
+    state.showAllCountries = !hasCountry;
+    countrySearch.value = state.countryQuery;
+    renderCountries();
+    setStep(3);
+    window.requestAnimationFrame(() => {
+      const destination = builder.querySelector(isIncluded ? ".country-included" : ".country-controls");
+      destination?.scrollIntoView({ behavior: "smooth", block: "center" });
+      if (!isIncluded) countrySearch.focus({ preventScroll: true });
+    });
+    showDiscoveryFeedback(isIncluded ? `${country} is included with every package.` : hasCountry ? `Choose ${country} in the country selector to add it for $20 AUD.` : "Choose a country in the selector to add it for $20 AUD.");
+  }
+
+  function selectDiscoveryTrial() {
+    state.plan = plans.find(plan => plan.months === 1);
+    renderPlanCards();
+    setStep(4);
+    window.requestAnimationFrame(() => builder.querySelector("[data-builder-step='4']")?.scrollIntoView({ behavior: "smooth", block: "center" }));
+  }
 
   function renderPlanCards() {
     const grid = builder.querySelector("#builder-plan-grid");
@@ -127,6 +296,7 @@
       if (detail) detail.open = true;
       renderSummary();
     }));
+    updateDiscoveryCardStates();
   }
 
   function renderAdvanced() {
@@ -137,6 +307,7 @@
         if (input.checked) state.advanced.add(input.value);
         else state.advanced.delete(input.value);
         renderSummary();
+        updateDiscoveryCardStates();
       }));
     });
   }
@@ -175,6 +346,14 @@
   }
 
   function renderSummary() {
+    try {
+      localStorage.setItem(preferenceStorageKey, JSON.stringify({
+        categories: [...state.categories],
+        subpreferences: [...state.subpreferences],
+        advanced: [...state.advanced],
+        countries: [...state.countries],
+      }));
+    } catch {}
     const rows = summaryRows();
     asideSummary.innerHTML = rows;
     mobileTotal.textContent = money(totalCost());
@@ -241,7 +420,44 @@
   renderPreferences();
   renderAdvanced();
   renderCountries();
+  renderDiscoveryRows();
   renderSummary();
+
+  if (discoveryRows) discoveryRows.addEventListener("click", event => {
+    const button = event.target.closest("[data-discovery-card]");
+    if (!button) return;
+    const card = discoveryCards[Number(button.dataset.discoveryCard)];
+    if (!card) return;
+    if (card.country) {
+      openCountrySelector(card.country);
+      return;
+    }
+    if (card.advanced) {
+      const selected = state.advanced.has(card.advanced);
+      if (selected) state.advanced.delete(card.advanced);
+      else state.advanced.add(card.advanced);
+      renderAdvanced();
+      builder.querySelector(".advanced-details").open = true;
+      setStep(2);
+      updateDiscoveryCardStates();
+      showDiscoveryFeedback(selected ? "Removed from your preferences." : "Added to your preferences.");
+      return;
+    }
+    const key = `${card.category}::${card.option}`;
+    const selected = state.subpreferences.has(key);
+    if (selected) state.subpreferences.delete(key);
+    else {
+      state.categories.add(card.category);
+      state.subpreferences.add(key);
+    }
+    renderPreferences();
+    if (!selected) categoryGrid.querySelector(`[data-category="${card.category}"]`)?.closest(".preference-card")?.querySelector("details")?.setAttribute("open", "");
+    renderSummary();
+    showDiscoveryFeedback(selected ? "Removed from your preferences." : "Added to your preferences.");
+  });
+
+  document.querySelector("[data-discovery-build]")?.addEventListener("click", () => builder.scrollIntoView({ behavior: "smooth", block: "start" }));
+  document.querySelector("[data-discovery-trial]")?.addEventListener("click", selectDiscoveryTrial);
 
   countrySearch.addEventListener("input", () => {
     state.countryQuery = countrySearch.value;

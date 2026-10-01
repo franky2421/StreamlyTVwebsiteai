@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" class="site-background">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090b">
+  <meta name="description" content="Choose your StreamlyTV plan, entertainment preferences and countries, then order directly through WhatsApp.">
+  <title>Build Your Package | StreamlyTV</title>
+  <link rel="icon" href="/assets/streamlytv-logo.png">
+  <link rel="stylesheet" href="/package-builder-enhancements.css">
+  <link rel="stylesheet" href="/site-pages.css">
+</head>
+<body data-page="build-package">
+  <a class="site-skip-link" href="#main-content">Skip to content</a>
+  <div id="site-header"></div>
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="page-wrap page-heading">
+        <p class="page-eyebrow">Made for your screen</p>
+        <h1>Build Your StreamlyTV Package</h1>
+        <p>Choose a plan, tell us what you love watching, then add any countries you want. Australia, the United Kingdom and the USA are already included.</p>
+      </div>
+    </section>
+    <section id="package-builder" aria-labelledby="builder-title">
+      <div class="page-wrap">
+        <div class="builder-intro">
+          <p class="builder-eyebrow">Your entertainment, your way</p>
+          <h2 id="builder-title">Choose your StreamlyTV package</h2>
+          <p>Build a selection that fits you. The total updates as you choose, and your order is sent straight to StreamlyTV on WhatsApp.</p>
+        </div>
+        <div class="builder-layout">
+          <div class="builder-main">
+            <ol class="builder-steps" aria-label="Package builder steps">
+              <li><span class="step-indicator is-active" data-step-indicator="1" aria-current="step"><span class="step-number">1</span><span>Access</span></span></li>
+              <li><span class="step-indicator" data-step-indicator="2" aria-current="false"><span class="step-number">2</span><span>Entertainment</span></span></li>
+              <li><span class="step-indicator" data-step-indicator="3" aria-current="false"><span class="step-number">3</span><span>Countries</span></span></li>
+              <li><span class="step-indicator" data-step-indicator="4" aria-current="false"><span class="step-number">4</span><span>Review</span></span></li>
+            </ol>
+
+            <div class="builder-panel" data-builder-step="1">
+              <div class="builder-panel-heading"><h3>Choose Access</h3><p>Every plan is a one-time package. Choose the duration that suits you.</p></div>
+              <div class="builder-plan-grid" id="builder-plan-grid"></div>
+              <p class="builder-plan-note">You can change your selection at any time before sending your WhatsApp order.</p>
+              <div class="builder-actions"><span></span><button class="builder-action" type="button" data-step-next>Continue</button></div>
+            </div>
+
+            <div class="builder-panel" data-builder-step="2" hidden>
+              <div class="builder-panel-heading"><h3>Choose Entertainment</h3><p>Choose as many as you like. Your Explore page favourites are carried into this step.</p></div>
+              <div class="preference-actions"><button type="button" id="select-all-preferences">Select All</button><button type="button" id="clear-preferences">Clear Selection</button></div>
+              <div class="preference-grid" id="preference-grid"></div>
+              <details class="advanced-details"><summary>Advanced Preferences</summary><div class="advanced-content"><div class="advanced-group" data-advanced="quality"></div><div class="advanced-group" data-advanced="language"></div><div class="advanced-group" data-advanced="dialect"></div></div></details>
+              <div class="builder-actions"><button class="builder-secondary" type="button" data-step-prev hidden>Back</button><button class="builder-action" type="button" data-step-next>Continue</button></div>
+            </div>
+
+            <div class="builder-panel" data-builder-step="3" hidden>
+              <div class="builder-panel-heading"><h3>Choose Countries</h3><p>Australia, United Kingdom and USA are included with every package. Add any others for $20 AUD each.</p></div>
+              <div class="country-included"><h4>Included at no extra cost</h4><p>Already part of every StreamlyTV package. These are included and won&apos;t change your total.</p><div class="included-country-list"><span class="included-country">✓ 🇦🇺 Australia <strong>INCLUDED</strong></span><span class="included-country">✓ 🇬🇧 United Kingdom <strong>INCLUDED</strong></span><span class="included-country">✓ 🇺🇸 USA <strong>INCLUDED</strong></span></div></div>
+              <div class="country-controls"><label class="country-search-wrap"><span class="sr-only">Search additional countries</span><input id="country-search" type="search" placeholder="Search countries..." autocomplete="off"></label><button class="view-countries" type="button" id="view-all-countries">View All Countries</button></div>
+              <div class="country-grid" id="country-grid" aria-live="polite"></div>
+              <p class="countries-footnote">Each additional country is +$20 AUD. Your total updates instantly. You can choose more than one.</p>
+              <div class="builder-actions"><button class="builder-secondary" type="button" data-step-prev hidden>Back</button><button class="builder-action" type="button" data-step-next>Review Package</button></div>
+            </div>
+
+            <div class="builder-panel" data-builder-step="4" hidden>
+              <div class="builder-panel-heading"><h3>Review &amp; Order</h3><p>Check your plan and preferences, then send your selections directly to StreamlyTV on WhatsApp.</p></div>
+              <div class="review-card" id="builder-review"></div>
+              <div class="builder-actions"><button class="builder-secondary" type="button" data-step-prev hidden>Back</button><button class="builder-action" type="button" data-builder-action>Order via WhatsApp</button></div>
+            </div>
+          </div>
+
+          <aside class="builder-summary" aria-label="Your StreamlyTV package summary">
+            <div class="builder-summary-title">YOUR STREAMLYTV PACKAGE</div>
+            <div id="builder-summary-content"></div>
+            <button class="builder-action" type="button" data-builder-action>Continue</button>
+          </aside>
+        </div>
+      </div>
+      <div class="builder-mobile-bar" aria-label="Current package total"><div class="builder-mobile-price"><span>Total</span><strong id="builder-mobile-total">$80 AUD</strong></div><button class="builder-action" type="button" id="builder-mobile-action" data-builder-action>Continue — $80</button></div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <div id="site-support"></div>
+  <script src="/package-builder.js" defer></script>
+  <script src="/site-shell.js" defer></script>
+</body>
+</html>
