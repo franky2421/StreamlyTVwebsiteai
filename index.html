@@ -931,7 +931,8 @@
       border-radius: 26px;
       background:
         linear-gradient(145deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, .035));
-      backdrop-filter: blur(18px);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
       box-shadow: 0 24px 65px rgba(0, 0, 0, .30);
       transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
     }
@@ -986,6 +987,21 @@
       color: #fff;
     }
 
+    #plans .price,
+    #plans .price * {
+      opacity: 1 !important;
+      filter: none !important;
+      text-shadow: none !important;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #plans .amount,
+    #plans .amount small {
+      color: #fff;
+      font-weight: 800;
+    }
+
     #plans ul {
       flex: 1;
       margin: 10px 0 28px;
@@ -1014,14 +1030,26 @@
       min-height: 56px;
       margin-top: auto;
       border-radius: 16px;
+      background: #1689f7;
+      color: #fff;
       font-size: 16px;
-      font-weight: 900;
+      font-weight: 700;
+      opacity: 1;
+      filter: none;
+      text-shadow: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      transform: none;
     }
 
-    #plans .card:nth-child(3) .btn {
-      background: linear-gradient(135deg, #f6dc8a, #b87b16);
-      color: #06101c;
-      box-shadow: 0 16px 38px rgba(217, 175, 82, .23);
+    #plans .btn:hover,
+    #plans .btn:focus-visible {
+      background: #1689f7;
+      color: #fff;
+      filter: none;
+      transform: none;
     }
 
     @media(max-width:900px) {
@@ -1044,6 +1072,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="package-builder-enhancements.css">
 </head>
 
 <body>
@@ -1056,53 +1085,27 @@
     </div>
   </header>
   <main>
-    <section class="hero">
-      <div class="wrap heroContent">
-        <span class="kicker">🟢 StreamlyTV Support Online • 24/7 Support</span>
-
-        <h1>
-          Unlimited Entertainment.<br>
-          <span style="color:#d9af52;">Built Around You.</span>
-        </h1>
-
-        <p>
-          Live TV, sports, PPV, movies, series, kids content and international
-          entertainment with fast setup and friendly support.
-        </p>
-
+    <section class="hero cinematic" aria-labelledby="home-title">
+      <div class="heroContent">
+        <span class="cinema-kicker">StreamlyTV · Entertainment from around the world</span>
+        <h1 id="home-title">Everything You Love.<span>All in One Place.</span></h1>
+        <p class="hero-lede">Live TV • Sports • Movies • Series<br>Entertainment from around the world.</p>
         <div class="heroBtns">
-          <button class="btn" onclick="openChat('I want a 24-hour free trial')">
-            Start 24-Hour Trial
-          </button>
-
-          <a class="btn alt" href="#plans">View Packages</a>
-
-          <a class="btn green" href="entertainment.html">
-            🎬 Entertainment Hub
-          </a>
+          <a class="btn" href="#plans">View Packages</a>
+          <a class="btn alt" href="#package-builder" data-trial-link>Start 24-Hour Trial</a>
         </div>
-
-        <div class="stats">
-          <div class="stat">
-            <strong>50,000+</strong>
-            <span>Live TV Channels</span>
-          </div>
-
-          <div class="stat">
-            <strong>100,000+</strong>
-            <span>Movies &amp; Series</span>
-          </div>
-
-          <div class="stat">
-            <strong>4K / FHD / HD</strong>
-            <span>Quality where available</span>
-          </div>
-
-          <div class="stat">
-            <strong>Worldwide</strong>
-            <span>No VPN required</span>
-          </div>
+        <div class="stats" aria-label="StreamlyTV catalogue highlights">
+          <div class="stat"><strong>50,000+</strong><span>Live Channels</span></div>
+          <div class="stat"><strong>100,000+</strong><span>Movies &amp; Series</span></div>
         </div>
+      </div>
+    </section>
+
+    <section class="content-shelves" aria-label="Explore StreamlyTV entertainment">
+      <div class="wrap">
+        <div class="shelf"><div class="shelf-heading"><h2>LIVE SPORTS</h2><a href="#package-builder">Personalise your selection</a></div><div class="shelf-track"><a class="shelf-card" style="--shelf-image:url('assets/genre-sports.png')" href="#package-builder"><span>Live Sports &amp; Events</span></a><a class="shelf-card" style="--shelf-image:url('assets/ufc-hero.png')" href="#package-builder"><span>Match Day, All Day</span></a><a class="shelf-card" style="--shelf-image:url('assets/genre-world.png')" href="#package-builder"><span>Global Sports</span></a></div></div>
+        <div class="shelf"><div class="shelf-heading"><h2>MOVIES &amp; SERIES</h2><a href="#package-builder">Explore entertainment</a></div><div class="shelf-track"><a class="shelf-card" style="--shelf-image:url('assets/genre-films.png')" href="#package-builder"><span>Movies &amp; Series</span></a><a class="shelf-card" style="--shelf-image:url('assets/genre-documentary.png')" href="#package-builder"><span>Documentaries</span></a><a class="shelf-card" style="--shelf-image:url('assets/genre-family.png')" href="#package-builder"><span>Family Favourites</span></a></div></div>
+        <div class="shelf"><div class="shelf-heading"><h2>EXPLORE MORE</h2><a href="entertainment.html">Entertainment hub</a></div><div class="shelf-track"><a class="shelf-card" style="--shelf-image:url('assets/genre-family.png')" href="#package-builder"><span>KIDS &amp; FAMILY</span></a><a class="shelf-card" style="--shelf-image:url('assets/genre-arabic.png')" href="#package-builder"><span>ARABIC ENTERTAINMENT</span></a><a class="shelf-card" style="--shelf-image:url('assets/genre-world.png')" href="#package-builder"><span>INTERNATIONAL TV</span></a><a class="shelf-card" style="--shelf-image:url('assets/genre-documentary.png')" href="#package-builder"><span>4K &amp; UHD</span></a><a class="shelf-card" style="--shelf-image:url('assets/genre-documentary.png')" href="#package-builder"><span>DOCUMENTARIES</span></a><a class="shelf-card" style="--shelf-image:url('assets/ufc-hero.png')" href="#package-builder"><span>LIVE EVENTS</span></a></div></div>
       </div>
     </section>
 
@@ -1194,6 +1197,68 @@
         </div>
       </div>
     </section>
+    <section id="package-builder" aria-labelledby="builder-title">
+      <div class="wrap">
+        <div class="builder-intro">
+          <p class="builder-eyebrow">Made for your screen</p>
+          <h2 id="builder-title">Build Your StreamlyTV Package</h2>
+          <p>Choose a plan, tell us what you love watching, then add any countries you want. Australia, the United Kingdom and the USA are already included.</p>
+        </div>
+        <div class="builder-layout">
+          <div class="builder-main">
+            <ol class="builder-steps" aria-label="Package builder steps">
+              <li><span class="step-indicator is-active" data-step-indicator="1" aria-current="step"><span class="step-number">1</span><span>Package</span></span></li>
+              <li><span class="step-indicator" data-step-indicator="2" aria-current="false"><span class="step-number">2</span><span>Entertainment</span></span></li>
+              <li><span class="step-indicator" data-step-indicator="3" aria-current="false"><span class="step-number">3</span><span>Countries</span></span></li>
+              <li><span class="step-indicator" data-step-indicator="4" aria-current="false"><span class="step-number">4</span><span>Review</span></span></li>
+            </ol>
+
+            <div class="builder-panel" data-builder-step="1">
+              <div class="builder-panel-heading"><h3>Choose your plan</h3><p>Every plan is a one-time package. Choose the duration that suits you.</p></div>
+              <div class="builder-plan-grid" id="builder-plan-grid"></div>
+              <p class="builder-plan-note">You can change your selection at any time before sending your WhatsApp order.</p>
+              <div class="builder-actions"><span></span><button class="builder-action" type="button" data-step-next>Continue</button></div>
+            </div>
+
+            <div class="builder-panel" data-builder-step="2" hidden>
+              <div class="builder-panel-heading"><h3>What do you love watching?</h3><p>Choose as many as you like. We&apos;ll personalise your entertainment selection.</p></div>
+              <div class="preference-actions"><button type="button" id="select-all-preferences">Select All</button><button type="button" id="clear-preferences">Clear Selection</button></div>
+              <div class="preference-grid" id="preference-grid"></div>
+              <details class="advanced-details"><summary>Advanced Preferences</summary><div class="advanced-content"><div class="advanced-group" data-advanced="quality"></div><div class="advanced-group" data-advanced="language"></div><div class="advanced-group" data-advanced="dialect"></div></div></details>
+              <div class="builder-actions"><button class="builder-secondary" type="button" data-step-prev hidden>Back</button><button class="builder-action" type="button" data-step-next>Continue</button></div>
+            </div>
+
+            <div class="builder-panel" data-builder-step="3" hidden>
+              <div class="builder-panel-heading"><h3>Choose Your Countries</h3><p>Australia, United Kingdom and USA are included with every package. Add any others for $20 AUD each.</p></div>
+              <div class="country-included"><h4>Included at no extra cost</h4><p>Already part of every StreamlyTV package. These are included and won&apos;t change your total.</p><div class="included-country-list"><span class="included-country">✓ 🇦🇺 Australia <strong>INCLUDED</strong></span><span class="included-country">✓ 🇬🇧 United Kingdom <strong>INCLUDED</strong></span><span class="included-country">✓ 🇺🇸 USA <strong>INCLUDED</strong></span></div></div>
+              <div class="country-controls"><label class="country-search-wrap"><span class="sr-only">Search additional countries</span><input id="country-search" type="search" placeholder="Search countries..." autocomplete="off"></label><button class="view-countries" type="button" id="view-all-countries">View All Countries</button></div>
+              <div class="country-grid" id="country-grid" aria-live="polite"></div>
+              <p class="countries-footnote">Each additional country is +$20 AUD. Your total updates instantly. You can choose more than one.</p>
+              <div class="builder-actions"><button class="builder-secondary" type="button" data-step-prev hidden>Back</button><button class="builder-action" type="button" data-step-next>Review Package</button></div>
+            </div>
+
+            <div class="builder-panel" data-builder-step="4" hidden>
+              <div class="builder-panel-heading"><h3>Review your package</h3><p>Check your plan and preferences, then send your selections directly to StreamlyTV on WhatsApp.</p></div>
+              <div class="review-card" id="builder-review"></div>
+              <div class="builder-actions"><button class="builder-secondary" type="button" data-step-prev hidden>Back</button><button class="builder-action" type="button" data-builder-action>Order via WhatsApp</button></div>
+            </div>
+          </div>
+
+          <aside class="builder-summary" aria-label="Your StreamlyTV package summary">
+            <div class="builder-summary-title">YOUR STREAMLYTV PACKAGE</div>
+            <div id="builder-summary-content"></div>
+            <button class="builder-action" type="button" data-builder-action>Continue</button>
+          </aside>
+        </div>
+
+        <div class="trial-panel">
+          <div><h3>Not sure yet? Try StreamlyTV first.</h3><p>Tell us what you like and we&apos;ll help you get started.</p><span class="trial-label">24-HOUR FREE TRIAL</span></div>
+          <a class="builder-action" href="#package-builder" data-trial-link>Request Free Trial</a>
+        </div>
+      </div>
+      <div class="builder-mobile-bar" aria-label="Current package total"><div class="builder-mobile-price"><span>Total</span><strong id="builder-mobile-total">$80 AUD</strong></div><button class="builder-action" type="button" id="builder-mobile-action" data-builder-action>Continue — $80</button></div>
+    </section>
+
     <section id="devices">
       <div class="wrap">
         <div class="sectionTitle">
@@ -1398,6 +1463,7 @@
     <div class="chatInput"><input id="chatText" placeholder="Ask StreamlyTV Support..."
         onkeydown="if(event.key==='Enter') sendChat()"><button onclick="sendChat()">Send</button></div>
   </div>
+  <script src="package-builder.js"></script>
   <script>
     const msgs = [{ role: 'assistant', content: 'Hi! 👋 Welcome to StreamlyTV. I’m StreamlyTV Support. I can help with packages, free trials, device setup, sports, movies, troubleshooting and activation details. What can I help you with today?' }];
     const chat = document.getElementById('chat'), chatMsgs = document.getElementById('chatMsgs'), chatText = document.getElementById('chatText');
