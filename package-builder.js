@@ -44,7 +44,6 @@
     ["🇳🇿", "New Zealand"], ["🇨🇦", "Canada"], ["🇱🇧", "Lebanon"], ["🇩🇪", "Germany"], ["🇦🇹", "Austria"], ["🇳🇱", "Netherlands"], ["🇧🇪", "Belgium"], ["🇮🇹", "Italy"], ["🇫🇷", "France"], ["🇪🇸", "Spain"], ["🇵🇹", "Portugal"], ["🇨🇭", "Switzerland"], ["🇵🇱", "Poland"], ["🇬🇷", "Greece"], ["🇨🇾", "Cyprus"], ["🇱🇻", "Latvia"], ["🇸🇪", "Sweden"], ["🇩🇰", "Denmark"], ["🇳🇴", "Norway"], ["🇫🇮", "Finland"], ["🇮🇸", "Iceland"], ["🇭🇺", "Hungary"], ["🇷🇴", "Romania"], ["🇦🇱", "Albania"], ["🇽🇰", "Kosovo"], ["🇷🇺", "Russia"], ["🇺🇦", "Ukraine"], ["🇲🇹", "Malta"], ["🇨🇿", "Czech Republic"], ["🇷🇸", "Serbia"], ["🇧🇦", "Bosnia"], ["🇭🇷", "Croatia"], ["🇲🇰", "Macedonia"], ["🇸🇮", "Slovenia"], ["🇲🇪", "Montenegro"], ["🇧🇬", "Bulgaria"], ["🇪🇪", "Estonia"], ["🇹🇷", "Turkey"], ["🌐", "Kurdish Region"], ["🇮🇷", "Iran"], ["🇦🇫", "Afghanistan"], ["🇵🇰", "Pakistan"], ["🇮🇳", "India"], ["🇸🇬", "Singapore"], ["🇧🇷", "Brazil"], ["🇸🇷", "Suriname"], ["🇲🇽", "Mexico"], ["🇦🇷", "Argentina"], ["🌎", "Latin America"], ["🏝️", "Caribbean"], ["🇯🇵", "Japan"], ["🇹🇼", "Taiwan"], ["🇵🇭", "Philippines"], ["🇬🇪", "Georgia"], ["🇦🇿", "Azerbaijan"], ["🇺🇿", "Uzbekistan"], ["🇦🇲", "Armenia"], ["🇻🇪", "Venezuela"], ["🇭🇰", "Hong Kong"], ["🇨🇳", "China"], ["🇻🇳", "Vietnam"], ["🇲🇾", "Malaysia"], ["🇮🇩", "Indonesia"], ["🇰🇷", "South Korea"], ["🇹🇭", "Thailand"], ["🇰🇿", "Kazakhstan"], ["🇱🇹", "Lithuania"], ["🌍", "Africa"], ["🇸🇾", "Syria"], ["🇲🇦", "Morocco"], ["🇪🇬", "Egypt"], ["🇦🇪", "United Arab Emirates"], ["🇮🇶", "Iraq"], ["🇸🇦", "Saudi Arabia"], ["🇰🇼", "Kuwait"], ["🇶🇦", "Qatar"], ["🇴🇲", "Oman"], ["🇧🇭", "Bahrain"], ["🇯🇴", "Jordan"], ["🇵🇸", "Palestine"], ["🇹🇳", "Tunisia"], ["🇩🇿", "Algeria"], ["🇾🇪", "Yemen"], ["🇱🇾", "Libya"], ["🇸🇩", "Sudan"],
   ].filter((country, index, list) => list.findIndex(item => item[1] === country[1]) === index);
   const popularCountryNames = new Set(["New Zealand", "Canada", "Lebanon", "Germany", "France", "India", "Turkey", "Italy", "Spain", "United Arab Emirates"]);
-  const preferenceStorageKey = "streamlytv-explore-preferences-v1";
   const builderStorageKey = "streamlytv-package-builder-v1";
   const validCategoryIds = new Set(entertainment.map(group => group.id));
   const validSubpreferences = new Set(entertainment.flatMap(group => group.options.map(option => `${group.id}::${option}`)));
@@ -53,8 +52,7 @@
 
   function readSavedPreferences() {
     try {
-      const savedBuilder = localStorage.getItem(builderStorageKey);
-      const saved = JSON.parse(savedBuilder || localStorage.getItem(preferenceStorageKey) || "{}");
+      const saved = JSON.parse(localStorage.getItem(builderStorageKey) || "{}");
       const subpreferences = Array.isArray(saved.subpreferences) ? saved.subpreferences.filter(value => validSubpreferences.has(value)) : [];
       const categories = Array.isArray(saved.categories) ? saved.categories.filter(value => validCategoryIds.has(value)) : [];
       subpreferences.forEach(value => categories.push(value.split("::")[0]));
@@ -84,6 +82,13 @@
     showAllCountries: false,
     countryQuery: "",
   };
+  const packageUrl = new URL(window.location.href);
+  const exploreCategory = packageUrl.searchParams.get("category");
+  if (validCategoryIds.has(exploreCategory)) state.categories.add(exploreCategory);
+  if (packageUrl.searchParams.has("category")) {
+    packageUrl.searchParams.delete("category");
+    window.history.replaceState(window.history.state, "", `${packageUrl.pathname}${packageUrl.search}${packageUrl.hash}`);
+  }
 
   const builder = document.getElementById("package-builder");
   if (!builder) return;
@@ -547,14 +552,7 @@
     renderPreferences();
     renderSummary();
   });
-  builder.querySelector("#clear-preferences").addEventListener("click", () => {
-    state.categories.clear();
-    state.subpreferences.clear();
-    state.advanced.clear();
-    renderPreferences();
-    renderAdvanced();
-    renderSummary();
-  });
+  builder.querySelector("#clear-preferences").addEventListener("click", resetBuilder);
   const resetDialog = builder.querySelector(".builder-reset-dialog");
   builder.querySelectorAll("[data-builder-reset]").forEach(button => button.addEventListener("click", () => resetDialog.showModal()));
   resetDialog.querySelector("[data-builder-reset-cancel]").addEventListener("click", () => resetDialog.close());
