@@ -45,6 +45,7 @@
   ].filter((country, index, list) => list.findIndex(item => item[1] === country[1]) === index);
   const popularCountryNames = new Set(["New Zealand", "Canada", "Lebanon", "Germany", "France", "India", "Turkey", "Italy", "Spain", "United Arab Emirates"]);
   const preferenceStorageKey = "streamlytv-explore-preferences-v1";
+  const builderStorageKey = "streamlytv-package-builder-v1";
   const validCategoryIds = new Set(entertainment.map(group => group.id));
   const validSubpreferences = new Set(entertainment.flatMap(group => group.options.map(option => `${group.id}::${option}`)));
   const validAdvancedPreferences = new Set(Object.values(preferenceGroups).flatMap(group => group.values));
@@ -52,25 +53,29 @@
 
   function readSavedPreferences() {
     try {
-      const saved = JSON.parse(localStorage.getItem(preferenceStorageKey) || "{}");
+      const savedBuilder = localStorage.getItem(builderStorageKey);
+      const saved = JSON.parse(savedBuilder || localStorage.getItem(preferenceStorageKey) || "{}");
       const subpreferences = Array.isArray(saved.subpreferences) ? saved.subpreferences.filter(value => validSubpreferences.has(value)) : [];
       const categories = Array.isArray(saved.categories) ? saved.categories.filter(value => validCategoryIds.has(value)) : [];
       subpreferences.forEach(value => categories.push(value.split("::")[0]));
+      const planMonths = Object.prototype.hasOwnProperty.call(saved, "planMonths") ? saved.planMonths : plans[0].months;
       return {
         categories: new Set(categories),
         subpreferences: new Set(subpreferences),
         advanced: new Set(Array.isArray(saved.advanced) ? saved.advanced.filter(value => validAdvancedPreferences.has(value)) : []),
         countries: new Set(Array.isArray(saved.countries) ? saved.countries.filter(value => validCountryNames.has(value)) : []),
+        planMonths,
+        connections: [1, 2, 3].includes(saved.connections) ? saved.connections : 1,
       };
     } catch {
-      return { categories: new Set(), subpreferences: new Set(), advanced: new Set(), countries: new Set() };
+      return { categories: new Set(), subpreferences: new Set(), advanced: new Set(), countries: new Set(), planMonths: plans[0].months, connections: 1 };
     }
   }
 
   const savedPreferences = readSavedPreferences();
   const state = {
-    plan: plans[0],
-    connections: 1,
+    plan: savedPreferences.planMonths === null ? null : plans.find(plan => plan.months === savedPreferences.planMonths) || plans[0],
+    connections: savedPreferences.connections,
     categories: savedPreferences.categories,
     subpreferences: savedPreferences.subpreferences,
     advanced: savedPreferences.advanced,
@@ -260,12 +265,12 @@
 
   function renderConnectionOptions() {
     const grid = builder.querySelector("#connection-grid");
-    const trialOnly = state.plan.months === 1;
+    const trialOnly = state.plan?.months === 1;
     const trialNote = builder.querySelector("#connection-trial-note");
     trialNote.hidden = !trialOnly;
     grid.innerHTML = connectionOptions.map(option => {
       const disabled = trialOnly && option.count !== 1;
-      const price = connectionPrices[state.plan.months]?.[option.count] ?? 0;
+      const price = connectionPrices[state.plan?.months]?.[option.count] ?? 0;
       return `<button class="connection-option${state.connections === option.count ? " is-selected" : ""}" type="button" data-connections="${option.count}" aria-pressed="${state.connections === option.count}"${disabled ? " disabled" : ""}>
         <span class="connection-option-check" aria-hidden="true">✓</span>
         <span class="connection-option-copy"><strong>${option.label}</strong><span>${option.description}</span></span>
@@ -282,7 +287,7 @@
   function renderPlanCards() {
     const grid = builder.querySelector("#builder-plan-grid");
     grid.innerHTML = plans.map(plan => `
-      <button class="builder-plan${state.plan.months === plan.months ? " is-selected" : ""}" type="button" data-plan="${plan.months}" aria-pressed="${state.plan.months === plan.months}">
+      <button class="builder-plan${state.plan?.months === plan.months ? " is-selected" : ""}" type="button" data-plan="${plan.months}" aria-pressed="${state.plan?.months === plan.months}">
         ${plan.months === 6 ? '<span class="builder-plan-badge">Most Popular</span>' : ""}
         <span class="builder-plan-check" aria-hidden="true">✓</span>
         <span class="builder-plan-name">${plan.label}</span>
@@ -374,7 +379,7 @@
     const preferences = selectedPreferenceLines();
     const countries = [...state.countries];
     return `
-      <div class="summary-plan"><span>Plan</span><strong>${state.plan.label}</strong></div>
+      <div class="summary-plan"><span>Plan</span><strong>${state.plan?.label || "No plan selected"}</strong></div>
       <div class="summary-plan"><span>Connections</span><strong>${state.connections} ${state.connections === 1 ? "Connection" : "Connections"}</strong></div>
       <div class="summary-plan"><span>Package price</span><strong>${money(planCost())}</strong></div>
       <div class="summary-block"><h4>Included at no extra cost</h4><ul>${includedCountries.map(country => `<li>${country}</li>`).join("")}</ul></div>
@@ -385,7 +390,9 @@
 
   function renderSummary() {
     try {
-      localStorage.setItem(preferenceStorageKey, JSON.stringify({
+      localStorage.setItem(builderStorageKey, JSON.stringify({
+        planMonths: state.plan?.months ?? null,
+        connections: state.connections,
         categories: [...state.categories],
         subpreferences: [...state.subpreferences],
         advanced: [...state.advanced],
@@ -398,7 +405,11 @@
     builder.querySelectorAll("[data-current-total]").forEach(node => { node.textContent = money(totalCost()); });
     updateTrialLinks();
     const actionLabel = state.step === 5 ? "Order via WhatsApp" : `Continue — $${totalCost()}`;
-    builder.querySelectorAll("[data-builder-action]").forEach(button => { button.textContent = actionLabel; });
+    builder.querySelectorAll("[data-builder-action]").forEach(button => {
+      button.textContent = actionLabel;
+      button.disabled = !state.plan;
+    });
+    builder.querySelectorAll("[data-step-next]").forEach(button => { button.disabled = state.step === 1 && !state.plan; });
     const mobileAction = builder.querySelector("#builder-mobile-action");
     if (mobileAction) mobileAction.setAttribute("aria-label", actionLabel);
     renderReview();
@@ -424,6 +435,26 @@
     builder.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  function resetBuilder() {
+    state.plan = null;
+    state.connections = 1;
+    state.categories.clear();
+    state.subpreferences.clear();
+    state.advanced.clear();
+    state.countries.clear();
+    state.showAllCountries = false;
+    state.countryQuery = "";
+    countrySearch.value = "";
+    builder.querySelector(".advanced-details").open = false;
+    renderPlanCards();
+    renderConnectionOptions();
+    renderPreferences();
+    renderAdvanced();
+    renderCountries();
+    updateDiscoveryCardStates();
+    setStep(1);
+  }
+
   function orderMessage(isTrial = false) {
     const preferences = selectedPreferenceLines();
     if (isTrial) {
@@ -432,7 +463,7 @@
     const optionalCountries = [...state.countries];
     return [
       "Hi StreamlyTV, I'd like to place an order.", "",
-      "Plan:", state.plan.label, "",
+      "Plan:", state.plan?.label || "No plan selected", "",
       "Connections:", `${state.connections} ${state.connections === 1 ? "Connection" : "Connections"}`, "",
       "Entertainment Preferences:", ...(preferences.length ? preferences : ["None selected"]), "",
       "Included Countries:", ...includedCountries.map(country => country.replace(/^\S+\s/, "")), "",
@@ -523,6 +554,13 @@
     renderPreferences();
     renderAdvanced();
     renderSummary();
+  });
+  const resetDialog = builder.querySelector(".builder-reset-dialog");
+  builder.querySelectorAll("[data-builder-reset]").forEach(button => button.addEventListener("click", () => resetDialog.showModal()));
+  resetDialog.querySelector("[data-builder-reset-cancel]").addEventListener("click", () => resetDialog.close());
+  resetDialog.querySelector("[data-builder-reset-confirm]").addEventListener("click", () => {
+    resetDialog.close();
+    resetBuilder();
   });
   builder.querySelectorAll("[data-step-next]").forEach(button => button.addEventListener("click", () => setStep(state.step + 1)));
   builder.querySelectorAll("[data-step-prev]").forEach(button => button.addEventListener("click", () => setStep(state.step - 1)));
