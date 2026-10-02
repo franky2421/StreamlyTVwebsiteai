@@ -77,13 +77,26 @@
           </div>
 
           <aside class="builder-summary" aria-label="Your StreamlyTV package summary">
-            <div class="builder-summary-title">YOUR STREAMLYTV PACKAGE</div>
+            <div class="builder-summary-heading">
+              <div class="builder-summary-title">YOUR STREAMLYTV PACKAGE</div>
+              <button class="builder-reset" type="button" data-builder-reset>Start Over</button>
+            </div>
             <div id="builder-summary-content"></div>
             <button class="builder-action" type="button" data-builder-action>Continue</button>
           </aside>
         </div>
       </div>
-      <div class="builder-mobile-bar" aria-label="Current package total"><div class="builder-mobile-price"><span>Total</span><strong id="builder-mobile-total">$80 AUD</strong></div><button class="builder-action" type="button" id="builder-mobile-action" data-builder-action>Continue — $80</button></div>
+      <div class="builder-mobile-bar" aria-label="Current package total"><div class="builder-mobile-price"><span>Total</span><strong id="builder-mobile-total">$80 AUD</strong></div><button class="builder-reset" type="button" data-builder-reset>Start Over</button><button class="builder-action" type="button" id="builder-mobile-action" data-builder-action>Continue — $80</button></div>
+      <dialog class="builder-reset-dialog" aria-labelledby="builder-reset-title" aria-describedby="builder-reset-message">
+        <div class="builder-reset-content">
+          <h2 id="builder-reset-title">Start Over?</h2>
+          <p id="builder-reset-message">Clear your current package selections and start again?</p>
+          <div class="builder-reset-actions">
+            <button class="builder-secondary" type="button" data-builder-reset-cancel>Cancel</button>
+            <button class="builder-action" type="button" data-builder-reset-confirm>Clear &amp; Start Again</button>
+          </div>
+        </div>
+      </dialog>
     </section>
   </main>
   <div id="site-footer"></div>
