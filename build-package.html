@@ -32,9 +32,10 @@
           <div class="builder-main">
             <ol class="builder-steps" aria-label="Package builder steps">
               <li><span class="step-indicator is-active" data-step-indicator="1" aria-current="step"><span class="step-number">1</span><span>Access</span></span></li>
-              <li><span class="step-indicator" data-step-indicator="2" aria-current="false"><span class="step-number">2</span><span>Entertainment</span></span></li>
-              <li><span class="step-indicator" data-step-indicator="3" aria-current="false"><span class="step-number">3</span><span>Countries</span></span></li>
-              <li><span class="step-indicator" data-step-indicator="4" aria-current="false"><span class="step-number">4</span><span>Review</span></span></li>
+              <li><span class="step-indicator" data-step-indicator="2" aria-current="false"><span class="step-number">2</span><span>Connections</span></span></li>
+              <li><span class="step-indicator" data-step-indicator="3" aria-current="false"><span class="step-number">3</span><span>Entertainment</span></span></li>
+              <li><span class="step-indicator" data-step-indicator="4" aria-current="false"><span class="step-number">4</span><span>Countries</span></span></li>
+              <li><span class="step-indicator" data-step-indicator="5" aria-current="false"><span class="step-number">5</span><span>Review</span></span></li>
             </ol>
 
             <div class="builder-panel" data-builder-step="1">
@@ -45,6 +46,13 @@
             </div>
 
             <div class="builder-panel" data-builder-step="2" hidden>
+              <div class="builder-panel-heading"><h3>How Many Connections?</h3><p>Each connection can stream independently at the same time on a TV, Firestick, phone, tablet or other supported device.</p></div>
+              <div class="connection-grid" id="connection-grid" role="group" aria-label="Choose the number of simultaneous connections"></div>
+              <p class="connection-trial-note" id="connection-trial-note" hidden>The 24-hour free trial includes one connection. Choose a 3-, 6- or 12-month plan for additional connections.</p>
+              <div class="builder-actions"><button class="builder-secondary" type="button" data-step-prev>Back</button><button class="builder-action" type="button" data-step-next>Continue</button></div>
+            </div>
+
+            <div class="builder-panel" data-builder-step="3" hidden>
               <div class="builder-panel-heading"><h3>Choose Entertainment</h3><p>Choose as many as you like. Your Explore page favourites are carried into this step.</p></div>
               <div class="preference-actions"><button type="button" id="select-all-preferences">Select All</button><button type="button" id="clear-preferences">Clear Selection</button></div>
               <div class="preference-grid" id="preference-grid"></div>
@@ -52,7 +60,7 @@
               <div class="builder-actions"><button class="builder-secondary" type="button" data-step-prev hidden>Back</button><button class="builder-action" type="button" data-step-next>Continue</button></div>
             </div>
 
-            <div class="builder-panel" data-builder-step="3" hidden>
+            <div class="builder-panel" data-builder-step="4" hidden>
               <div class="builder-panel-heading"><h3>Choose Countries</h3><p>Australia, United Kingdom and USA are included with every package. Add any others for $20 AUD each.</p></div>
               <div class="country-included"><h4>Included at no extra cost</h4><p>Already part of every StreamlyTV package. These are included and won&apos;t change your total.</p><div class="included-country-list"><span class="included-country">✓ 🇦🇺 Australia <strong>INCLUDED</strong></span><span class="included-country">✓ 🇬🇧 United Kingdom <strong>INCLUDED</strong></span><span class="included-country">✓ 🇺🇸 USA <strong>INCLUDED</strong></span></div></div>
               <div class="country-controls"><label class="country-search-wrap"><span class="sr-only">Search additional countries</span><input id="country-search" type="search" placeholder="Search countries..." autocomplete="off"></label><button class="view-countries" type="button" id="view-all-countries">View All Countries</button></div>
@@ -61,7 +69,7 @@
               <div class="builder-actions"><button class="builder-secondary" type="button" data-step-prev hidden>Back</button><button class="builder-action" type="button" data-step-next>Review Package</button></div>
             </div>
 
-            <div class="builder-panel" data-builder-step="4" hidden>
+            <div class="builder-panel" data-builder-step="5" hidden>
               <div class="builder-panel-heading"><h3>Review &amp; Order</h3><p>Check your plan and preferences, then send your selections directly to StreamlyTV on WhatsApp.</p></div>
               <div class="review-card" id="builder-review"></div>
               <div class="builder-actions"><button class="builder-secondary" type="button" data-step-prev hidden>Back</button><button class="builder-action" type="button" data-builder-action>Order via WhatsApp</button></div>

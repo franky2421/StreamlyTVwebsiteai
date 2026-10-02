@@ -107,7 +107,7 @@ header { background: rgba(7, 8, 11, .97); border-bottom-color: rgba(255, 255, 25
 .builder-intro > p:last-child { max-width: 630px; margin: 16px auto 0; color: #b6b2b1; font-size: 15px; line-height: 1.65; }
 .builder-layout { display: grid; grid-template-columns: minmax(0, 1fr) 330px; align-items: start; gap: 28px; }
 .builder-main { min-width: 0; }
-.builder-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0 0 26px; padding: 0; list-style: none; }
+.builder-steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 0 0 26px; padding: 0; list-style: none; }
 .builder-steps li { position: relative; min-width: 0; }
 .builder-steps li:not(:last-child)::after { position: absolute; top: 16px; left: calc(50% + 24px); width: calc(100% - 44px); height: 1px; content: ""; background: rgba(255,255,255,.16); }
 .step-indicator { position: relative; z-index: 1; display: flex; align-items: center; gap: 9px; color: #8d8b8a; font-size: 12px; font-weight: 650; white-space: nowrap; }
@@ -131,6 +131,19 @@ header { background: rgba(7, 8, 11, .97); border-bottom-color: rgba(255, 255, 25
 .builder-plan-price { color: #fff; font-size: 21px; font-weight: 820; letter-spacing: -.025em; }
 .builder-plan-badge { position: absolute; top: -10px; left: 12px; padding: 4px 8px; border-radius: 3px; background: var(--cinema-gold); color: #15120c; font-size: 9px; font-weight: 850; letter-spacing: .04em; text-transform: uppercase; }
 .builder-plan-note { margin: 16px 0 0; color: #a5a1a0; font-size: 12px; }
+.connection-grid { display: grid; gap: 10px; }
+.connection-option { display: flex; min-height: 80px; align-items: center; gap: 14px; padding: 15px 17px; border: 1px solid rgba(255,255,255,.15); border-radius: 8px; background: #18191e; color: #fff; text-align: left; cursor: pointer; transition: border-color .18s, background .18s; }
+.connection-option:hover:not(:disabled) { border-color: rgba(255,255,255,.46); }
+.connection-option.is-selected { border: 2px solid var(--cinema-red-bright); padding: 14px 16px; background: #211316; }
+.connection-option:disabled { opacity: .55; cursor: not-allowed; }
+.connection-option-check { display: grid; width: 23px; height: 23px; flex: 0 0 23px; place-items: center; border: 1px solid rgba(255,255,255,.32); border-radius: 50%; color: transparent; font-size: 12px; font-weight: 900; }
+.connection-option.is-selected .connection-option-check { border-color: var(--cinema-red-bright); background: var(--cinema-red); color: #fff; }
+.connection-option-copy { display: flex; min-width: 0; flex: 1; flex-direction: column; gap: 5px; }
+.connection-option-copy strong { font-size: 15px; font-weight: 780; }
+.connection-option-copy > span { color: #bcb8b6; font-size: 12px; line-height: 1.45; }
+.connection-option-price { color: #fff; font-size: 16px; font-weight: 820; white-space: nowrap; }
+.connection-trial-note { margin: 13px 0 0; color: #c8c2bb; font-size: 12px; line-height: 1.55; }
+.connection-option:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
 .preference-actions { display: flex; flex-wrap: wrap; gap: 9px; margin: 0 0 14px; }
 .preference-actions button, .view-countries { min-height: 40px; padding: 9px 13px; border: 1px solid rgba(255,255,255,.18); border-radius: 5px; background: #191a1f; color: #f1efed; font-size: 12px; font-weight: 700; cursor: pointer; }
@@ -257,6 +270,11 @@ header { background: rgba(7, 8, 11, .97); border-bottom-color: rgba(255, 255, 25
   .builder-steps li:not(:last-child)::after { top: 15px; left: calc(50% + 19px); width: calc(100% - 31px); }
   .builder-panel { min-height: 0; padding: 18px 14px; border-radius: 9px; }
   .builder-panel-heading { margin-bottom: 17px; }
+  .connection-option { min-height: 74px; gap: 10px; padding: 12px; }
+  .connection-option.is-selected { padding: 11px; }
+  .connection-option-copy strong { font-size: 14px; }
+  .connection-option-copy > span { font-size: 11px; }
+  .connection-option-price { font-size: 14px; }
   .builder-plan-grid { grid-template-columns: 1fr; gap: 10px; padding-top: 8px; }
   .builder-plan { min-height: 88px; padding: 14px 16px; gap: 5px; }
   .builder-plan.is-selected { padding: 13px 15px; }

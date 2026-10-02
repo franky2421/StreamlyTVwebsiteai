@@ -6,6 +6,16 @@
     { months: 12, label: "12 Months", price: 250 },
     { months: 1, label: "1-Day Free Trial", price: 0 },
   ];
+  const connectionPrices = {
+    3: { 1: 80, 2: 120, 3: 150 },
+    6: { 1: 140, 2: 200, 3: 250 },
+    12: { 1: 250, 2: 350, 3: 450 },
+  };
+  const connectionOptions = [
+    { count: 1, label: "1 Connection", description: "Included in your selected plan" },
+    { count: 2, label: "2 Connections", description: "Allows 2 devices to stream at the same time" },
+    { count: 3, label: "3 Connections", description: "Allows 3 devices to stream at the same time" },
+  ];
 
   const entertainment = [
     { id: "sports", title: "Sports & Live Events", icon: "⚽", image: "assets/genre-sports.png", description: "Follow the matches, fights and events you love.", options: ["Football / Soccer", "Live Sports", "Champions League", "beIN Sports", "Football PPV", "Live PPV Events", "NRL & Rugby", "Cricket", "Tennis", "Horse Racing", "UFC / Combat Sports", "Sports Replays"] },
@@ -60,6 +70,7 @@
   const savedPreferences = readSavedPreferences();
   const state = {
     plan: plans[0],
+    connections: 1,
     categories: savedPreferences.categories,
     subpreferences: savedPreferences.subpreferences,
     advanced: savedPreferences.advanced,
@@ -87,7 +98,7 @@
 
   const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]);
   const money = amount => `$${amount} AUD`;
-  const planCost = () => state.plan?.price || 0;
+  const planCost = () => connectionPrices[state.plan?.months]?.[state.connections] ?? 0;
   const countryCost = () => state.countries.size * 20;
   const totalCost = () => planCost() + countryCost();
   const selectedPreferenceLines = () => {
@@ -229,7 +240,7 @@
     state.showAllCountries = !hasCountry;
     countrySearch.value = state.countryQuery;
     renderCountries();
-    setStep(3);
+    setStep(4);
     window.requestAnimationFrame(() => {
       const destination = builder.querySelector(isIncluded ? ".country-included" : ".country-controls");
       destination?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -240,9 +251,32 @@
 
   function selectDiscoveryTrial() {
     state.plan = plans.find(plan => plan.months === 1);
+    state.connections = 1;
     renderPlanCards();
-    setStep(4);
-    window.requestAnimationFrame(() => builder.querySelector("[data-builder-step='4']")?.scrollIntoView({ behavior: "smooth", block: "center" }));
+    renderConnectionOptions();
+    setStep(5);
+    window.requestAnimationFrame(() => builder.querySelector("[data-builder-step='5']")?.scrollIntoView({ behavior: "smooth", block: "center" }));
+  }
+
+  function renderConnectionOptions() {
+    const grid = builder.querySelector("#connection-grid");
+    const trialOnly = state.plan.months === 1;
+    const trialNote = builder.querySelector("#connection-trial-note");
+    trialNote.hidden = !trialOnly;
+    grid.innerHTML = connectionOptions.map(option => {
+      const disabled = trialOnly && option.count !== 1;
+      const price = connectionPrices[state.plan.months]?.[option.count] ?? 0;
+      return `<button class="connection-option${state.connections === option.count ? " is-selected" : ""}" type="button" data-connections="${option.count}" aria-pressed="${state.connections === option.count}"${disabled ? " disabled" : ""}>
+        <span class="connection-option-check" aria-hidden="true">✓</span>
+        <span class="connection-option-copy"><strong>${option.label}</strong><span>${option.description}</span></span>
+        <span class="connection-option-price">${money(price)}</span>
+      </button>`;
+    }).join("");
+    grid.querySelectorAll("[data-connections]").forEach(button => button.addEventListener("click", () => {
+      state.connections = Number(button.dataset.connections);
+      renderConnectionOptions();
+      renderSummary();
+    }));
   }
 
   function renderPlanCards() {
@@ -256,7 +290,9 @@
       </button>`).join("");
     grid.querySelectorAll("[data-plan]").forEach(button => button.addEventListener("click", () => {
       state.plan = plans.find(plan => plan.months === Number(button.dataset.plan));
+      if (state.plan.months === 1) state.connections = 1;
       renderPlanCards();
+      renderConnectionOptions();
       renderSummary();
     }));
   }
@@ -338,7 +374,9 @@
     const preferences = selectedPreferenceLines();
     const countries = [...state.countries];
     return `
-      <div class="summary-plan"><span>${state.plan.label} Plan</span><strong>${money(planCost())}</strong></div>
+      <div class="summary-plan"><span>Plan</span><strong>${state.plan.label}</strong></div>
+      <div class="summary-plan"><span>Connections</span><strong>${state.connections} ${state.connections === 1 ? "Connection" : "Connections"}</strong></div>
+      <div class="summary-plan"><span>Package price</span><strong>${money(planCost())}</strong></div>
       <div class="summary-block"><h4>Included at no extra cost</h4><ul>${includedCountries.map(country => `<li>${country}</li>`).join("")}</ul></div>
       <div class="summary-block"><h4>Additional countries <span>${money(countryCost())}</span></h4>${countries.length ? `<ul>${countries.map(country => `<li>${escapeHtml(country)} <span>+$20</span></li>`).join("")}</ul>` : '<p class="summary-empty">No additional countries selected</p>'}</div>
       <div class="summary-block"><h4>Entertainment</h4>${preferences.length ? `<ul>${preferences.map(preference => `<li>${escapeHtml(preference)}</li>`).join("")}</ul>` : '<p class="summary-empty">Choose your favourites to personalise your selection</p>'}</div>
@@ -359,7 +397,7 @@
     mobileTotal.textContent = money(totalCost());
     builder.querySelectorAll("[data-current-total]").forEach(node => { node.textContent = money(totalCost()); });
     updateTrialLinks();
-    const actionLabel = state.step === 4 ? "Order via WhatsApp" : `Continue — $${totalCost()}`;
+    const actionLabel = state.step === 5 ? "Order via WhatsApp" : `Continue — $${totalCost()}`;
     builder.querySelectorAll("[data-builder-action]").forEach(button => { button.textContent = actionLabel; });
     const mobileAction = builder.querySelector("#builder-mobile-action");
     if (mobileAction) mobileAction.setAttribute("aria-label", actionLabel);
@@ -373,7 +411,7 @@
   }
 
   function setStep(step) {
-    state.step = Math.max(1, Math.min(4, step));
+    state.step = Math.max(1, Math.min(5, step));
     builder.querySelectorAll("[data-builder-step]").forEach(panel => { panel.hidden = Number(panel.dataset.builderStep) !== state.step; });
     builder.querySelectorAll("[data-step-indicator]").forEach(indicator => {
       const itemStep = Number(indicator.dataset.stepIndicator);
@@ -394,12 +432,14 @@
     const optionalCountries = [...state.countries];
     return [
       "Hi StreamlyTV, I'd like to place an order.", "",
-      "PLAN:", `${state.plan.label} — ${money(planCost())}`, "",
-      "ENTERTAINMENT PREFERENCES:", ...(preferences.length ? preferences.map(value => `• ${value}`) : ["• No specific preferences selected"]), "",
-      "INCLUDED COUNTRIES:", ...includedCountries.map(country => `• ${country.replace(/^\S+\s/, "")}`), "",
-      "ADDITIONAL COUNTRIES:", ...(optionalCountries.length ? optionalCountries.map(country => `• ${country} — $20`) : ["• None"]), "",
-      "COUNTRY ADD-ONS:", `${money(countryCost())}`, "",
-      "TOTAL:", money(totalCost()), "",
+      "Plan:", state.plan.label, "",
+      "Connections:", `${state.connections} ${state.connections === 1 ? "Connection" : "Connections"}`, "",
+      "Entertainment Preferences:", ...(preferences.length ? preferences : ["None selected"]), "",
+      "Included Countries:", ...includedCountries.map(country => country.replace(/^\S+\s/, "")), "",
+      "Additional Countries:", ...(optionalCountries.length ? optionalCountries.map(country => `${country} — $20`) : ["None"]), "",
+      "Package Price:", `$${planCost()}`, "",
+      "Country Add-ons:", `$${countryCost()}`, "",
+      "TOTAL:", `$${totalCost()} AUD`, "",
       "Please help me set up my StreamlyTV account."
     ].join("\n");
   }
@@ -417,6 +457,7 @@
   }
 
   renderPlanCards();
+  renderConnectionOptions();
   renderPreferences();
   renderAdvanced();
   renderCountries();
@@ -438,7 +479,7 @@
       else state.advanced.add(card.advanced);
       renderAdvanced();
       builder.querySelector(".advanced-details").open = true;
-      setStep(2);
+      setStep(3);
       updateDiscoveryCardStates();
       showDiscoveryFeedback(selected ? "Removed from your preferences." : "Added to your preferences.");
       return;
@@ -486,7 +527,7 @@
   builder.querySelectorAll("[data-step-next]").forEach(button => button.addEventListener("click", () => setStep(state.step + 1)));
   builder.querySelectorAll("[data-step-prev]").forEach(button => button.addEventListener("click", () => setStep(state.step - 1)));
   builder.querySelectorAll("[data-builder-action]").forEach(button => button.addEventListener("click", () => {
-    if (state.step < 4) setStep(state.step + 1);
+    if (state.step < 5) setStep(state.step + 1);
     else goToWhatsApp(orderMessage());
   }));
   builder.querySelectorAll("[data-trial-link]").forEach(link => {
@@ -500,6 +541,8 @@
   window.StreamlyTVPackageBuilder = {
     getSelections: () => ({
       plan: state.plan,
+      connections: state.connections,
+      packagePrice: planCost(),
       categories: selectedPreferenceLines(),
       includedCountries: [...includedCountries],
       additionalCountries: [...state.countries],
