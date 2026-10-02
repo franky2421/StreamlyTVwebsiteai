@@ -1,6 +1,5 @@
 (() => {
   const whatsappNumber = "61410350514";
-  const preferenceStorageKey = "streamlytv-explore-preferences-v1";
   const currentPage = document.body.dataset.page || "home";
   const navigation = [
     ["Home", "/", "home"],
@@ -160,88 +159,99 @@
     renderMessages();
   }
 
-  function readExplorePreferences() {
-    try {
-      const saved = JSON.parse(localStorage.getItem(preferenceStorageKey) || "{}");
-      return {
-        categories: new Set(Array.isArray(saved.categories) ? saved.categories : []),
-        subpreferences: new Set(Array.isArray(saved.subpreferences) ? saved.subpreferences : []),
-        advanced: new Set(Array.isArray(saved.advanced) ? saved.advanced : []),
-        countries: Array.isArray(saved.countries) ? saved.countries : [],
-      };
-    } catch {
-      return { categories: new Set(), subpreferences: new Set(), advanced: new Set(), countries: [] };
-    }
-  }
-
   function initExplore() {
     const rowsNode = document.getElementById("explore-rows");
     if (!rowsNode) return;
     const shelves = [
       { title: "Live Sports", id: "live-sports", cards: [
-        { title: "Football / Soccer", image: "assets/genre-sports.png", category: "sports", option: "Football / Soccer" },
-        { title: "UFC & Combat Sports", image: "assets/ufc-hero.png", category: "sports", option: "UFC / Combat Sports" },
-        { title: "NRL & Rugby", image: "assets/genre-sports.png", category: "sports", option: "NRL & Rugby" },
-        { title: "Cricket", image: "assets/genre-sports.png", category: "sports", option: "Cricket" },
-        { title: "Tennis", image: "assets/genre-sports.png", category: "sports", option: "Tennis" },
-        { title: "Live PPV Events", image: "assets/ufc-hero.png", category: "sports", option: "Live PPV Events" },
-        { title: "Champions League", image: "assets/genre-sports.png", category: "sports", option: "Champions League" },
-        { title: "beIN Sports", image: "assets/genre-world.png", category: "sports", option: "beIN Sports" },
+        { title: "Football / Soccer", image: "assets/genre-sports.png", category: "sports" },
+        { title: "UFC & Combat Sports", image: "assets/ufc-hero.png", category: "sports" },
+        { title: "NRL & Rugby", image: "assets/genre-sports.png", category: "sports" },
+        { title: "Cricket", image: "assets/genre-sports.png", category: "sports" },
+        { title: "Tennis", image: "assets/genre-sports.png", category: "sports" },
+        { title: "Live PPV Events", image: "assets/ufc-hero.png", category: "sports" },
+        { title: "Champions League", image: "assets/genre-sports.png", category: "sports" },
+        { title: "beIN Sports", image: "assets/genre-world.png", category: "sports" },
       ] },
       { title: "Movies & Series", id: "movies-series", cards: [
-        { title: "Latest Movies", image: "assets/genre-films.png", category: "movies", option: "Latest Movies" },
-        { title: "Popular Series", image: "assets/genre-films.png", category: "movies", option: "Popular Series" },
-        { title: "New Releases", image: "assets/genre-films.png", category: "movies", option: "New Releases" },
-        { title: "4K & UHD", image: "assets/genre-films.png", advanced: "4K / UHD" },
-        { title: "Dolby Audio", image: "assets/genre-films.png", category: "movies", option: "Dolby Audio" },
-        { title: "Cinema Releases", image: "assets/genre-films.png", category: "movies", option: "Cinema Releases" },
-        { title: "Box Office", image: "assets/genre-films.png", category: "movies", option: "Box Office" },
-        { title: "International Movies", image: "assets/genre-world.png", category: "movies", option: "International Movies" },
+        { title: "Latest Movies", image: "assets/genre-films.png", category: "movies" },
+        { title: "Popular Series", image: "assets/genre-films.png", category: "movies" },
+        { title: "New Releases", image: "assets/genre-films.png", category: "movies" },
+        { title: "Cinema Releases", image: "assets/genre-films.png", category: "movies" },
+        { title: "Box Office", image: "assets/genre-films.png", category: "movies" },
+        { title: "International Movies", image: "assets/genre-world.png", category: "movies" },
       ] },
       { title: "Kids & Family", id: "kids-family", cards: [
-        { title: "Kids Channels", image: "assets/genre-family.png", category: "family", option: "Kids Channels" },
-        { title: "Kids Movies", image: "assets/genre-family.png", category: "family", option: "Kids Movies" },
-        { title: "Cartoons", image: "assets/genre-family.png", category: "family", option: "Cartoons" },
-        { title: "Family Entertainment", image: "assets/genre-family.png", category: "family", option: "Family Entertainment" },
-        { title: "Kids Series", image: "assets/genre-family.png", category: "family", option: "Kids Series" },
-        { title: "Anime for Kids", image: "assets/genre-family.png", category: "family", option: "Anime for Kids" },
+        { title: "Kids Channels", image: "assets/genre-family.png", category: "family" },
+        { title: "Kids Movies", image: "assets/genre-family.png", category: "family" },
+        { title: "Cartoons", image: "assets/genre-family.png", category: "family" },
+        { title: "Family Entertainment", image: "assets/genre-family.png", category: "family" },
+        { title: "Kids Series", image: "assets/genre-family.png", category: "family" },
+        { title: "Anime for Kids", image: "assets/genre-family.png", category: "family" },
       ] },
       { title: "Arabic Entertainment", id: "arabic-entertainment", cards: [
-        { title: "Arabic Movies", image: "assets/genre-arabic.png", category: "arabic", option: "Arabic Movies" },
-        { title: "Arabic Series", image: "assets/genre-arabic.png", category: "arabic", option: "Arabic Series" },
-        { title: "MBC", image: "assets/genre-arabic.png", category: "arabic", option: "MBC" },
-        { title: "Rotana & ART", image: "assets/genre-arabic.png", category: "arabic", option: "Rotana & ART" },
-        { title: "Arabic Drama", image: "assets/genre-arabic.png", category: "arabic", option: "Arabic Drama" },
-        { title: "Arabic Comedy", image: "assets/genre-arabic.png", category: "arabic", option: "Arabic Comedy" },
-        { title: "Arabic Cinema", image: "assets/genre-arabic.png", category: "arabic", option: "Arabic Cinema" },
-        { title: "Ramadan Content", image: "assets/genre-arabic.png", category: "arabic", option: "Ramadan Content" },
+        { title: "Arabic Movies", image: "assets/genre-arabic.png", category: "arabic" },
+        { title: "Arabic Series", image: "assets/genre-arabic.png", category: "arabic" },
+        { title: "MBC", image: "assets/genre-arabic.png", category: "arabic" },
+        { title: "Rotana & ART", image: "assets/genre-arabic.png", category: "arabic" },
+        { title: "Arabic Drama", image: "assets/genre-arabic.png", category: "arabic" },
+        { title: "Arabic Comedy", image: "assets/genre-arabic.png", category: "arabic" },
+        { title: "Arabic Cinema", image: "assets/genre-arabic.png", category: "arabic" },
+        { title: "Ramadan Content", image: "assets/genre-arabic.png", category: "arabic" },
       ] },
       { title: "International", id: "international", cards: [
-        { title: "Australia", image: "assets/genre-world.png", advanced: "Australia", badge: "Included" },
-        { title: "United Kingdom", image: "assets/genre-world.png", advanced: "United Kingdom", badge: "Included" },
-        { title: "USA", image: "assets/genre-world.png", advanced: "USA", badge: "Included" },
-        { title: "New Zealand", image: "assets/genre-world.png", advanced: "New Zealand" },
-        { title: "Canada", image: "assets/genre-world.png", advanced: "Canada" },
-        { title: "Europe", image: "assets/genre-world.png", advanced: "Europe" },
-        { title: "Asia", image: "assets/genre-world.png", advanced: "Asia" },
-        { title: "Middle East", image: "assets/genre-arabic.png", advanced: "Middle East" },
+        { title: "Australia", image: "assets/genre-world.png", badge: "Included" },
+        { title: "United Kingdom", image: "assets/genre-world.png", badge: "Included" },
+        { title: "USA", image: "assets/genre-world.png", badge: "Included" },
+        { title: "New Zealand", image: "assets/genre-world.png", badge: "Optional Add-On" },
+        { title: "Canada", image: "assets/genre-world.png", badge: "Optional Add-On" },
+        { title: "Europe", image: "assets/genre-world.png", badge: "Optional Add-On" },
+        { title: "Asia", image: "assets/genre-world.png", badge: "Optional Add-On" },
+        { title: "Middle East", image: "assets/genre-arabic.png", badge: "Optional Add-On" },
       ] },
-      { title: "More to Explore", id: "more-to-explore", cards: [
-        { title: "Documentaries", image: "assets/genre-documentary.png", category: "documentaries", option: "Documentaries" },
-        { title: "News", image: "assets/genre-world.png", category: "news", option: "International News" },
-        { title: "Music & Radio", image: "assets/genre-world.png", category: "music", option: "Music Channels" },
-        { title: "Islamic", image: "assets/genre-arabic.png", category: "islamic", option: "Islamic Channels" },
-        { title: "Comedy & Theatre", image: "assets/genre-films.png", category: "comedy", option: "Comedy" },
-        { title: "Anime", image: "assets/genre-family.png", category: "anime", option: "Anime Series" },
-        { title: "Turkish", image: "assets/genre-world.png", category: "turkish", option: "Turkish Series" },
-        { title: "Asian Entertainment", image: "assets/genre-world.png", category: "asian", option: "Asian Series" },
-        { title: "Indian Entertainment", image: "assets/genre-world.png", category: "indian", option: "Indian Series" },
+      { title: "Documentaries", id: "documentaries", cards: [
+        { title: "Documentaries", image: "assets/genre-documentary.png", category: "documentaries" },
+      ] },
+      { title: "News", id: "news", cards: [
+        { title: "International News", image: "assets/genre-world.png", category: "news" },
+        { title: "Arabic News", image: "assets/genre-arabic.png", category: "news" },
+        { title: "Local News", image: "assets/genre-world.png", category: "news" },
+      ] },
+      { title: "Music & Radio", id: "music-radio", cards: [
+        { title: "Music Channels", image: "assets/genre-world.png", category: "music" },
+        { title: "Arabic Music", image: "assets/genre-arabic.png", category: "music" },
+        { title: "Radio & Podcasts", image: "assets/genre-world.png", category: "music" },
+      ] },
+      { title: "Islamic", id: "islamic", cards: [
+        { title: "Quran & Islamic Channels", image: "assets/genre-arabic.png", category: "islamic" },
+        { title: "Islamic Programs", image: "assets/genre-arabic.png", category: "islamic" },
+        { title: "Nasheeds", image: "assets/genre-arabic.png", category: "islamic" },
+      ] },
+      { title: "Anime", id: "anime", cards: [
+        { title: "Anime Movies & Series", image: "assets/genre-family.png", category: "anime" },
+        { title: "Dubbed & Subtitled Anime", image: "assets/genre-family.png", category: "anime" },
+      ] },
+      { title: "Turkish", id: "turkish", cards: [
+        { title: "Turkish Movies", image: "assets/genre-world.png", category: "turkish" },
+        { title: "Turkish Series", image: "assets/genre-world.png", category: "turkish" },
+        { title: "Dubbed & Subtitled", image: "assets/genre-world.png", category: "turkish" },
+      ] },
+      { title: "Asian Entertainment", id: "asian-entertainment", cards: [
+        { title: "Asian Movies & Series", image: "assets/genre-world.png", category: "asian" },
+        { title: "Korean, Japanese & Chinese", image: "assets/genre-world.png", category: "asian" },
+      ] },
+      { title: "Indian Entertainment", id: "indian-entertainment", cards: [
+        { title: "Indian Movies & Series", image: "assets/genre-world.png", category: "indian" },
+        { title: "Hindi Content", image: "assets/genre-world.png", category: "indian" },
+      ] },
+      { title: "4K / UHD", id: "4k-uhd", cards: [
+        { title: "4K UHD", image: "assets/genre-films.png" },
+        { title: "Dolby Audio", image: "assets/genre-films.png" },
+        { title: "Dolby Vision", image: "assets/genre-films.png" },
+        { title: "Multi-Subtitle", image: "assets/genre-world.png" },
+        { title: "Premium Sports Quality", image: "assets/genre-sports.png" },
       ] },
     ];
-
-    const selections = readExplorePreferences();
-    const getKey = card => card.advanced ? `advanced::${card.advanced}` : `${card.category}::${card.option}`;
-    const isSelected = card => card.advanced ? selections.advanced.has(card.advanced) : selections.subpreferences.has(`${card.category}::${card.option}`);
     const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]);
 
     rowsNode.innerHTML = shelves.map((shelf, shelfIndex) => `
@@ -249,50 +259,14 @@
         <h2 id="explore-title-${shelfIndex + 1}">${escapeHtml(shelf.title)}</h2>
         <div class="explore-track">
           ${shelf.cards.map(card => {
-            const selected = isSelected(card);
-            const action = selected ? "Added" : "Add to my preferences";
+            const href = card.category ? `/build-package?category=${encodeURIComponent(card.category)}` : "/build-package";
             const badge = card.badge ? `<span class="shelf-card-badge${card.badge === "Included" ? " is-included" : ""}">${escapeHtml(card.badge)}</span>` : "";
-            return `<button class="shelf-card${selected ? " is-selected" : ""}" type="button" style="--shelf-image:url('${card.image}')" data-explore-card="${escapeHtml(getKey(card))}" aria-pressed="${selected}" aria-label="${escapeHtml(`${card.title}: ${action}`)}">
-              ${badge}<span class="shelf-card-content"><span class="shelf-card-title">${escapeHtml(card.title)}</span><span class="shelf-card-action">${action}</span></span><span class="shelf-card-check" aria-hidden="true">${selected ? "✓" : ""}</span>
-            </button>`;
+            return `<a class="shelf-card" href="${escapeHtml(href)}" style="--shelf-image:url('${card.image}')" aria-label="${escapeHtml(`${card.title}: Choose in Package`)}">
+              ${badge}<span class="shelf-card-content"><span class="shelf-card-title">${escapeHtml(card.title)}</span><span class="shelf-card-action">Choose in Package</span></span>
+            </a>`;
           }).join("")}
         </div>
       </section>`).join("");
-
-    rowsNode.addEventListener("click", event => {
-      const button = event.target.closest("[data-explore-card]");
-      if (!button) return;
-      const [kind, value] = button.dataset.exploreCard.split("::");
-      if (kind === "advanced") {
-        if (selections.advanced.has(value)) selections.advanced.delete(value);
-        else selections.advanced.add(value);
-      } else {
-        const key = `${kind}::${value}`;
-        if (selections.subpreferences.has(key)) {
-          selections.subpreferences.delete(key);
-          if (![...selections.subpreferences].some(item => item.startsWith(`${kind}::`))) selections.categories.delete(kind);
-        } else {
-          selections.categories.add(kind);
-          selections.subpreferences.add(key);
-        }
-      }
-      try {
-        localStorage.setItem(preferenceStorageKey, JSON.stringify({
-          categories: [...selections.categories],
-          subpreferences: [...selections.subpreferences],
-          advanced: [...selections.advanced],
-          countries: selections.countries,
-        }));
-      } catch {}
-      const selected = isSelected({ advanced: kind === "advanced" ? value : undefined, category: kind, option: value });
-      button.classList.toggle("is-selected", selected);
-      button.setAttribute("aria-pressed", String(selected));
-      button.setAttribute("aria-label", `${button.querySelector(".shelf-card-title").textContent}: ${selected ? "Added" : "Add to my preferences"}`);
-      button.querySelector(".shelf-card-action").textContent = selected ? "Added" : "Add to my preferences";
-      button.querySelector(".shelf-card-check").textContent = selected ? "✓" : "";
-      const status = document.getElementById("explore-status");
-      if (status) status.textContent = selected ? "Added to your preferences. Your choices will be ready in Build Package." : "Removed from your preferences.";
-    });
 
     if (window.location.hash) {
       requestAnimationFrame(() => document.getElementById(window.location.hash.slice(1))?.scrollIntoView({ block: "start" }));
