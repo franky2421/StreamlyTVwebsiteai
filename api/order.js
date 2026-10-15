@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   const data = req.body || {};
   const summary = buildSummary(data);
   const whatsappNumber = "61410350514";
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(summary)}`;
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(summary)}`;
   let emailed = false;
 
   try {

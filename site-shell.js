@@ -1,5 +1,12 @@
 (() => {
   const whatsappNumber = "61410350514";
+  const whatsappUrl = message => {
+    const baseUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}`;
+    return message ? `${baseUrl}&text=${encodeURIComponent(message)}` : baseUrl;
+  };
+  document.querySelectorAll("[data-whatsapp-message]").forEach(link => {
+    link.href = whatsappUrl(link.dataset.whatsappMessage);
+  });
   const currentPage = document.body.dataset.page || "home";
   const navigation = [
     ["Home", "/", "home"],
@@ -48,7 +55,7 @@
     footerMount.innerHTML = `
       <footer class="site-footer">
         <div class="site-footer-inner">
-          <span>StreamlyTV · WhatsApp <a href="https://wa.me/${whatsappNumber}" target="_blank" rel="noopener noreferrer">0410 350 514</a></span>
+          <span>StreamlyTV · WhatsApp <a href="${whatsappUrl()}" target="_blank" rel="noopener noreferrer">0410 350 514</a></span>
           <nav class="site-footer-links" aria-label="Policies">
             <a href="/privacy.html">Privacy Policy</a>
             <a href="/terms.html">Terms &amp; Conditions</a>
@@ -78,7 +85,8 @@
           </form>
         </section>
         <button class="support-launcher" id="support-launcher" type="button" aria-expanded="false" aria-controls="support-panel">StreamlyTV Support</button>
-      </div>`;
+      </div>
+      <a class="site-whatsapp-float" href="${whatsappUrl()}" target="_blank" rel="noopener noreferrer" aria-label="Chat with StreamlyTV on WhatsApp">WhatsApp</a>`;
 
     const panel = supportMount.querySelector("#support-panel");
     const launcher = supportMount.querySelector("#support-launcher");
@@ -96,7 +104,7 @@
         bubble.textContent = message.content;
         if (message.contactButton) {
           const link = document.createElement("a");
-          link.href = `https://wa.me/${whatsappNumber}`;
+          link.href = whatsappUrl();
           link.target = "_blank";
           link.rel = "noopener noreferrer";
           link.textContent = "WhatsApp StreamlyTV";

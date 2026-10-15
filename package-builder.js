@@ -481,7 +481,7 @@
   }
 
   function whatsappUrl(message) {
-    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    return `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
   }
 
   function updateTrialLinks() {
