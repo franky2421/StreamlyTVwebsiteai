@@ -17,9 +17,9 @@ a { color: inherit; }
 button { color: inherit; }
 .site-header { position: relative; border-bottom: 1px solid var(--site-line); background: rgba(7, 8, 11, .96); backdrop-filter: blur(14px); }
 #site-header { position: sticky; top: 0; z-index: 100; }
-.site-nav-wrap { display: flex; width: min(1280px, calc(100% - 48px)); min-height: 76px; align-items: center; justify-content: space-between; gap: 24px; margin: auto; }
+.site-nav-wrap { display: flex; width: min(1280px, calc(100% - 48px)); min-height: 92px; align-items: center; justify-content: space-between; gap: 24px; margin: auto; }
 .site-brand { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 11px; color: var(--site-white); text-decoration: none; }
-.site-brand img { display: block; width: 43px; height: 43px; object-fit: contain; }
+.site-brand img { display: block; width: 60px; height: 60px; object-fit: contain; }
 .site-brand span { font-size: 17px; font-weight: 850; letter-spacing: .04em; }
 .site-nav { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 28px); }
 .site-nav a { color: #d8d6d4; font-size: 13px; font-weight: 700; text-decoration: none; transition: color .18s ease; }
@@ -113,8 +113,8 @@ button { color: inherit; }
 .support-form input:focus { border-color: var(--site-gold); }
 .support-form button { min-width: 58px; border: 0; border-radius: 4px; background: var(--site-red); color: var(--site-white); font-size: 12px; font-weight: 800; cursor: pointer; }
 @media (max-width: 760px) {
-  .site-nav-wrap { width: min(100% - 32px, 1180px); min-height: 68px; }
-  .site-brand img { width: 39px; height: 39px; }
+  .site-nav-wrap { width: min(100% - 32px, 1180px); min-height: 76px; }
+  .site-brand img { width: 46px; height: 46px; }
   .site-brand span { font-size: 15px; }
   .site-menu-toggle { display: block; }
   .site-nav { position: absolute; top: calc(100% + 1px); right: 0; left: 0; display: none; align-items: stretch; flex-direction: column; gap: 0; padding: 8px 16px 15px; border-bottom: 1px solid var(--site-line); background: #090a0d; }
@@ -301,7 +301,7 @@ button { color: inherit; }
 @media (max-width: 760px) { .support-form { padding: 10px; } }
 @media (max-width: 760px) { .support-form input { font-size: 16px; } }
 @media (max-width: 760px) { .explore-row h2 { letter-spacing: .025em; } }
-@media (max-width: 760px) { .site-brand img { flex: 0 0 39px; } }
+@media (max-width: 760px) { .site-brand img { flex: 0 0 46px; } }
 @media (max-width: 760px) { .support-message.user { align-self: flex-end; } }
 @media (max-width: 760px) { .popular-card::before { background-position: center; } }
 @media (max-width: 760px) { .site-skip-link { font-size: 13px; } }
@@ -498,7 +498,7 @@ button { color: inherit; }
 @media (max-width: 760px) { .site-nav .site-nav-cta:active { transform: scale(.99); } }
 @media (max-width: 760px) { .site-footer-links { align-items: center; } }
 @media (max-width: 760px) { .site-footer-inner { width: min(100% - 32px, 1180px); } }
-@media (max-width: 760px) { .site-header .site-nav-wrap { min-height: 68px; } }
+@media (max-width: 760px) { .site-header .site-nav-wrap { min-height: 76px; } }
 @media (max-width: 760px) { .site-nav a { text-decoration: none; } }
 @media (max-width: 760px) { .site-nav .site-nav-cta { border-radius: 5px; } }
 @media (max-width: 760px) { .support-launcher { border-radius: 5px; } }
@@ -846,9 +846,9 @@ button { color: inherit; }
 @media (max-width: 760px) { .hero.cinematic .stat strong { font-size: 17px; } }
 @media (max-width: 760px) { .hero.cinematic .stat span { font-size: 11px; } }
 @media (max-width: 760px) { .popular-card span { font-size: 15px; } }
-@media (max-width: 760px) { .site-nav-wrap { min-height: 68px; } }
+@media (max-width: 760px) { .site-nav-wrap { min-height: 76px; } }
 @media (max-width: 760px) { .site-nav-wrap { width: calc(100% - 32px); } }
-@media (max-width: 760px) { .site-brand img { width: 39px; height: 39px; } }
+@media (max-width: 760px) { .site-brand img { width: 46px; height: 46px; } }
 @media (max-width: 760px) { .site-menu-toggle { width: 44px; height: 44px; } }
 @media (max-width: 760px) { .site-menu-toggle::before, .site-menu-toggle::after, .site-menu-toggle span { height: 2px; } }
 @media (max-width: 760px) { .support-launcher { min-height: 44px; } }
