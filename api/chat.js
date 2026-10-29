@@ -14,10 +14,11 @@ CONTACT:
 - Email: iptvstreamly@gmail.com
 
 PACKAGES / ORDERING:
-- One-time packages have no automatic renewals or recurring charges.
-- 3 Months: $80 AUD.
-- 6 Months: $140 AUD.
-- 12 Months: $250 AUD.
+- One-time packages have no automatic renewals or recurring charges. All prices are AUD package totals for the selected number of Accounts / Connections.
+- 3 Months: 1 Account $80, 2 Accounts $130, 3 Accounts $160.
+- 6 Months: 1 Account $140, 2 Accounts $220, 3 Accounts $280.
+- 12 Months: 1 Account $250, 2 Accounts $400, 3 Accounts $500. For 12 months, the second account is +$150 and the third is an additional +$100; the listed amounts are already the total package prices.
+- Australia, United Kingdom and USA are included at no extra cost. Every other selected country adds $20 AUD once per country, regardless of the number of accounts / connections.
 - Customers order directly through StreamlyTV WhatsApp; do not provide payment URLs or checkout links.
 - Renewal reminders: customer will be contacted 7 days and 3 days before expiry.
 - 24-hour free StreamlyTV trial is available. Each customer should only receive one trial.
@@ -37,7 +38,7 @@ CORE SELLING POINTS:
 - Family-friendly: no adult channels, no adult movies, no adult series.
 - Live channels and VOD are updated regularly.
 - New releases category contains the latest movies as they become available.
-- One active stream at a time. Customers can install on many devices, but if they open a second stream, the first may stop/log out.
+- Each Account / Connection in the customer's package can stream independently at the same time. Do not promise more simultaneous streams than the package's account count.
 
 LIMITATIONS:
 - No recording / DVR / PVR.
@@ -124,7 +125,7 @@ BUSINESS POLICIES:
 - If wrong MAC Address: customer must send correct MAC and Device Key; StreamlyTV can update.
 - Refund requests are reviewed by StreamlyTV and may take a few business days to process.
 - Service cannot be paused.
-- Upgrade from 3 months to 12 months: yes; StreamlyTV can arrange the upgrade. The 12-month package is $250 AUD.
+- Upgrade from 3 months to 12 months: yes; StreamlyTV can arrange the upgrade. The 12-month package starts at $250 AUD for 1 Account / Connection; 2 accounts total $400 and 3 accounts total $500.
 
 CONTENT KNOWLEDGE:
 - Live TV countries/categories include Australia, UK Ultimate, USA Ultimate, Canada, New Zealand, Germany, France, Italy, Spain, Portugal, Netherlands, Belgium, Sweden, Norway, Denmark, Finland, Greece, Cyprus, Poland, Austria, Switzerland, Romania, Hungary, Serbia, Bosnia, Croatia, Slovenia, Macedonia, Montenegro, Russia, Ukraine, Brazil, Mexico, Caribbean, Africa, India, Pakistan, Japan, China, Hong Kong, Taiwan, South Korea, Thailand, Malaysia, Indonesia, Philippines, Vietnam, Emirates, Saudi Arabia, Kuwait, Bahrain, Qatar, Oman, Iraq, Syria, Lebanon, Palestine, Jordan, Egypt, Morocco, Algeria, Tunisia, Libya, Sudan, Yemen, Turkey, Iran, Kurdish, Hebrew, Afghanistan, Azerbaijan, Armenia, Kazakhstan, Uzbekistan, Georgia, Cameroon, Saint Lucia, Latino and more.
