@@ -32,7 +32,7 @@
           <div class="builder-main">
             <ol class="builder-steps" aria-label="Package builder steps">
               <li><span class="step-indicator is-active" data-step-indicator="1" aria-current="step"><span class="step-number">1</span><span>Access</span></span></li>
-              <li><span class="step-indicator" data-step-indicator="2" aria-current="false"><span class="step-number">2</span><span>Connections</span></span></li>
+              <li><span class="step-indicator" data-step-indicator="2" aria-current="false"><span class="step-number">2</span><span>Accounts / Connections</span></span></li>
               <li><span class="step-indicator" data-step-indicator="3" aria-current="false"><span class="step-number">3</span><span>Entertainment</span></span></li>
               <li><span class="step-indicator" data-step-indicator="4" aria-current="false"><span class="step-number">4</span><span>Countries</span></span></li>
               <li><span class="step-indicator" data-step-indicator="5" aria-current="false"><span class="step-number">5</span><span>Review</span></span></li>
@@ -41,14 +41,14 @@
             <div class="builder-panel" data-builder-step="1">
               <div class="builder-panel-heading"><h3>Choose Access</h3><p>Every plan is a one-time package. Choose the duration that suits you.</p></div>
               <div class="builder-plan-grid" id="builder-plan-grid"></div>
-              <p class="builder-plan-note">You can change your selection at any time before sending your WhatsApp order.</p>
+              <p class="builder-plan-note">Prices shown start at 1 Account / Connection. Choose Accounts / Connections to see your full package price. You can change your selection before sending your WhatsApp order.</p>
               <div class="builder-actions"><span></span><button class="builder-action" type="button" data-step-next>Continue</button></div>
             </div>
 
             <div class="builder-panel" data-builder-step="2" hidden>
-              <div class="builder-panel-heading"><h3>How Many Connections?</h3><p>Each connection can stream independently at the same time on a TV, Firestick, phone, tablet or other supported device.</p></div>
-              <div class="connection-grid" id="connection-grid" role="group" aria-label="Choose the number of simultaneous connections"></div>
-              <p class="connection-trial-note" id="connection-trial-note" hidden>The 24-hour free trial includes one connection. Choose a 3-, 6- or 12-month plan for additional connections.</p>
+              <div class="builder-panel-heading"><h3>Accounts / Connections</h3><p>Choose how many accounts you need. Each account can stream independently at the same time on a TV, Firestick, phone, tablet or other supported device.</p></div>
+              <div class="connection-grid" id="connection-grid" role="group" aria-label="Choose the number of accounts / connections that can stream simultaneously"></div>
+              <p class="connection-trial-note" id="connection-trial-note" hidden>The 24-hour free trial includes one Account / Connection. Choose a 3-, 6- or 12-month plan for additional Accounts / Connections.</p>
               <div class="builder-actions"><button class="builder-secondary" type="button" data-step-prev>Back</button><button class="builder-action" type="button" data-step-next>Continue</button></div>
             </div>
 
@@ -61,11 +61,11 @@
             </div>
 
             <div class="builder-panel" data-builder-step="4" hidden>
-              <div class="builder-panel-heading"><h3>Choose Countries</h3><p>Australia, United Kingdom and USA are included with every package. Add any others for $20 AUD each.</p></div>
+              <div class="builder-panel-heading"><h3>Choose Countries</h3><p>Australia, United Kingdom and USA are included with every package. Add any other country for $20 AUD each, charged once per country regardless of accounts / connections.</p></div>
               <div class="country-included"><h4>Included at no extra cost</h4><p>Already part of every StreamlyTV package. These are included and won&apos;t change your total.</p><div class="included-country-list"><span class="included-country">✓ 🇦🇺 Australia <strong>INCLUDED</strong></span><span class="included-country">✓ 🇬🇧 United Kingdom <strong>INCLUDED</strong></span><span class="included-country">✓ 🇺🇸 USA <strong>INCLUDED</strong></span></div></div>
               <div class="country-controls"><label class="country-search-wrap"><span class="sr-only">Search additional countries</span><input id="country-search" type="search" placeholder="Search countries..." autocomplete="off"></label><button class="view-countries" type="button" id="view-all-countries">View All Countries</button></div>
               <div class="country-grid" id="country-grid" aria-live="polite"></div>
-              <p class="countries-footnote">Each additional country is +$20 AUD. Your total updates instantly. You can choose more than one.</p>
+              <p class="countries-footnote">Each additional country is +$20 AUD, charged once per selected country regardless of accounts / connections. Your total updates instantly.</p>
               <div class="builder-actions"><button class="builder-secondary" type="button" data-step-prev hidden>Back</button><button class="builder-action" type="button" data-step-next>Review Package</button></div>
             </div>
 
@@ -86,11 +86,11 @@
           </aside>
         </div>
       </div>
-      <div class="builder-mobile-bar" aria-label="Current package total"><div class="builder-mobile-price"><span>Total</span><strong id="builder-mobile-total">$80 AUD</strong></div><button class="builder-reset" type="button" data-builder-reset>Start Over</button><button class="builder-action" type="button" id="builder-mobile-action" data-builder-action>Continue — $80</button></div>
+      <div class="builder-mobile-bar" aria-label="Current package total"><div class="builder-mobile-price"><span>Total</span><strong id="builder-mobile-total">$80 AUD</strong></div><button class="builder-reset" type="button" data-builder-reset>Start Over</button><button class="builder-action" type="button" id="builder-mobile-action" data-builder-action>Continue — $80 AUD</button></div>
       <dialog class="builder-reset-dialog" aria-labelledby="builder-reset-title" aria-describedby="builder-reset-message">
         <div class="builder-reset-content">
           <h2 id="builder-reset-title">Reset Package?</h2>
-          <p id="builder-reset-message">This clears your plan, connections, preferences, countries, and total.</p>
+          <p id="builder-reset-message">This clears your plan, Accounts / Connections, preferences, countries, and total.</p>
           <div class="builder-reset-actions">
             <button class="builder-secondary" type="button" data-builder-reset-cancel>Cancel</button>
             <button class="builder-action" type="button" data-builder-reset-confirm>Clear &amp; Start Again</button>

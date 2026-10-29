@@ -7,14 +7,14 @@
     { months: 1, label: "1-Day Free Trial", price: 0 },
   ];
   const connectionPrices = {
-    3: { 1: 80, 2: 120, 3: 150 },
-    6: { 1: 140, 2: 200, 3: 250 },
-    12: { 1: 250, 2: 350, 3: 450 },
+    3: { 1: 80, 2: 130, 3: 160 },
+    6: { 1: 140, 2: 220, 3: 280 },
+    12: { 1: 250, 2: 400, 3: 500 },
   };
   const connectionOptions = [
-    { count: 1, label: "1 Connection", description: "Included in your selected plan" },
-    { count: 2, label: "2 Connections", description: "Allows 2 devices to stream at the same time" },
-    { count: 3, label: "3 Connections", description: "Allows 3 devices to stream at the same time" },
+    { count: 1, label: "1 Account / Connection", description: "One account for your selected package" },
+    { count: 2, label: "2 Accounts / Connections", description: "Two accounts can stream independently at the same time" },
+    { count: 3, label: "3 Accounts / Connections", description: "Three accounts can stream independently at the same time" },
   ];
 
   const entertainment = [
@@ -385,10 +385,10 @@
     const countries = [...state.countries];
     return `
       <div class="summary-plan"><span>Plan</span><strong>${state.plan?.label || "No plan selected"}</strong></div>
-      <div class="summary-plan"><span>Connections</span><strong>${state.connections} ${state.connections === 1 ? "Connection" : "Connections"}</strong></div>
+      <div class="summary-plan"><span>Accounts / Connections</span><strong>${state.connections} ${state.connections === 1 ? "Account / Connection" : "Accounts / Connections"}</strong></div>
       <div class="summary-plan"><span>Package price</span><strong>${money(planCost())}</strong></div>
       <div class="summary-block"><h4>Included at no extra cost</h4><ul>${includedCountries.map(country => `<li>${country}</li>`).join("")}</ul></div>
-      <div class="summary-block"><h4>Additional countries <span>${money(countryCost())}</span></h4>${countries.length ? `<ul>${countries.map(country => `<li>${escapeHtml(country)} <span>+$20</span></li>`).join("")}</ul>` : '<p class="summary-empty">No additional countries selected</p>'}</div>
+      <div class="summary-block"><h4>Additional countries <span>${money(countryCost())}</span></h4>${countries.length ? `<ul>${countries.map(country => `<li>${escapeHtml(country)} <span>+$20 AUD</span></li>`).join("")}</ul>` : '<p class="summary-empty">No additional countries selected</p>'}</div>
       <div class="summary-block"><h4>Entertainment</h4>${preferences.length ? `<ul>${preferences.map(preference => `<li>${escapeHtml(preference)}</li>`).join("")}</ul>` : '<p class="summary-empty">Choose your favourites to personalise your selection</p>'}</div>
       <div class="summary-total"><span>Total</span><strong>${money(totalCost())}</strong><small>One-time package</small></div>`;
   }
@@ -409,7 +409,7 @@
     mobileTotal.textContent = money(totalCost());
     builder.querySelectorAll("[data-current-total]").forEach(node => { node.textContent = money(totalCost()); });
     updateTrialLinks();
-    const actionLabel = state.step === 5 ? "Order via WhatsApp" : `Continue — $${totalCost()}`;
+    const actionLabel = state.step === 5 ? "Order via WhatsApp" : `Continue — $${totalCost()} AUD`;
     builder.querySelectorAll("[data-builder-action]").forEach(button => {
       button.textContent = actionLabel;
       button.disabled = !state.plan;
@@ -469,12 +469,13 @@
     return [
       "Hi StreamlyTV, I'd like to place an order.", "",
       "Plan:", state.plan?.label || "No plan selected", "",
-      "Connections:", `${state.connections} ${state.connections === 1 ? "Connection" : "Connections"}`, "",
+      "Accounts / Connections:", `${state.connections} ${state.connections === 1 ? "Account / Connection" : "Accounts / Connections"} (can stream independently at the same time)`, "",
       "Entertainment Preferences:", ...(preferences.length ? preferences : ["None selected"]), "",
       "Included Countries:", ...includedCountries.map(country => country.replace(/^\S+\s/, "")), "",
-      "Additional Countries:", ...(optionalCountries.length ? optionalCountries.map(country => `${country} — $20`) : ["None"]), "",
-      "Package Price:", `$${planCost()}`, "",
-      "Country Add-ons:", `$${countryCost()}`, "",
+      "Additional Countries:", ...(optionalCountries.length ? optionalCountries.map(country => `${country} — $20 AUD`) : ["None"]),
+      "Country add-ons are charged once per country, regardless of Accounts / Connections.", "",
+      "Package Price:", money(planCost()), "",
+      "Country Add-ons:", money(countryCost()), "",
       "TOTAL:", `$${totalCost()} AUD`, "",
       "Please help me set up my StreamlyTV account."
     ].join("\n");
