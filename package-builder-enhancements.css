@@ -47,8 +47,9 @@ header { background: rgba(7, 8, 11, .97); border-bottom-color: rgba(255, 255, 25
   pointer-events: none;
 }
 .hero.cinematic .heroContent { position: relative; z-index: 1; width: min(100% - 48px, 1280px); padding: 110px 0 115px; margin: 0 auto; }
-.cinema-kicker { display: inline-flex; align-items: center; gap: 10px; color: #f5d6d8; font-size: 12px; font-weight: 750; letter-spacing: .2em; text-transform: uppercase; }
-.cinema-kicker::before { content: ""; width: 24px; height: 2px; background: var(--cinema-red-bright); }
+.hero-brand-lockup { display: flex; align-items: center; gap: 16px; color: #fff; }
+.hero-brand-lockup img { display: block; width: 50px; height: auto; object-fit: contain; }
+.hero-brand-lockup span { font-size: 28px; font-weight: 900; letter-spacing: .04em; line-height: 1; }
 .hero.cinematic h1 { max-width: 960px; margin: 22px 0 18px; font-size: clamp(52px, 7vw, 90px); line-height: .94; font-weight: 850; letter-spacing: -.055em; color: #fff; text-shadow: none; text-wrap: balance; }
 .hero.cinematic h1 span { display: block; color: #fff !important; }
 .hero.cinematic .hero-lede { max-width: 600px; margin: 0; color: #e1dedb; font-size: clamp(17px, 1.65vw, 21px); line-height: 1.58; text-shadow: none; }
@@ -256,6 +257,9 @@ header { background: rgba(7, 8, 11, .97); border-bottom-color: rgba(255, 255, 25
   .hero.cinematic { min-height: min(740px, calc(100svh - 68px)); }
   .hero.cinematic::before { background-image: linear-gradient(90deg, rgba(5,5,7,.9), rgba(5,5,7,.42)), linear-gradient(0deg, rgba(5,5,7,.98), rgba(5,5,7,.08) 68%, rgba(5,5,7,.48)), url("assets/genre-sports.png"); background-position: center, center, 61% center; }
   .hero.cinematic .heroContent { width: min(100% - 40px, 600px); padding: 82px 0 88px; }
+  .hero-brand-lockup { gap: 12px; }
+  .hero-brand-lockup img { width: 34px; }
+  .hero-brand-lockup span { font-size: 22px; }
   .hero.cinematic h1 { font-size: clamp(48px, 12vw, 74px); }
   .hero.cinematic .hero-lede { max-width: 480px; font-size: 17px; }
   .hero.cinematic .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 22px; margin-top: 30px; }

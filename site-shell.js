@@ -24,7 +24,7 @@
       <header class="site-header">
         <div class="site-nav-wrap">
           <a class="site-brand" href="/" aria-label="StreamlyTV home">
-            <img src="/assets/streamlytv-logo.png" alt="" width="43" height="43">
+            <img src="/assets/streamlytv-logo.png" alt="" width="50" height="75">
             <span>STREAMLYTV</span>
           </a>
           <button class="site-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav"><span></span></button>
