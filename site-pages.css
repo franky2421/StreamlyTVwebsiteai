@@ -73,13 +73,13 @@ button { color: inherit; }
 .explore-card.is-selected { border-color: var(--site-red-hot); box-shadow: inset 0 0 0 1px var(--site-red-hot); }
 .explore-card-content { display: flex; width: 100%; flex-direction: column; align-items: flex-start; gap: 10px; padding: 17px; }
 .explore-card-title { color: var(--site-white); font-size: 16px; font-weight: 790; line-height: 1.25; }
-.explore-card-action { display: inline-flex; min-height: 33px; align-items: center; gap: 7px; padding: 6px 10px; border: 1px solid rgba(255,255,255,.48); border-radius: 4px; background: rgba(7,8,11,.86); color: var(--site-white); font-size: 10px; font-weight: 790; letter-spacing: .02em; text-transform: uppercase; }
+.explore-card-action { display: inline-flex; min-height: 52px; align-items: center; gap: 7px; padding: 12px; border: 1px solid rgba(255,255,255,.48); border-radius: 4px; background: rgba(7,8,11,.86); color: var(--site-white); font-size: 18px; font-weight: 790; letter-spacing: .02em; text-transform: uppercase; }
 .explore-card.is-selected .explore-card-action { border-color: var(--site-red); background: var(--site-red); }
 .explore-check { position: absolute; top: 11px; right: 11px; display: grid; width: 28px; height: 28px; place-items: center; border: 1px solid rgba(255,255,255,.45); border-radius: 50%; background: rgba(7,8,11,.8); color: transparent; font-size: 14px; font-weight: 900; }
 .explore-card.is-selected .explore-check { border-color: var(--site-red); background: var(--site-red); color: var(--site-white); }
 .explore-card:focus-visible, .site-button:focus-visible, .site-menu-toggle:focus-visible { outline: 2px solid var(--site-gold); outline-offset: 3px; }
 .explore-build { display: flex; width: fit-content; min-height: 56px; gap: 10px; margin: 46px auto 0; padding: 16px 24px; box-shadow: 0 10px 30px rgba(0,0,0,.38); }
-.explore-build span { color: rgba(255,255,255,.78); font-size: 14px; }
+.explore-build span { color: rgba(255,255,255,.78); font-size: 18px; }
 .faq-page, .contact-page { padding: 12px 0 84px; }
 .faq-list { display: grid; gap: 9px; max-width: 900px; }
 .faq-item { border: 1px solid var(--site-line); border-radius: 7px; background: var(--site-surface); }
@@ -180,7 +180,7 @@ button { color: inherit; }
   #package-builder .builder-mobile-bar .builder-action { min-height: 44px; flex: 1; }
 }
 .css-sr-only, .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
-.site-skip-link { position: absolute; z-index: 200; top: 8px; left: 8px; transform: translateY(-150%); padding: 10px 14px; background: var(--site-white); color: var(--site-bg); }
+.site-skip-link { position: absolute; z-index: 200; top: 8px; left: 8px; transform: translateY(-150%); padding: 10px 14px; background: var(--site-white); color: var(--site-bg); font-size: 16px; }
 .site-skip-link:focus { transform: translateY(0); }
 @media (max-width: 760px) { body.package-builder-visible .site-support { bottom: 68px; } }
 @media (max-width: 760px) { body.package-builder-visible .site-support { display: none; } }
@@ -412,6 +412,9 @@ button { color: inherit; }
 @media (max-width: 760px) { .site-nav-wrap > a { text-decoration: none; } }
 @media (max-width: 760px) { .support-quick button { color: #e6e3e0; } }
 @media (max-width: 760px) { .support-message a { text-decoration: underline; } }
+
+
+
 @media (max-width: 760px) { .site-nav .site-nav-cta { text-decoration: none; } }
 @media (max-width: 760px) { .support-form button { flex: 0 0 auto; } }
 @media (max-width: 760px) { .support-panel { isolation: isolate; } }
@@ -950,3 +953,136 @@ button { color: inherit; }
 @media (max-width: 760px) { .site-button, .site-nav a, .support-launcher { -webkit-tap-highlight-color: transparent; } }
 @media (max-width: 760px) { .site-nav-toggle { display: none; } }
 @media (max-width: 760px) { .page-hero { background-color: var(--site-bg); } }
+
+/* Final accessibility overrides for the legacy rules above. */
+body { font-size: 18px; line-height: 1.6; }
+.site-nav-wrap { min-height: 96px; }
+.site-brand { gap: 16px; }
+.site-brand img { width: auto; height: 68px; object-fit: contain; }
+.site-brand span { font-size: 26px; line-height: 1.2; }
+.site-nav { gap: clamp(12px, 1.5vw, 22px); }
+.site-nav a { font-size: 18px; }
+.site-nav .site-nav-cta { min-height: 52px; padding: 12px 16px; font-size: 18px; }
+.site-menu-toggle { min-width: 48px; min-height: 48px; }
+.site-footer-inner { font-size: 17px; line-height: 1.55; }
+.site-footer-links a { font-size: 17px; }
+.site-footer-inner > span a { font-size: 22px; font-weight: 800; }
+.eyebrow, .page-eyebrow { font-size: 14px; letter-spacing: .12em; }
+.page-heading > p:last-child { font-size: 18px; line-height: 1.65; }
+.site-button { min-height: 52px; padding: 14px 20px; font-size: 18px; }
+.hero.cinematic .heroBtns .btn { min-height: 56px; font-size: 18px; }
+.hero.cinematic .hero-lede { font-size: 20px; }
+.hero.cinematic .hero-catalogue { font-size: 17px; }
+.hero.cinematic .stat span { font-size: 17px; }
+.popular-card span { font-size: 20px; }
+.how-list li { font-size: 17px; line-height: 1.55; }
+.explore-row h2 { font-size: 20px; }
+.explore-card-title { font-size: 19px; }
+  .explore-card-action { min-height: 52px; padding: 12px; font-size: 18px; }
+.explore-build span { font-size: 16px; }
+.faq-item summary { min-height: 60px; padding-top: 18px; padding-bottom: 18px; font-size: 20px; line-height: 1.5; }
+.faq-answer { font-size: 18px; line-height: 1.7; }
+.contact-panel p { font-size: 18px; line-height: 1.65; }
+.contact-note { font-size: 18px; }
+.contact-note a { font-size: 22px; font-weight: 800; }
+.contact-actions .site-button { min-height: 56px; font-size: 18px; }
+.site-whatsapp-float { right: 250px; height: auto; min-height: 52px; padding: 12px 16px; font-size: 18px; }
+.support-launcher { min-height: 52px; padding: 12px 16px; font-size: 18px; }
+.support-head strong { font-size: 18px; }
+.support-message { font-size: 16px; line-height: 1.6; }
+  .support-quick button { min-height: 48px; padding: 10px 12px; font-size: 18px; }
+.support-form input { min-height: 52px; font-size: 18px; }
+.support-form button { min-width: 72px; min-height: 52px; font-size: 18px; }
+#package-builder .step-indicator { font-size: 16px; }
+#package-builder .builder-plan-name { font-size: 20px; }
+#package-builder .builder-plan-price { font-size: 24px; }
+#package-builder .builder-plan-badge { font-size: 16px; }
+#package-builder .step-number { font-size: 16px; }
+#package-builder .builder-plan-note { font-size: 17px; line-height: 1.6; }
+#package-builder .connection-option-copy strong { font-size: 20px; }
+#package-builder .connection-option-copy > span { font-size: 17px; line-height: 1.55; }
+#package-builder .connection-option-price { font-size: 20px; }
+#package-builder .preference-actions button, #package-builder .view-countries { min-height: 52px; font-size: 18px; }
+#package-builder .preference-copy strong { font-size: 18px; }
+#package-builder .preference-copy small { font-size: 16px; line-height: 1.5; }
+#package-builder .preference-details summary, #package-builder .advanced-details summary { font-size: 17px; }
+#package-builder .check-option, #package-builder .advanced-options label { font-size: 16px; line-height: 1.55; }
+#package-builder .country-included h4 { font-size: 17px; }
+#package-builder .country-included p, #package-builder .countries-footnote { font-size: 17px; line-height: 1.6; }
+#package-builder .included-country { min-height: 44px; font-size: 17px; }
+#package-builder .included-country strong { font-size: 16px; }
+#package-builder #country-search { min-height: 52px; font-size: 18px; }
+#package-builder .country-option { min-height: 52px; }
+#package-builder .country-name { font-size: 17px; }
+#package-builder .country-cost { font-size: 18px; }
+#package-builder .builder-actions button, #package-builder .builder-actions a, #package-builder .builder-summary > .builder-action { min-height: 52px; font-size: 18px; }
+#package-builder .builder-secondary, #package-builder .builder-action { font-size: 18px; }
+#package-builder .builder-summary-title { font-size: 16px; }
+#package-builder .summary-plan, #package-builder .summary-plan strong { font-size: 18px; }
+#package-builder .summary-block h4 { font-size: 16px; }
+#package-builder .summary-block li, #package-builder .summary-empty { font-size: 16px; line-height: 1.55; }
+#package-builder .summary-total span { font-size: 17px; }
+#package-builder .summary-total strong { font-size: 40px; }
+#package-builder .summary-total small, #package-builder .summary-note { font-size: 16px; }
+#package-builder .builder-reset { min-height: 52px; padding: 10px 13px; font-size: 18px; }
+#package-builder .review-card { font-size: 18px; line-height: 1.6; }
+@media (max-width: 760px) {
+  body { font-size: 17px; }
+  .site-nav-wrap { min-height: 82px; }
+  .site-brand { gap: 10px; }
+  .site-brand img { width: auto; height: 54px; }
+  .site-brand span { font-size: 20px; }
+  .site-nav a { min-height: 52px; padding: 15px 5px; font-size: 20px; }
+  .site-nav .site-nav-cta { font-size: 20px; }
+  .site-footer-inner, .site-footer-links a { font-size: 16px; }
+  .page-heading > p:last-child, .contact-panel p { font-size: 17px; }
+  .hero.cinematic .hero-lede { font-size: 18px; }
+  .popular-card span { font-size: 18px; }
+  .how-list li { min-height: 72px; font-size: 16px; }
+  .explore-row h2 { font-size: 20px; }
+  .explore-card-title { font-size: 18px; }
+  .explore-card-action { min-height: 48px; font-size: 16px; }
+  .faq-item summary { min-height: 60px; padding: 16px 44px 16px 15px; font-size: 20px; }
+  .faq-answer { font-size: 17px; line-height: 1.7; }
+  .contact-note { font-size: 17px; }
+  .contact-note a { font-size: 22px; }
+  .contact-actions .site-button { min-height: 56px; font-size: 18px; }
+  .site-whatsapp-float { right: 246px; bottom: 12px; min-height: 52px; font-size: 18px; }
+  #site-support .site-support { bottom: 12px; }
+  .site-skip-link, .explore-build span { font-size: 18px; }
+  .support-launcher { min-height: 52px; font-size: 18px; }
+  @media (max-width: 380px) {
+    .site-whatsapp-float { right: 180px; }
+    #site-support .support-launcher { width: 156px; max-width: calc(100vw - 164px); padding: 8px 10px; line-height: 1.2; text-align: center; white-space: normal; }
+  }
+  .support-message { font-size: 16px; }
+  .support-quick button { min-height: 48px; font-size: 18px; }
+  .support-form input, .support-form button { min-height: 52px; font-size: 18px; }
+  #package-builder { padding-bottom: 150px; }
+  #package-builder .step-indicator { width: 100%; font-size: 16px; white-space: normal; text-align: center; }
+  #package-builder .builder-steps li .step-indicator > span:last-child { display: block; width: 100%; max-width: 100%; font-size: 16px; line-height: 1.25; overflow-wrap: anywhere; text-align: center; white-space: normal; }
+  #package-builder .builder-panel-heading p { font-size: 17px; line-height: 1.6; }
+  #package-builder .builder-plan-name { font-size: 19px; }
+  #package-builder .builder-plan-price { font-size: 23px; }
+  #package-builder .connection-option { min-height: 80px; }
+  #package-builder .connection-option-copy strong { font-size: 19px; }
+  #package-builder .connection-option-copy > span { font-size: 16px; }
+  #package-builder .connection-option-price { font-size: 18px; }
+  #package-builder .preference-actions button, #package-builder .view-countries { min-height: 52px; font-size: 18px; }
+  #package-builder .preference-copy strong { font-size: 18px; }
+  #package-builder .preference-copy small { font-size: 16px; }
+  #package-builder .check-option, #package-builder .advanced-options label { min-height: 36px; font-size: 16px; }
+  #package-builder .country-included p, #package-builder .countries-footnote { font-size: 16px; }
+  #package-builder .included-country { font-size: 16px; }
+  #package-builder .country-name { font-size: 17px; }
+  #package-builder .country-cost { font-size: 18px; }
+  #package-builder .builder-actions button, #package-builder .builder-actions a { min-height: 52px; font-size: 18px; }
+  #package-builder .builder-mobile-bar.is-visible { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 9px 12px; }
+  #package-builder .builder-mobile-price { grid-column: 1 / -1; font-size: 16px; }
+  #package-builder .builder-mobile-price span { font-size: 16px; }
+  #package-builder .builder-mobile-price strong { font-size: 34px; line-height: 1.1; }
+  #package-builder .builder-mobile-bar .builder-reset { grid-column: 1; min-height: 52px; font-size: 18px; }
+  #package-builder .builder-mobile-bar .builder-action { grid-column: 2; min-height: 52px; font-size: 18px; line-height: 1.2; white-space: normal; }
+  #package-builder .builder-summary { display: none; }
+  #package-builder .builder-reset { min-height: 52px; font-size: 18px; }
+}
