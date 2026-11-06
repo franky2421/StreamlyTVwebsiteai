@@ -12,9 +12,9 @@
     12: { 1: 250, 2: 400, 3: 500 },
   };
   const connectionOptions = [
-    { count: 1, label: "1 Account / Connection", description: "One account for your selected package" },
-    { count: 2, label: "2 Accounts / Connections", description: "Two accounts can stream independently at the same time" },
-    { count: 3, label: "3 Accounts / Connections", description: "Three accounts can stream independently at the same time" },
+    { count: 1, label: "1 Connection", description: "One account for your selected package" },
+    { count: 2, label: "2 Connections", description: "Two accounts can stream independently at the same time" },
+    { count: 3, label: "3 Connections", description: "Three accounts can stream independently at the same time" },
   ];
 
   const entertainment = [
@@ -385,8 +385,8 @@
     const countries = [...state.countries];
     return `
       <div class="summary-plan"><span>Plan</span><strong>${state.plan?.label || "No plan selected"}</strong></div>
-      <div class="summary-plan"><span>Accounts / Connections</span><strong>${state.connections} ${state.connections === 1 ? "Account / Connection" : "Accounts / Connections"}</strong></div>
-      <div class="summary-plan"><span>Package price</span><strong>${money(planCost())}</strong></div>
+      <div class="summary-plan"><span>Connections</span><strong>${state.connections} ${state.connections === 1 ? "Connection" : "Connections"}</strong></div>
+      <div class="summary-plan"><span>Package Price</span><strong>${money(planCost())}</strong></div>
       <div class="summary-block"><h4>Included at no extra cost</h4><ul>${includedCountries.map(country => `<li>${country}</li>`).join("")}</ul></div>
       <div class="summary-block"><h4>Additional countries <span>${money(countryCost())}</span></h4>${countries.length ? `<ul>${countries.map(country => `<li>${escapeHtml(country)} <span>+$20 AUD</span></li>`).join("")}</ul>` : '<p class="summary-empty">No additional countries selected</p>'}</div>
       <div class="summary-block"><h4>Entertainment</h4>${preferences.length ? `<ul>${preferences.map(preference => `<li>${escapeHtml(preference)}</li>`).join("")}</ul>` : '<p class="summary-empty">Choose your favourites to personalise your selection</p>'}</div>
