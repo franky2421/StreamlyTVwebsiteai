@@ -1086,3 +1086,93 @@ body { font-size: 18px; line-height: 1.6; }
   #package-builder .builder-summary { display: none; }
   #package-builder .builder-reset { min-height: 52px; font-size: 18px; }
 }
+
+.site-header .site-nav-wrap { min-height: 156px; }
+.site-brand { gap: 0; }
+.site-brand img { display: block; width: auto; height: 140px; flex: 0 0 auto; object-fit: contain; }
+
+#package-builder .builder-steps {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+#package-builder .builder-steps li {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 8px;
+  background: #111216;
+}
+#package-builder .builder-steps li:not(:last-child)::after { display: none; }
+#package-builder .step-indicator {
+  width: 100%;
+  gap: 11px;
+  color: #d1cecc;
+  font-size: 16px;
+  font-weight: 650;
+}
+#package-builder .step-indicator.is-active { color: #fff; font-weight: 750; }
+#package-builder .step-number { width: 38px; height: 38px; flex-basis: 38px; font-size: 16px; }
+#package-builder .step-indicator.is-complete { color: #f0d7d9; }
+#package-builder .builder-steps:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+
+#package-builder .builder-summary-title { padding-top: 16px; padding-bottom: 16px; font-size: 17px; }
+#package-builder #builder-summary-content { padding: 18px; }
+#package-builder .summary-plan {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 8px 14px;
+  margin: 0;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+  font-size: 17px;
+  line-height: 1.5;
+}
+#package-builder .summary-plan strong { max-width: 100%; font-size: 17px; text-align: right; white-space: normal; }
+#package-builder .summary-block h4 { color: #e7e3e0; font-size: 16px; line-height: 1.45; white-space: normal; }
+#package-builder .summary-block li, #package-builder .summary-empty { font-size: 16px; line-height: 1.55; }
+#package-builder .summary-total span { font-size: 17px; }
+
+@media (min-width: 761px) {
+  #package-builder .builder-mobile-bar.is-visible { display: none; }
+}
+
+@media (min-width: 761px) and (max-width: 900px) {
+  #package-builder .step-indicator { flex-direction: column; justify-content: center; gap: 6px; font-size: 14px; text-align: center; }
+  #package-builder .builder-steps li { justify-content: center; padding-right: 6px; padding-left: 6px; }
+}
+
+@media (max-width: 760px) {
+  .site-header .site-nav-wrap { min-height: 120px; }
+  .site-brand { min-width: 0; flex: 0 1 auto; }
+  .site-brand img { width: auto; height: 108px; max-width: calc(100vw - 110px); flex: 0 0 auto; object-fit: contain; }
+
+  #package-builder .builder-steps {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    margin: 0 -16px 20px;
+    padding: 6px 16px 12px;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+  #package-builder .builder-steps li { flex: 0 0 auto; padding: 8px 12px; scroll-snap-align: start; }
+  #package-builder .step-indicator { width: auto; flex-direction: row; gap: 10px; font-size: 17px; white-space: nowrap; }
+  #package-builder .step-number { width: 38px; height: 38px; flex-basis: 38px; }
+
+  #package-builder .builder-summary { display: block; position: static; margin-top: 24px; }
+  #package-builder .builder-summary > .builder-action { display: none; }
+  #package-builder .builder-summary-title { font-size: 17px; }
+  #package-builder #builder-summary-content { padding: 16px; }
+  #package-builder .summary-plan { grid-template-columns: minmax(0, 1fr); gap: 3px; padding: 12px 0; font-size: 18px; }
+  #package-builder .summary-plan strong { font-size: 18px; text-align: left; }
+  #package-builder .summary-block h4 { font-size: 17px; }
+  #package-builder .summary-block li, #package-builder .summary-empty { font-size: 17px; line-height: 1.55; }
+  #package-builder .summary-total { margin-right: -16px; margin-left: -16px; }
+  #package-builder .summary-total strong { font-size: 36px; }
+}
